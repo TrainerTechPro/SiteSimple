@@ -1,17 +1,8 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useState } from "react";
 import Link from "next/link";
 import { createSite } from "@/lib/actions";
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <button type="submit" disabled={pending} className="btn-primary disabled:opacity-50">
-      {pending ? "Creating..." : "Create Site"}
-    </button>
-  );
-}
 
 interface Client {
   id: string;
@@ -25,16 +16,32 @@ interface CreateSiteFormProps {
 }
 
 export default function CreateSiteForm({ clients, defaultOwnerId }: CreateSiteFormProps) {
-  const [state, formAction] = useFormState(createSite, null);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, setPending] = useState(false);
+
+  async function handleSubmit(formData: FormData) {
+    setError(null);
+    setPending(true);
+    try {
+      const result = await createSite(null, formData);
+      if (result?.error) {
+        setError(result.error);
+      }
+    } catch {
+      // redirect throws on success — this is expected
+    } finally {
+      setPending(false);
+    }
+  }
 
   return (
     <form
-      action={formAction}
+      action={handleSubmit}
       className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 space-y-6"
     >
-      {state?.error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
-          {state.error}
+      {error && (
+        <div role="alert" className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+          {error}
         </div>
       )}
 
@@ -118,7 +125,9 @@ export default function CreateSiteForm({ clients, defaultOwnerId }: CreateSiteFo
       </div>
 
       <div className="flex items-center gap-3 pt-2">
-        <SubmitButton />
+        <button type="submit" disabled={pending} className="btn-primary disabled:opacity-50">
+          {pending ? "Creating..." : "Create Site"}
+        </button>
         <Link
           href="/admin/sites"
           className="text-sm text-gray-500 hover:text-gray-700"

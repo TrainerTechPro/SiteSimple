@@ -1,0 +1,82 @@
+- generic [active] [ref=e1]:
+  - alert [ref=e16]: SiteSimple — Website Management Platform
+  - generic [ref=e17]:
+    - link "Skip to main content" [ref=e18] [cursor=pointer]:
+      - /url: "#main-content"
+    - generic [ref=e19]:
+      - button "Open navigation menu" [ref=e20] [cursor=pointer]:
+        - img [ref=e21]
+      - link "◆ SiteSimple" [ref=e23] [cursor=pointer]:
+        - /url: /admin/dashboard
+        - generic [ref=e24]: ◆
+        - generic [ref=e25]: SiteSimple
+    - complementary [ref=e26]:
+      - button "Close navigation menu" [ref=e28] [cursor=pointer]:
+        - img [ref=e29]
+      - generic [ref=e31]:
+        - link "◆ SiteSimple" [ref=e32] [cursor=pointer]:
+          - /url: /admin/dashboard
+          - generic [ref=e33]: ◆
+          - generic [ref=e34]: SiteSimple
+        - paragraph [ref=e35]: Admin Panel
+      - navigation "Admin navigation" [ref=e36]:
+        - link "Dashboard" [ref=e37] [cursor=pointer]:
+          - /url: /admin/dashboard
+          - img [ref=e38]
+          - generic [ref=e40]: Dashboard
+        - link "Clients" [ref=e41] [cursor=pointer]:
+          - /url: /admin/clients
+          - img [ref=e42]
+          - generic [ref=e44]: Clients
+        - link "Sites" [ref=e45] [cursor=pointer]:
+          - /url: /admin/sites
+          - img [ref=e46]
+          - generic [ref=e48]: Sites
+      - button "Sign Out" [ref=e50] [cursor=pointer]:
+        - img [ref=e51]
+        - generic [ref=e53]: Sign Out
+    - main "Admin content" [ref=e54]:
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - heading "Dashboard" [level=1] [ref=e58]
+          - paragraph [ref=e59]: Overview of your platform activity
+        - generic [ref=e60]:
+          - generic [ref=e61]:
+            - generic [ref=e62]:
+              - generic [ref=e63]: Total Clients
+              - img [ref=e65]
+            - paragraph [ref=e67]: "1"
+          - generic [ref=e68]:
+            - generic [ref=e69]:
+              - generic [ref=e70]: Total Sites
+              - img [ref=e72]
+            - paragraph [ref=e74]: "1"
+          - generic [ref=e75]:
+            - generic [ref=e76]:
+              - generic [ref=e77]: Live Sites
+              - img [ref=e79]
+            - paragraph [ref=e81]: "1"
+        - generic [ref=e82]:
+          - generic [ref=e83]:
+            - heading "Recent Sites" [level=2] [ref=e84]
+            - link "View all" [ref=e85] [cursor=pointer]:
+              - /url: /admin/sites
+          - table "Recent sites" [ref=e87]:
+            - rowgroup [ref=e88]:
+              - row "Name Owner Status Created" [ref=e89]:
+                - columnheader "Name" [ref=e90]
+                - columnheader "Owner" [ref=e91]
+                - columnheader "Status" [ref=e92]
+                - columnheader "Created" [ref=e93]
+            - rowgroup [ref=e94]:
+              - row "The Classic Cut /the-classic-cut Demo Barbershop demo@client.com LIVE Apr 10, 2026" [ref=e95]:
+                - cell "The Classic Cut /the-classic-cut" [ref=e96]:
+                  - link "The Classic Cut" [ref=e97] [cursor=pointer]:
+                    - /url: /admin/sites/clsite001
+                  - paragraph [ref=e98]: /the-classic-cut
+                - cell "Demo Barbershop demo@client.com" [ref=e99]:
+                  - paragraph [ref=e100]: Demo Barbershop
+                  - paragraph [ref=e101]: demo@client.com
+                - cell "LIVE" [ref=e102]:
+                  - generic [ref=e103]: LIVE
+                - cell "Apr 10, 2026" [ref=e105]

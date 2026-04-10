@@ -1,32 +1,40 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useState } from "react";
 import { createClient } from "@/lib/actions";
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <button type="submit" disabled={pending} className="btn-primary disabled:opacity-50">
-      {pending ? "Creating..." : "Create Client"}
-    </button>
-  );
-}
-
 export default function CreateClientForm() {
-  const [state, formAction] = useFormState(createClient, null);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, setPending] = useState(false);
+
+  async function handleSubmit(formData: FormData) {
+    setError(null);
+    setPending(true);
+    try {
+      const result = await createClient(null, formData);
+      if (result?.error) {
+        setError(result.error);
+      }
+    } catch {
+      // redirect throws on success — this is expected
+    } finally {
+      setPending(false);
+    }
+  }
 
   return (
-    <form action={formAction} className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {state?.error && (
-        <div className="md:col-span-3 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
-          {state.error}
+    <form action={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {error && (
+        <div role="alert" className="md:col-span-3 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+          {error}
         </div>
       )}
       <div>
-        <label className="block text-xs font-mono uppercase tracking-wider text-gray-500 mb-1.5">
+        <label htmlFor="client-name" className="block text-xs font-mono uppercase tracking-wider text-gray-500 mb-1.5">
           Name
         </label>
         <input
+          id="client-name"
           type="text"
           name="name"
           required
@@ -35,10 +43,11 @@ export default function CreateClientForm() {
         />
       </div>
       <div>
-        <label className="block text-xs font-mono uppercase tracking-wider text-gray-500 mb-1.5">
+        <label htmlFor="client-email" className="block text-xs font-mono uppercase tracking-wider text-gray-500 mb-1.5">
           Email
         </label>
         <input
+          id="client-email"
           type="email"
           name="email"
           required
@@ -47,10 +56,11 @@ export default function CreateClientForm() {
         />
       </div>
       <div>
-        <label className="block text-xs font-mono uppercase tracking-wider text-gray-500 mb-1.5">
+        <label htmlFor="client-password" className="block text-xs font-mono uppercase tracking-wider text-gray-500 mb-1.5">
           Password
         </label>
         <input
+          id="client-password"
           type="password"
           name="password"
           required
@@ -60,7 +70,9 @@ export default function CreateClientForm() {
         />
       </div>
       <div className="md:col-span-3">
-        <SubmitButton />
+        <button type="submit" disabled={pending} className="btn-primary disabled:opacity-50">
+          {pending ? "Creating..." : "Create Client"}
+        </button>
       </div>
     </form>
   );
