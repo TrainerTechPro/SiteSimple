@@ -26,6 +26,7 @@ import {
   deleteSection,
   reorderSections,
 } from "@/lib/actions";
+import SectionRenderer from "@/components/sections/SectionRenderer";
 import type {
   HeroContent,
   TextContent,
@@ -103,6 +104,16 @@ export default function PageEditor({
   const [editingId, setEditingId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [adding, setAdding] = useState(false);
+  const [liveContent, setLiveContent] = useState<Record<string, Record<string, unknown>>>({});
+  const [activeTab, setActiveTab] = useState<"edit" | "preview">("edit");
+
+  // Scroll the preview panel to the section being edited
+  useEffect(() => {
+    if (editingId) {
+      const el = document.getElementById(`preview-${editingId}`);
+      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [editingId]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -149,6 +160,12 @@ export default function PageEditor({
         setSections((prev) =>
           prev.map((s) => (s.id === sectionId ? { ...s, content } : s))
         );
+        // Clear live content for this section since saved content is now canonical
+        setLiveContent((prev) => {
+          const next = { ...prev };
+          delete next[sectionId];
+          return next;
+        });
         setEditingId(null);
       } catch {
         alert("Failed to save section");
@@ -197,67 +214,128 @@ export default function PageEditor({
         </div>
       </div>
 
-      {/* Add Section Bar */}
-      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 mb-6 flex items-center gap-3">
-        <label className="text-xs font-mono uppercase tracking-wider text-gray-500 whitespace-nowrap">
-          Add Section
-        </label>
-        <select
-          value={newType}
-          onChange={(e) => setNewType(e.target.value as SectionType)}
-          aria-label="Add section type"
-          className="input-field flex-1 max-w-xs"
-        >
-          {Object.entries(SECTION_TYPE_LABELS).map(([value, label]) => (
-            <option key={value} value={value}>
-              {label}
-            </option>
-          ))}
-        </select>
+      {/* Mobile tab toggle - only on small screens */}
+      <div className="flex md:hidden mb-4 bg-gray-100 rounded-lg p-1">
         <button
-          onClick={handleAddSection}
-          disabled={adding}
-          className="btn-primary disabled:opacity-50"
+          onClick={() => setActiveTab("edit")}
+          className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "edit" ? "bg-white shadow text-gray-900" : "text-gray-500"}`}
         >
-          {adding ? "Adding..." : "+ Add"}
+          Edit
+        </button>
+        <button
+          onClick={() => setActiveTab("preview")}
+          className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "preview" ? "bg-white shadow text-gray-900" : "text-gray-500"}`}
+        >
+          Preview
         </button>
       </div>
 
-      {/* Sections List */}
-      {sections.length === 0 ? (
-        <div className="bg-white border border-gray-200 border-dashed rounded-xl p-12 text-center">
-          <p className="text-gray-400 text-sm">
-            No sections yet. Add your first section above.
-          </p>
-        </div>
-      ) : (
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
-        >
-          <SortableContext
-            items={sections.map((s) => s.id)}
-            strategy={verticalListSortingStrategy}
-          >
-            <div className="space-y-4">
-              {sections.map((section) => (
-                <SortableSectionCard
-                  key={section.id}
-                  section={section}
-                  isEditing={editingId === section.id}
-                  isSaving={saving && editingId === section.id}
-                  onToggleEdit={() =>
-                    setEditingId(editingId === section.id ? null : section.id)
-                  }
-                  onSave={handleSave}
-                  onDelete={handleDelete}
-                />
+      {/* Split screen */}
+      <div className="flex gap-6">
+        {/* Left: Edit Panel */}
+        <div className={`w-full md:w-[45%] flex-shrink-0 ${activeTab === "preview" ? "hidden md:block" : ""}`}>
+          {/* Add Section Bar */}
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 mb-6 flex items-center gap-3">
+            <label className="text-xs font-mono uppercase tracking-wider text-gray-500 whitespace-nowrap">
+              Add Section
+            </label>
+            <select
+              value={newType}
+              onChange={(e) => setNewType(e.target.value as SectionType)}
+              aria-label="Add section type"
+              className="input-field flex-1 max-w-xs"
+            >
+              {Object.entries(SECTION_TYPE_LABELS).map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
               ))}
+            </select>
+            <button
+              onClick={handleAddSection}
+              disabled={adding}
+              className="btn-primary disabled:opacity-50"
+            >
+              {adding ? "Adding..." : "+ Add"}
+            </button>
+          </div>
+
+          {/* Sections List */}
+          {sections.length === 0 ? (
+            <div className="bg-white border border-gray-200 border-dashed rounded-xl p-12 text-center">
+              <p className="text-gray-400 text-sm">
+                No sections yet. Add your first section above.
+              </p>
             </div>
-          </SortableContext>
-        </DndContext>
-      )}
+          ) : (
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEnd}
+            >
+              <SortableContext
+                items={sections.map((s) => s.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                <div className="space-y-4">
+                  {sections.map((section) => (
+                    <SortableSectionCard
+                      key={section.id}
+                      section={section}
+                      isEditing={editingId === section.id}
+                      isSaving={saving && editingId === section.id}
+                      onToggleEdit={() =>
+                        setEditingId(editingId === section.id ? null : section.id)
+                      }
+                      onSave={handleSave}
+                      onDelete={handleDelete}
+                      onContentChange={(id, content) =>
+                        setLiveContent((prev) => ({ ...prev, [id]: content }))
+                      }
+                    />
+                  ))}
+                </div>
+              </SortableContext>
+            </DndContext>
+          )}
+        </div>
+
+        {/* Right: Preview Panel */}
+        <div className={`w-full md:w-[55%] ${activeTab === "edit" ? "hidden md:block" : ""}`}>
+          <div className="sticky top-4">
+            <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+              <div className="px-4 py-2 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
+                <span className="text-xs font-mono uppercase tracking-wider text-gray-500">Live Preview</span>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-red-400"></span>
+                  <span className="w-2 h-2 rounded-full bg-yellow-400"></span>
+                  <span className="w-2 h-2 rounded-full bg-green-400"></span>
+                </div>
+              </div>
+              <div className="max-h-[75vh] overflow-y-auto" id="preview-panel">
+                {sections.length === 0 ? (
+                  <div className="p-12 text-center text-gray-400 text-sm">
+                    Add sections to see a preview
+                  </div>
+                ) : (
+                  sections.map((section) => (
+                    <div
+                      key={section.id}
+                      id={`preview-${section.id}`}
+                      className={`transition-all duration-200 ${editingId === section.id ? "ring-2 ring-amber-500 ring-inset" : ""}`}
+                    >
+                      <SectionRenderer
+                        type={section.type}
+                        content={(liveContent[section.id] || section.content) as Record<string, unknown>}
+                      />
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -271,6 +349,7 @@ interface SortableSectionCardProps {
   onToggleEdit: () => void;
   onSave: (id: string, content: Record<string, unknown>) => Promise<void>;
   onDelete: (id: string) => Promise<void>;
+  onContentChange?: (id: string, content: Record<string, unknown>) => void;
 }
 
 function SortableSectionCard({
@@ -280,6 +359,7 @@ function SortableSectionCard({
   onToggleEdit,
   onSave,
   onDelete,
+  onContentChange,
 }: SortableSectionCardProps) {
   const {
     attributes,
@@ -364,6 +444,7 @@ function SortableSectionCard({
             section={section}
             isSaving={isSaving}
             onSave={onSave}
+            onContentChange={onContentChange}
           />
         </div>
       )}
@@ -377,15 +458,20 @@ interface SectionEditFormProps {
   section: SerializedSection;
   isSaving: boolean;
   onSave: (id: string, content: Record<string, unknown>) => Promise<void>;
+  onContentChange?: (id: string, content: Record<string, unknown>) => void;
 }
 
-function SectionEditForm({ section, isSaving, onSave }: SectionEditFormProps) {
+function SectionEditForm({ section, isSaving, onSave, onContentChange }: SectionEditFormProps) {
   const [content, setContent] = useState<Record<string, unknown>>(
     section.content
   );
 
   const updateField = (key: string, value: unknown) => {
-    setContent((prev) => ({ ...prev, [key]: value }));
+    setContent((prev) => {
+      const next = { ...prev, [key]: value };
+      onContentChange?.(section.id, next);
+      return next;
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {

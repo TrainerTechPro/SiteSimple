@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import Link from "next/link";
 import { updateSection } from "@/lib/actions";
+import SectionRenderer from "@/components/sections/SectionRenderer";
 import type { SectionType } from "@prisma/client";
 import type {
   HeroContent,
@@ -22,20 +24,194 @@ const SECTION_LABELS: Record<SectionType, string> = {
   GALLERY: "Photo Gallery",
 };
 
-interface ClientEditorProps {
+/* ─── SiteEditor (main export) ─── */
+
+interface SiteEditorProps {
+  siteId: string;
+  siteName: string;
+  siteSlug: string;
+  pages: Array<{
+    id: string;
+    title: string;
+    sections: Array<{
+      id: string;
+      type: SectionType;
+      order: number;
+      content: Record<string, unknown>;
+    }>;
+  }>;
+}
+
+export default function SiteEditor({ siteId, siteName, siteSlug, pages }: SiteEditorProps) {
+  // Track live content for all sections
+  const [liveContent, setLiveContent] = useState<Record<string, Record<string, unknown>>>({});
+  const [activeTab, setActiveTab] = useState<"edit" | "preview">("edit");
+
+  // All sections flat (for preview rendering)
+  const allSections = pages.flatMap((p) => p.sections);
+
+  return (
+    <div>
+      {/* Header */}
+      <div className="mb-6">
+        <Link
+          href="/dashboard"
+          className="text-sm text-amber-600 hover:text-amber-700 font-medium mb-4 inline-block"
+        >
+          &larr; Back to My Sites
+        </Link>
+        <h1 className="text-2xl font-bold text-gray-900">Edit: {siteName}</h1>
+        <p className="text-gray-500">
+          Update your website content below. Changes are saved per section.
+        </p>
+      </div>
+
+      {/* Mobile tab toggle */}
+      <div className="flex md:hidden mb-4 bg-gray-100 rounded-lg p-1">
+        <button
+          onClick={() => setActiveTab("edit")}
+          className={`flex-1 py-2.5 text-sm font-medium rounded-md transition-colors ${
+            activeTab === "edit"
+              ? "bg-white shadow text-gray-900"
+              : "text-gray-500"
+          }`}
+        >
+          Edit Content
+        </button>
+        <button
+          onClick={() => setActiveTab("preview")}
+          className={`flex-1 py-2.5 text-sm font-medium rounded-md transition-colors ${
+            activeTab === "preview"
+              ? "bg-white shadow text-gray-900"
+              : "text-gray-500"
+          }`}
+        >
+          Preview Site
+        </button>
+      </div>
+
+      {/* Split screen */}
+      <div className="flex gap-6">
+        {/* Left: Edit Panel */}
+        <div
+          className={`w-full md:w-[45%] flex-shrink-0 space-y-6 ${
+            activeTab === "preview" ? "hidden md:block" : ""
+          }`}
+        >
+          {pages.map((page) => (
+            <div key={page.id}>
+              {pages.length > 1 && (
+                <h2 className="text-lg font-semibold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                  {page.title}
+                </h2>
+              )}
+              {page.sections.length === 0 ? (
+                <div className="card text-center py-12">
+                  <p className="text-gray-500">
+                    No sections. Contact your admin to add content.
+                  </p>
+                </div>
+              ) : (
+                page.sections.map((section) => (
+                  <SectionEditor
+                    key={section.id}
+                    sectionId={section.id}
+                    sectionType={section.type}
+                    initialContent={section.content}
+                    onContentChange={(content) =>
+                      setLiveContent((prev) => ({
+                        ...prev,
+                        [section.id]: content,
+                      }))
+                    }
+                  />
+                ))
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Right: Preview Panel */}
+        <div
+          className={`w-full md:w-[55%] ${
+            activeTab === "edit" ? "hidden md:block" : ""
+          }`}
+        >
+          <div className="sticky top-4">
+            <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+              <div className="px-4 py-2 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
+                <span className="text-xs font-medium text-gray-500">
+                  Live Preview
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-red-400"></span>
+                  <span className="w-2 h-2 rounded-full bg-yellow-400"></span>
+                  <span className="w-2 h-2 rounded-full bg-green-400"></span>
+                </div>
+              </div>
+              <div className="max-h-[80vh] overflow-y-auto">
+                {/* Dark header like public site */}
+                <div
+                  className="py-3 px-4"
+                  style={{ backgroundColor: "#111111" }}
+                >
+                  <span className="text-white text-sm font-bold">
+                    {siteName}
+                  </span>
+                </div>
+                {/* Render all sections */}
+                {allSections.map((section) => (
+                  <div key={section.id} id={`preview-${section.id}`}>
+                    <SectionRenderer
+                      type={section.type}
+                      content={
+                        (liveContent[section.id] ||
+                          section.content) as Record<string, unknown>
+                      }
+                    />
+                  </div>
+                ))}
+                {allSections.length === 0 && (
+                  <div className="p-12 text-center text-gray-400 text-sm">
+                    No content yet
+                  </div>
+                )}
+                {/* Footer like public site */}
+                <div className="py-6 px-4 bg-gray-50 border-t border-gray-200 text-center">
+                  <p className="text-gray-400 text-xs">
+                    Built with SiteSimple
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── SectionEditor (per-section card with save) ─── */
+
+interface SectionEditorProps {
   sectionId: string;
   sectionType: SectionType;
   initialContent: Record<string, unknown>;
+  onContentChange?: (content: Record<string, unknown>) => void;
 }
 
-export default function ClientEditor({
+function SectionEditor({
   sectionId,
   sectionType,
   initialContent,
-}: ClientEditorProps) {
+  onContentChange,
+}: SectionEditorProps) {
   const [content, setContent] = useState<Record<string, unknown>>(initialContent);
   const [saving, setSaving] = useState(false);
-  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [message, setMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
 
   const handleSave = useCallback(async () => {
     setSaving(true);
@@ -45,15 +221,25 @@ export default function ClientEditor({
       setMessage({ type: "success", text: "Changes saved!" });
       setTimeout(() => setMessage(null), 3000);
     } catch {
-      setMessage({ type: "error", text: "Something went wrong. Please try again." });
+      setMessage({
+        type: "error",
+        text: "Something went wrong. Please try again.",
+      });
     } finally {
       setSaving(false);
     }
   }, [sectionId, content]);
 
-  const updateField = useCallback((field: string, value: unknown) => {
-    setContent((prev) => ({ ...prev, [field]: value }));
-  }, []);
+  const updateField = useCallback(
+    (field: string, value: unknown) => {
+      setContent((prev) => {
+        const next = { ...prev, [field]: value };
+        onContentChange?.(next);
+        return next;
+      });
+    },
+    [onContentChange]
+  );
 
   return (
     <div className="card">
@@ -131,7 +317,15 @@ export default function ClientEditor({
 
 /* ─── Field Components ─── */
 
-function FieldLabel({ label, hint, htmlFor }: { label: string; hint?: string; htmlFor?: string }) {
+function FieldLabel({
+  label,
+  hint,
+  htmlFor,
+}: {
+  label: string;
+  hint?: string;
+  htmlFor?: string;
+}) {
   return (
     <label htmlFor={htmlFor} className="block">
       <span className="text-sm font-medium text-gray-700">{label}</span>
@@ -479,7 +673,7 @@ function ContactEditor({
         value={content.address}
         onChange={(val) => onChange("address", val)}
         multiline
-        placeholder="123 Main Street&#10;Anytown, USA 12345"
+        placeholder={"123 Main Street\nAnytown, USA 12345"}
       />
       <div>
         <label className="flex items-center gap-3 cursor-pointer">
@@ -548,7 +742,10 @@ function GalleryEditor({
 
   return (
     <div>
-      <FieldLabel label="Photos" hint="Upload images of your business, products, or team" />
+      <FieldLabel
+        label="Photos"
+        hint="Upload images of your business, products, or team"
+      />
 
       {images.length > 0 && (
         <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
