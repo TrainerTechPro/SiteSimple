@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  ADMIN
+  CLIENT
+}
+
+enum SiteStatus {
+  LIVE
+  DRAFT
+}
+
+enum SectionType {
+  HERO
+  TEXT
+  PRICING
+  CTA
+  CONTACT
+  GALLERY
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      Role     @default(CLIENT)
+  sites     Site[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Site {
+  id        String     @id @default(cuid())
+  name      String
+  slug      String     @unique
+  domain    String?
+  status    SiteStatus @default(DRAFT)
+  ownerId   String
+  owner     User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  pages     Page[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([ownerId])
+}
+
+model Page {
+  id        String    @id @default(cuid())
+  title     String
+  slug      String
+  siteId    String
+  site      Site      @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  sections  Section[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@unique([siteId, slug])
+  @@index([siteId])
+}
+
+model Section {
+  id        String      @id @default(cuid())
+  type      SectionType
+  order     Int
+  content   Json
+  pageId    String
+  page      Page        @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@index([pageId])
+  @@index([pageId, order])
+}
