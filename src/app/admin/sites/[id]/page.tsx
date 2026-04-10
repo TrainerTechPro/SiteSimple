@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
 import { toggleSiteStatus, deleteSite, createPage, updateSite, deletePage } from "@/lib/actions";
+import ConfirmDeleteButton from "@/components/ui/ConfirmDeleteButton";
 
 export default async function AdminSiteDetail({
   params,
@@ -150,19 +151,12 @@ export default async function AdminSiteDetail({
               </button>
             </form>
 
-            <form action={deleteSiteAction}>
-              <button
-                type="submit"
-                className="btn-danger text-sm"
-                onClick={(e) => {
-                  if (!confirm("Delete this site? All pages and sections will be permanently removed.")) {
-                    e.preventDefault();
-                  }
-                }}
-              >
-                Delete Site
-              </button>
-            </form>
+            <ConfirmDeleteButton
+              action={deleteSiteAction}
+              message="Delete this site? All pages and sections will be permanently removed."
+              label="Delete Site"
+              className="btn-danger text-sm"
+            />
           </div>
         </div>
       </div>

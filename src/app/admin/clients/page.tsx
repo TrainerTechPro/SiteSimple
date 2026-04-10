@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { deleteClient } from "@/lib/actions";
 import CreateClientForm from "@/components/admin/CreateClientForm";
+import ConfirmDeleteButton from "@/components/ui/ConfirmDeleteButton";
 import Pagination from "@/components/ui/Pagination";
 
 const PAGE_SIZE = 20;
@@ -126,24 +127,13 @@ export default async function AdminClients({
                         >
                           View
                         </Link>
-                        <form
+                        <ConfirmDeleteButton
                           action={async () => {
                             "use server";
                             await deleteClient(client.id);
                           }}
-                        >
-                          <button
-                            type="submit"
-                            className="text-xs text-gray-400 hover:text-red-600 font-mono uppercase tracking-wider"
-                            onClick={(e) => {
-                              if (!confirm("Delete this client? This cannot be undone.")) {
-                                e.preventDefault();
-                              }
-                            }}
-                          >
-                            Delete
-                          </button>
-                        </form>
+                          message="Delete this client? This cannot be undone."
+                        />
                       </div>
                     </td>
                   </tr>

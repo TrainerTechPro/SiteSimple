@@ -1,0 +1,52 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - link "Skip to main content" [ref=e3] [cursor=pointer]:
+      - /url: "#main-content"
+    - generic [ref=e4]:
+      - button "Open navigation menu" [ref=e5] [cursor=pointer]:
+        - img [ref=e6]
+      - link "◆ SiteSimple" [ref=e8] [cursor=pointer]:
+        - /url: /admin/dashboard
+        - generic [ref=e9]: ◆
+        - generic [ref=e10]: SiteSimple
+    - complementary [ref=e11]:
+      - button "Close navigation menu" [ref=e13] [cursor=pointer]:
+        - img [ref=e14]
+      - generic [ref=e16]:
+        - link "◆ SiteSimple" [ref=e17] [cursor=pointer]:
+          - /url: /admin/dashboard
+          - generic [ref=e18]: ◆
+          - generic [ref=e19]: SiteSimple
+        - paragraph [ref=e20]: Admin Panel
+      - navigation "Admin navigation" [ref=e21]:
+        - link "Dashboard" [ref=e22] [cursor=pointer]:
+          - /url: /admin/dashboard
+          - img [ref=e23]
+          - generic [ref=e25]: Dashboard
+        - link "Clients" [ref=e26] [cursor=pointer]:
+          - /url: /admin/clients
+          - img [ref=e27]
+          - generic [ref=e29]: Clients
+        - link "Sites" [ref=e30] [cursor=pointer]:
+          - /url: /admin/sites
+          - img [ref=e31]
+          - generic [ref=e33]: Sites
+      - button "Sign Out" [ref=e35] [cursor=pointer]:
+        - img [ref=e36]
+        - generic [ref=e38]: Sign Out
+    - main "Admin content" [ref=e39]:
+      - generic [ref=e42]:
+        - img [ref=e44]
+        - heading "Something went wrong" [level=1] [ref=e46]
+        - paragraph [ref=e47]: An error occurred while loading this page. Please try again or return to the dashboard.
+        - paragraph [ref=e48]: "Error ID: 2028933839"
+        - generic [ref=e49]:
+          - button "Try Again" [ref=e50] [cursor=pointer]
+          - link "Go to Dashboard" [ref=e51] [cursor=pointer]:
+            - /url: /admin/dashboard
+  - alert [ref=e52]
+  - generic [ref=e55] [cursor=pointer]:
+    - img [ref=e56]
+    - generic [ref=e58]: 1 error
+    - button "Hide Errors" [ref=e59]:
+      - img [ref=e60]
