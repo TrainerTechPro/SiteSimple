@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Professor Tony's Interview Prep Lab</title>
+<style>
+:root{--navy:#1E2A5E;--blue:#4A7BC4;--bg:#F3F5FA;--ink:#0F1733;--muted:#5B6686;--line:#D9DEEC;--good:#2E8B57;--warn:#D4A017;--bad:#C0392B;--card:#ffffff;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Calibri,"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+header{background:linear-gradient(135deg,var(--navy),#2a3a7a);color:#fff;padding:28px 32px;border-bottom:4px solid var(--blue)}
+header h1{font-family:Georgia,serif;margin:0;font-size:30px;letter-spacing:.3px}
+header p{margin:6px 0 0;opacity:.85;font-size:15px}
+main{max-width:1280px;margin:0 auto;padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:980px){main{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px;box-shadow:0 2px 10px rgba(30,42,94,.05)}
+.panel h2{font-family:Georgia,serif;color:var(--navy);margin:0 0 14px;font-size:20px;border-bottom:2px solid var(--blue);padding-bottom:6px}
+.step{margin-bottom:14px}
+label{display:block;font-weight:600;color:var(--navy);font-size:13px;margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px}
+input,textarea,select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:6px;font:inherit;background:#fff}
+textarea{resize:vertical;min-height:70px}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(74,123,196,.15)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+button{background:var(--navy);color:#fff;border:none;padding:10px 16px;border-radius:6px;font:inherit;font-weight:600;cursor:pointer;transition:.15s}
+button:hover{background:var(--blue)}
+button.ghost{background:#fff;color:var(--navy);border:1px solid var(--navy)}
+button.ghost:hover{background:var(--bg)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.stat{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;text-align:center}
+.stat .v{font-family:Georgia,serif;font-size:22px;color:var(--navy);font-weight:700}
+.stat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.stat.good{border-color:var(--good);background:#eaf7ee}
+.stat.warn{border-color:var(--warn);background:#fdf6e3}
+.stat.bad{border-color:var(--bad);background:#fbe9e7}
+.qblock{background:var(--bg);border-left:4px solid var(--blue);padding:12px 14px;margin-bottom:10px;border-radius:4px}
+.qblock .q{font-weight:700;color:var(--navy);margin-bottom:4px}
+.qblock .why{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:6px}
+.qblock .tip{font-size:13px}
+.tag{display:inline-block;background:var(--navy);color:#fff;font-size:10px;padding:2px 7px;border-radius:10px;text-transform:uppercase;letter-spacing:.4px;margin-right:6px;vertical-align:middle}
+.tag.behav{background:var(--blue)}
+.tag.tech{background:var(--good)}
+.tag.curve{background:var(--warn);color:#000}
+.tag.close{background:var(--navy)}
+.star{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:10px}
+.star h4{margin:0 0 6px;font-family:Georgia,serif;color:var(--navy);font-size:15px}
+.star .lbl{display:inline-block;width:18px;height:18px;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;text-align:center;line-height:18px;margin-right:6px;font-weight:700}
+.empty{color:var(--muted);font-style:italic;text-align:center;padding:40px 10px}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--navy);color:#fff;padding:12px 18px;border-radius:6px;opacity:0;transform:translateY(10px);transition:.25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+details{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px 12px;margin-bottom:8px}
+details summary{font-weight:600;color:var(--navy);cursor:pointer}
+.foot{text-align:center;padding:20px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Professor Tony's Interview Prep Lab</h1>
+  <p>Build your STAR story bank, generate likely questions, and walk in ready. Kinesiology-friendly, works for any field.</p>
+</header>
+
+<main>
+<section class="panel">
+<h2>1. Your Interview</h2>
+<div class="step"><label>Role / title</label><input id="role" placeholder="Exercise Physiologist"></div>
+<div class="row">
+<div class="step"><label>Company / org</label><input id="company" placeholder="Palomar Health"></div>
+<div class="step"><label>Interview type</label><select id="itype"><option>Phone screen</option><option selected>In-person / panel</option><option>Virtual (Zoom)</option><option>Technical / case</option></select></div>
+</div>
+<div class="step"><label>Job description (paste)</label><textarea id="jd" rows="5" placeholder="Paste the full job description here — the tool will pull likely keywords and tailor questions."></textarea></div>
+
+<h2 style="margin-top:22px">2. Your Story Bank (STAR)</h2>
+<p style="font-size:13px;color:var(--muted);margin:0 0 10px">Fill at least 3 stories. Each becomes a reusable answer.</p>
+<div id="stories"></div>
+<button class="ghost" onclick="addStory()">+ Add Story</button>
+
+<div class="btns">
+<button onclick="generate()">Generate Prep Pack</button>
+<button class="ghost" onclick="loadDemo()">Load Demo</button>
+<button class="ghost" onclick="clearAll()">Clear</button>
+</div>
+</section>
+
+<section class="panel">
+<h2>Your Prep Pack</h2>
+<div class="stats">
+<div class="stat" id="s1"><div class="v" id="qCount">—</div><div class="l">Questions</div></div>
+<div class="stat" id="s2"><div class="v" id="storyCount">—</div><div class="l">Stories Ready</div></div>
+<div class="stat" id="s3"><div class="v" id="kwCount">—</div><div class="l">Keywords Pulled</div></div>
+</div>
+<div id="output"><div class="empty">Fill in the form and hit <b>Generate Prep Pack</b>. You'll get tailored questions, STAR-formatted stories, smart questions to ask them, and a day-of checklist.</div></div>
+<div class="btns" id="exportBtns" style="display:none">
+<button onclick="copyPack()">Copy</button>
+<button class="ghost" onclick="downloadPack()">Download .txt</button>
+<button class="ghost" onclick="downloadDoc()">Download .doc</button>
+</div>
+</section>
+</main>
+
+<div class="foot">Professor Tony · Cowork · Single-file drop-in for GitHub Pages</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const STOP=new Set("a an the and or but if then so of to in on for with at by from as is are was were be been being have has had do does did will would should could may might can this that these those i me my we us our you your he she it they them their".split(" "));
+
+const BEHAVIORAL=[
+ {q:"Tell me about yourself.",why:"Opening question. Tests whether you can deliver a focused 60–90s pitch.",tip:"Present → Past → Future. End with why THIS role."},
+ {q:"Why do you want to work here?",why:"Tests if you researched the company.",tip:"Name something specific — a program, value, or recent news. Not 'great culture'."},
+ {q:"Tell me about a time you worked with a difficult teammate or client.",why:"Behavioral. Looking for EQ and conflict handling.",tip:"Use STAR. Don't trash the other person. Focus on what YOU did."},
+ {q:"Describe a time you failed or made a mistake.",why:"Tests self-awareness and growth.",tip:"Pick a real one with a clear lesson. Avoid 'I work too hard'."},
+ {q:"Tell me about a time you had to learn something fast.",why:"Tests adaptability — huge in 2026.",tip:"Show the process: how you found resources, how fast you ramped."},
+ {q:"Describe a time you went above and beyond for a client or patient.",why:"Core kinesiology/healthcare signal.",tip:"Specific patient, specific outcome. Numbers if you have them."},
+ {q:"Tell me about a time you had to explain something complex to a non-expert.",why:"Tests communication — critical for exercise pros, coaches, clinicians.",tip:"Pick a story where the person's behavior changed because of your explanation."},
+ {q:"Where do you see yourself in 3–5 years?",why:"Tests fit and retention risk.",tip:"Tie growth to skills this role develops. Don't name a competitor or your boss's job."},
+ {q:"What's your greatest strength?",why:"Tests self-awareness.",tip:"Pick one that matches the JD. Back it with a micro-story."},
+ {q:"What's your biggest weakness?",why:"Tests honesty and growth mindset.",tip:"Real weakness + what you're actively doing about it. No humblebrags."}
+];
+
+const CURVEBALL=[
+ {q:"What would you do in your first 30/60/90 days?",tip:"Listen/learn → contribute → own. Show you've thought past the offer."},
+ {q:"How do you handle stress or a heavy caseload?",tip:"Name your actual system (time-blocking, triage, etc.)."},
+ {q:"Walk me through how you'd design a program for a 55-year-old post-MI patient.",tip:"Assess → goals → FITT → monitor → progress. Mention ACSM guidelines."},
+ {q:"How do you stay current in the field?",tip:"Name 2 specific sources — journal, podcast, CEUs."},
+ {q:"What's one thing not on your resume we should know?",tip:"Pick something relevant. Not a hobby unless it ties in."}
+];
+
+const SMART_QUESTIONS=[
+ "What does success look like in this role at 90 days? At one year?",
+ "What's the biggest challenge the person in this role will face?",
+ "How would you describe the team's working style?",
+ "What do the people who thrive here have in common?",
+ "How is performance measured and reviewed?",
+ "What's changed most about this role in the last year?",
+ "What are the next steps in the process?"
+];
+
+const CHECKLIST=[
+ "Print 3 copies of your resume on clean paper",
+ "Bring a pen + small notebook (take notes — it signals engagement)",
+ "Confirm exact location + parking the day before",
+ "Plan to arrive 10–15 min early (NOT earlier — it stresses them)",
+ "Business-professional attire, one step above company dress code",
+ "Silence phone BEFORE you walk in the building",
+ "Bring your STAR story bank (read on the way, stash in bag)",
+ "Eat something. Low blood sugar = bad interview",
+ "Firm handshake, eye contact, smile, use their name once",
+ "Send a thank-you email within 24 hours — specific and short"
+];
+
+function addStory(pref={}){
+ const wrap=document.getElementById('stories');
+ const idx=wrap.children.length+1;
+ const d=document.createElement('div');
+ d.className='star';
+ d.innerHTML=`<h4>Story ${idx} <button class="ghost" style="float:right;padding:2px 8px;font-size:11px" onclick="this.closest('.star').remove();renumber()">×</button></h4>
+ <div class="step"><label>Label (e.g. "cardiac rehab win")</label><input class="s-label" value="${pref.label||''}"></div>
+ <div class="step"><label><span class="lbl">S</span>Situation</label><textarea class="s-s" rows="2">${pref.s||''}</textarea></div>
+ <div class="step"><label><span class="lbl">T</span>Task</label><textarea class="s-t" rows="2">${pref.t||''}</textarea></div>
+ <div class="step"><label><span class="lbl">A</span>Action</label><textarea class="s-a" rows="3">${pref.a||''}</textarea></div>
+ <div class="step"><label><span class="lbl">R</span>Result</label><textarea class="s-r" rows="2">${pref.r||''}</textarea></div>`;
+ wrap.appendChild(d);
+}
+function renumber(){[...document.querySelectorAll('#stories .star h4')].forEach((h,i)=>h.childNodes[0].textContent=`Story ${i+1} `)}
+
+function extractKeywords(text,n=10){
+ if(!text)return[];
+ const words=text.toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(w=>w.length>3&&!STOP.has(w));
+ const freq={};words.forEach(w=>freq[w]=(freq[w]||0)+1);
+ return Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,n).map(x=>x[0]);
+}
+
+function getStories(){
+ return [...document.querySelectorAll('#stories .star')].map(el=>({
+  label:el.querySelector('.s-label').value.trim(),
+  s:el.querySelector('.s-s').value.trim(),
+  t:el.querySelector('.s-t').value.trim(),
+  a:el.querySelector('.s-a').value.trim(),
+  r:el.querySelector('.s-r').value.trim()
+ })).filter(s=>s.label||s.a);
+}
+
+let lastPackText='';
+
+function generate(){
+ const role=val('role'),company=val('company'),itype=val('itype'),jd=val('jd');
+ const kws=extractKeywords(jd,10);
+ const stories=getStories();
+ document.getElementById('qCount').textContent=BEHAVIORAL.length+CURVEBALL.length;
+ document.getElementById('storyCount').textContent=stories.length;
+ document.getElementById('kwCount').textContent=kws.length;
+ setStat('s2',stories.length>=3?'good':stories.length>=1?'warn':'bad');
+ setStat('s3',kws.length>=6?'good':kws.length>=3?'warn':'bad');
+ setStat('s1','good');
+
+ let html='';
+ html+=`<h2 style="margin-top:0">For: ${esc(role||'[Role]')} @ ${esc(company||'[Company]')}</h2>`;
+ if(kws.length)html+=`<p><b>Keywords they care about:</b> ${kws.map(k=>`<span class="tag">${k}</span>`).join(' ')}</p>`;
+
+ html+='<h3 style="font-family:Georgia,serif;color:var(--navy)">Likely Questions</h3>';
+ BEHAVIORAL.forEach(b=>{
+  html+=`<div class="qblock"><div class="q"><span class="tag behav">Behavioral</span>${esc(b.q)}</div><div class="why">${esc(b.why)}</div><div class="tip"><b>Tip:</b> ${esc(b.tip)}</div></div>`;
+ });
+ CURVEBALL.forEach(b=>{
+  html+=`<div class="qblock"><div class="q"><span class="tag curve">Curveball</span>${esc(b.q)}</div><div class="tip"><b>Tip:</b> ${esc(b.tip)}</div></div>`;
+ });
+
+ if(stories.length){
+  html+='<h3 style="font-family:Georgia,serif;color:var(--navy)">Your STAR Story Bank</h3>';
+  stories.forEach((s,i)=>{
+   html+=`<div class="star"><h4>${i+1}. ${esc(s.label||'Untitled')}</h4>
+   <p><span class="lbl">S</span>${esc(s.s)}</p>
+   <p><span class="lbl">T</span>${esc(s.t)}</p>
+   <p><span class="lbl">A</span>${esc(s.a)}</p>
+   <p><span class="lbl">R</span>${esc(s.r)}</p></div>`;
+  });
+ }
+
+ html+='<h3 style="font-family:Georgia,serif;color:var(--navy)">Smart Questions to Ask Them</h3>';
+ SMART_QUESTIONS.forEach(q=>html+=`<div class="qblock"><div class="q"><span class="tag close">Ask</span>${esc(q)}</div></div>`);
+
+ html+='<h3 style="font-family:Georgia,serif;color:var(--navy)">Day-Of Checklist</h3>';
+ CHECKLIST.forEach(c=>html+=`<details><summary>${esc(c)}</summary></details>`);
+
+ document.getElementById('output').innerHTML=html;
+ document.getElementById('exportBtns').style.display='flex';
+ lastPackText=buildText(role,company,itype,kws,stories);
+}
+
+function buildText(role,company,itype,kws,stories){
+ let t=`INTERVIEW PREP PACK\nRole: ${role}\nCompany: ${company}\nType: ${itype}\n\n`;
+ if(kws.length)t+=`KEYWORDS: ${kws.join(', ')}\n\n`;
+ t+='=== LIKELY QUESTIONS ===\n\n';
+ BEHAVIORAL.forEach(b=>t+=`[Behavioral] ${b.q}\nWhy: ${b.why}\nTip: ${b.tip}\n\n`);
+ CURVEBALL.forEach(b=>t+=`[Curveball] ${b.q}\nTip: ${b.tip}\n\n`);
+ if(stories.length){t+='=== STAR STORY BANK ===\n\n';stories.forEach((s,i)=>t+=`${i+1}. ${s.label}\nS: ${s.s}\nT: ${s.t}\nA: ${s.a}\nR: ${s.r}\n\n`)}
+ t+='=== SMART QUESTIONS TO ASK THEM ===\n\n';SMART_QUESTIONS.forEach(q=>t+='• '+q+'\n');
+ t+='\n=== DAY-OF CHECKLIST ===\n\n';CHECKLIST.forEach(c=>t+='[ ] '+c+'\n');
+ return t;
+}
+
+function loadDemo(){
+ document.getElementById('role').value='Exercise Physiologist, Cardiac Rehab';
+ document.getElementById('company').value='Palomar Health';
+ document.getElementById('itype').value='In-person / panel';
+ document.getElementById('jd').value='Seeking ACSM-certified exercise physiologist for Phase II/III cardiac rehabilitation. Duties include exercise prescription, ECG monitoring, patient education, interdisciplinary team collaboration, and outcomes documentation. Experience with post-MI, CABG, and heart failure populations preferred.';
+ document.getElementById('stories').innerHTML='';
+ addStory({label:'68 y/o post-CABG turnaround',s:'Internship at cardiac rehab, patient refused to progress past week 2, anxiety about exertion.',t:'Get him safely to Phase II completion without stalling the cohort.',a:'Built trust via 1:1 education on HR response, re-ran his RPE scale, added music, partnered him with a peer.',r:'Completed all 36 sessions, METs up from 4 to 7, wife cried at discharge.'});
+ addStory({label:'Difficult teammate',s:'Group project in biomechanics, one partner wasn\'t contributing.',t:'Deliver A-quality project without burning the relationship.',a:'Direct 1:1 conversation, split tasks by strength, set mid-week check-ins.',r:'Got an A, partner thanked me later for the structure.'});
+ addStory({label:'Learning fast',s:'Asked to run a VO2 max test day 3 of internship.',t:'Execute safely with no prior hands-on experience.',a:'Watched 2 ACSM videos night before, shadowed morning of, ran checklist out loud.',r:'Clean test, supervisor let me run 4 more that week.'});
+ generate();
+}
+
+function clearAll(){
+ ['role','company','jd'].forEach(id=>document.getElementById(id).value='');
+ document.getElementById('stories').innerHTML='';
+ addStory();addStory();addStory();
+ document.getElementById('output').innerHTML='<div class="empty">Fill in the form and hit <b>Generate Prep Pack</b>.</div>';
+ document.getElementById('exportBtns').style.display='none';
+ ['s1','s2','s3'].forEach(i=>setStat(i,''));
+ ['qCount','storyCount','kwCount'].forEach(i=>document.getElementById(i).textContent='—');
+}
+
+function copyPack(){navigator.clipboard.writeText(lastPackText).then(()=>toast('Copied!'))}
+function downloadPack(){dl(lastPackText,'interview-prep.txt','text/plain')}
+function downloadDoc(){
+ const html=`<html><head><meta charset="utf-8"></head><body style="font-family:Calibri"><pre>${esc(lastPackText)}</pre></body></html>`;
+ dl(html,'interview-prep.doc','application/msword');
+}
+function dl(content,name,type){
+ const b=new Blob([content],{type});const u=URL.createObjectURL(b);
+ const a=document.createElement('a');a.href=u;a.download=name;a.click();URL.revokeObjectURL(u);toast('Downloaded');
+}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function val(id){return document.getElementById(id).value.trim()}
+function esc(s){return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+function setStat(id,cls){const el=document.getElementById(id);el.className='stat'+(cls?' '+cls:'')}
+
+addStory();addStory();addStory();
+</script>
+</body>
+</html>

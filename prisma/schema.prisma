@@ -39,16 +39,17 @@ model User {
 }
 
 model Site {
-  id        String     @id @default(cuid())
-  name      String
-  slug      String     @unique
-  domain    String?
-  status    SiteStatus @default(DRAFT)
-  ownerId   String
-  owner     User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  pages     Page[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id           String     @id @default(cuid())
+  name         String
+  slug         String     @unique
+  domain       String?
+  status       SiteStatus @default(DRAFT)
+  importedPath String?
+  ownerId      String
+  owner        User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  pages        Page[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 
   @@index([ownerId])
 }

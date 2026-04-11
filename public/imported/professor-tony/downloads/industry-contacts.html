@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industry Contact Directory | Professor Tony</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --ink: #1d1d1f; --ink-secondary: #424245; --accent: #0071e3; --border: #e5e5e7; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f7; color: var(--ink); line-height: 1.6; }
+        .download-header { background: white; border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        .download-header a { color: var(--accent); text-decoration: none; font-size: 14px; }
+        .btn { padding: 8px 16px; border-radius: 8px; font-size: 14px; cursor: pointer; border: none; background: #e5e5e7; }
+        .document-container { max-width: 816px; margin: 40px auto; padding: 0 20px 60px; }
+        .document { background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.1); padding: 60px; }
+        h1 { font-size: 32px; margin-bottom: 8px; }
+        .subtitle { font-size: 18px; color: var(--ink-secondary); margin-bottom: 40px; }
+        h2 { font-size: 20px; margin: 40px 0 20px; padding: 12px 16px; background: #f5f5f7; border-radius: 8px; }
+        h3 { font-size: 16px; margin: 24px 0 12px; color: var(--accent); }
+        p { margin-bottom: 16px; font-size: 15px; }
+        .org-card { border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .org-name { font-weight: 700; font-size: 16px; margin-bottom: 8px; }
+        .org-desc { font-size: 14px; color: var(--ink-secondary); margin-bottom: 12px; }
+        .org-link { color: var(--accent); text-decoration: none; font-size: 14px; }
+        .org-link:hover { text-decoration: underline; }
+        .event-list { margin: 16px 0; }
+        .event { padding: 16px; border-left: 3px solid var(--accent); margin: 12px 0; background: #f9f9fb; }
+        .event-name { font-weight: 600; margin-bottom: 4px; }
+        .event-details { font-size: 14px; color: var(--ink-secondary); }
+        .tip { background: #e8f4fd; padding: 16px; border-radius: 8px; margin: 24px 0; font-size: 14px; }
+        ul { margin: 0 0 16px 24px; }
+        li { margin-bottom: 8px; }
+        @media print { .download-header { display: none; } body { background: white; } .document { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <div class="download-header">
+        <a href="../resources.html">&larr; Back to Resources</a>
+        <button class="btn" onclick="window.print()">Print / Save PDF</button>
+    </div>
+
+    <div class="document-container">
+        <div class="document">
+            <h1>Industry Contact Directory</h1>
+            <p class="subtitle">Professional associations, conferences, and networking resources for San Diego area health & fitness professionals</p>
+
+            <h2>Professional Associations</h2>
+
+            <div class="org-card">
+                <div class="org-name">National Strength and Conditioning Association (NSCA)</div>
+                <div class="org-desc">Premier organization for strength and conditioning professionals. Offers certifications (CSCS, NSCA-CPT), research journals, and career resources.</div>
+                <a href="https://www.nsca.com" class="org-link" target="_blank">www.nsca.com</a>
+                <ul style="margin-top: 12px; font-size: 14px;">
+                    <li>Student membership: $70/year</li>
+                    <li>Access to NSCA Coach journal</li>
+                    <li>Job board and career center</li>
+                    <li>Local and regional clinics</li>
+                </ul>
+            </div>
+
+            <div class="org-card">
+                <div class="org-name">American College of Sports Medicine (ACSM)</div>
+                <div class="org-desc">Largest sports medicine and exercise science organization. Excellent for those interested in clinical or research careers.</div>
+                <a href="https://www.acsm.org" class="org-link" target="_blank">www.acsm.org</a>
+                <ul style="margin-top: 12px; font-size: 14px;">
+                    <li>Student membership: $50/year</li>
+                    <li>Regional chapters across California</li>
+                    <li>Annual meeting and conferences</li>
+                </ul>
+            </div>
+
+            <div class="org-card">
+                <div class="org-name">American Council on Exercise (ACE)</div>
+                <div class="org-desc">Non-profit fitness certification organization. Strong focus on behavior change and accessible fitness.</div>
+                <a href="https://www.acefitness.org" class="org-link" target="_blank">www.acefitness.org</a>
+            </div>
+
+            <div class="org-card">
+                <div class="org-name">National Academy of Sports Medicine (NASM)</div>
+                <div class="org-desc">Known for the OPT model and corrective exercise specialization. Popular among commercial gym employers.</div>
+                <a href="https://www.nasm.org" class="org-link" target="_blank">www.nasm.org</a>
+            </div>
+
+            <div class="org-card">
+                <div class="org-name">IDEA Health & Fitness Association</div>
+                <div class="org-desc">Resources for group fitness instructors and personal trainers. Great continuing education options.</div>
+                <a href="https://www.ideafit.com" class="org-link" target="_blank">www.ideafit.com</a>
+            </div>
+
+            <h2>San Diego Area Organizations</h2>
+
+            <div class="org-card">
+                <div class="org-name">San Diego American College of Sports Medicine (SDACSM)</div>
+                <div class="org-desc">Regional chapter offering local networking events, student scholarships, and professional development.</div>
+                <a href="https://www.sdacsm.org" class="org-link" target="_blank">www.sdacsm.org</a>
+            </div>
+
+            <div class="org-card">
+                <div class="org-name">San Diego County Physical Therapy Association</div>
+                <div class="org-desc">For those pursuing physical therapy careers. Networking and advocacy for PT professionals.</div>
+            </div>
+
+            <h2>Major Industry Conferences</h2>
+
+            <div class="event-list">
+                <div class="event">
+                    <div class="event-name">NSCA National Conference</div>
+                    <div class="event-details">July annually • Largest S&C conference in the world • Student registration discounts available</div>
+                </div>
+
+                <div class="event">
+                    <div class="event-name">ACSM Annual Meeting</div>
+                    <div class="event-details">May-June annually • Research-focused • Excellent for clinical and academic careers</div>
+                </div>
+
+                <div class="event">
+                    <div class="event-name">IDEA World Fitness Convention</div>
+                    <div class="event-details">July in Los Angeles/San Diego area • Group fitness and personal training focus</div>
+                </div>
+
+                <div class="event">
+                    <div class="event-name">NSCA Coaches Conference</div>
+                    <div class="event-details">January annually • Tactical and collegiate S&C focus</div>
+                </div>
+
+                <div class="event">
+                    <div class="event-name">Perform Better Summits</div>
+                    <div class="event-details">Multiple locations/dates • Functional training focus • Hands-on workshops</div>
+                </div>
+            </div>
+
+            <div class="tip">
+                <strong>Student Tip:</strong> Most conferences offer significant student discounts (50-70% off). Volunteer opportunities often include free registration. Check with CSUSM Kinesiology department for potential funding.
+            </div>
+
+            <h2>Online Networking Resources</h2>
+
+            <h3>LinkedIn Groups to Join</h3>
+            <ul>
+                <li>NSCA Members</li>
+                <li>Personal Trainers & Fitness Professionals</li>
+                <li>Strength and Conditioning Coaches</li>
+                <li>Exercise Science Professionals</li>
+                <li>Physical Therapy Network</li>
+                <li>Corporate Wellness Professionals</li>
+            </ul>
+
+            <h3>Podcasts for Industry Insights</h3>
+            <ul>
+                <li><strong>NSCA Coaching Podcast</strong> - Strength & conditioning interviews</li>
+                <li><strong>Iron Culture</strong> - Evidence-based fitness discussions</li>
+                <li><strong>The FitPro Collective</strong> - Business of fitness</li>
+                <li><strong>Physical Preparation Podcast</strong> - Athletic performance</li>
+            </ul>
+
+            <h2>San Diego Job Boards & Resources</h2>
+            <ul>
+                <li><strong>NSCA Job Board</strong> - nsca.com/careers</li>
+                <li><strong>ACSM Career Center</strong> - acsm.org/career-center</li>
+                <li><strong>Indeed San Diego</strong> - Filter by "fitness" or "personal trainer"</li>
+                <li><strong>LinkedIn Jobs</strong> - Set location to San Diego area</li>
+                <li><strong>CSUSM Career Center</strong> - Handshake platform</li>
+            </ul>
+
+            <h2>Local Gym & Facility Networks</h2>
+            <p>Major employers in the San Diego area:</p>
+            <ul>
+                <li>Equinox / SoulCycle</li>
+                <li>LA Fitness</li>
+                <li>24 Hour Fitness</li>
+                <li>Chuze Fitness</li>
+                <li>The Olympic Training Center (Chula Vista)</li>
+                <li>UCSD Recreation</li>
+                <li>YMCA of San Diego County</li>
+                <li>Various boutique studios (OrangeTheory, F45, CrossFit)</li>
+            </ul>
+
+            <div class="tip">
+                <strong>Networking Strategy:</strong> Start building relationships NOW, before you need a job. Attend local events, engage on LinkedIn, and conduct informational interviews. The best opportunities often come through personal connections.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Professor Tony's Cover Letter Builder — 2026</title>
+<meta name="description" content="Build a short, specific, ATS-safe cover letter using Professor Tony's 2026 formula." />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<style>
+  :root {
+    --navy: #1E2A5E;
+    --navy-dark: #15204A;
+    --blue: #4A7BC4;
+    --ice: #CBD5EE;
+    --bg: #F3F5FA;
+    --ink: #1A1A2E;
+    --muted: #6B7280;
+    --white: #FFFFFF;
+    --green: #2E8B57;
+    --red: #C0392B;
+    --gold: #D4A017;
+    --border: #DDE3EE;
+    --shadow: 0 2px 8px rgba(30, 42, 94, 0.08);
+    --shadow-lg: 0 8px 28px rgba(30, 42, 94, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Calibri', 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+  .serif { font-family: 'Georgia', 'Cambria', serif; }
+
+  header.tool-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 2.5rem 2rem 3rem;
+    border-top: 4px solid var(--blue);
+    border-bottom: 4px solid var(--blue);
+  }
+  header.tool-header .inner { max-width: 1200px; margin: 0 auto; }
+  header.tool-header h1 {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  header.tool-header .tag {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    color: var(--ice);
+    font-size: 1.15rem;
+  }
+  header.tool-header .by { color: #9BA8C8; font-size: 0.9rem; margin-top: 0.6rem; }
+  header.tool-header .back { color: var(--ice); font-size: 0.9rem; text-decoration: none; display: inline-block; margin-bottom: 0.8rem; }
+  header.tool-header .back:hover { color: var(--white); }
+
+  main {
+    max-width: 1200px;
+    margin: -1.5rem auto 3rem;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  @media (max-width: 960px) { main { grid-template-columns: 1fr; } }
+
+  .panel { background: var(--white); border-radius: 12px; box-shadow: var(--shadow-lg); overflow: hidden; }
+  .panel-header { background: var(--navy); color: var(--white); padding: 0.85rem 1.25rem; font-family: 'Georgia', serif; font-weight: 700; font-size: 1.15rem; display: flex; align-items: center; gap: 0.6rem; }
+  .panel-header .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+  .panel-body { padding: 1.5rem; }
+
+  .field { margin-bottom: 1.1rem; }
+  .field label { display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--navy); margin-bottom: 0.35rem; }
+  .field .help { font-size: 0.78rem; color: var(--muted); margin-top: 0.25rem; font-style: italic; }
+  input[type="text"], textarea {
+    width: 100%; padding: 0.6rem 0.75rem; border: 1.5px solid var(--border); border-radius: 6px;
+    font-family: inherit; font-size: 0.95rem; background: #FAFBFD; transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(74, 123, 196, 0.15); background: var(--white); }
+  textarea { resize: vertical; min-height: 80px; font-family: 'Calibri', sans-serif; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .step { margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px dashed var(--border); }
+  .step:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+  .step-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem; }
+  .step-num { width: 30px; height: 30px; border-radius: 50%; background: var(--navy); color: var(--white); display: grid; place-items: center; font-family: 'Georgia', serif; font-weight: 700; font-size: 0.95rem; flex-shrink: 0; }
+  .step-title { font-family: 'Georgia', serif; font-weight: 700; font-size: 1.15rem; color: var(--navy); }
+
+  .actions { display: flex; gap: 0.6rem; flex-wrap: wrap; padding: 1rem 1.5rem; background: #F7F9FC; border-top: 1px solid var(--border); }
+  button { font-family: inherit; font-size: 0.92rem; font-weight: 600; padding: 0.7rem 1.2rem; border: none; border-radius: 6px; cursor: pointer; transition: transform 0.1s, box-shadow 0.15s, background 0.15s; }
+  button:active { transform: translateY(1px); }
+  .btn-primary { background: var(--navy); color: var(--white); }
+  .btn-primary:hover { background: var(--navy-dark); box-shadow: var(--shadow); }
+  .btn-secondary { background: var(--white); color: var(--navy); border: 1.5px solid var(--navy); }
+  .btn-secondary:hover { background: var(--navy); color: var(--white); }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1.5px solid var(--border); }
+  .btn-ghost:hover { background: #F1F3F8; color: var(--ink); }
+
+  #letter-output {
+    white-space: pre-wrap; font-family: 'Calibri', sans-serif; font-size: 0.95rem; line-height: 1.6;
+    padding: 1.5rem; background: #FAFBFD; border: 1px dashed var(--border); border-radius: 8px;
+    min-height: 300px; color: var(--ink);
+  }
+  #letter-output.empty { display: grid; place-items: center; color: var(--muted); font-style: italic; text-align: center; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 1rem; }
+  @media (max-width: 600px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat { background: var(--white); border: 1px solid var(--border); border-left: 3px solid var(--blue); padding: 0.7rem 0.8rem; border-radius: 6px; text-align: left; }
+  .stat .num { font-family: 'Georgia', serif; font-size: 1.5rem; font-weight: 700; color: var(--navy); line-height: 1; }
+  .stat .lbl { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.25rem; }
+  .stat.good { border-left-color: var(--green); }
+  .stat.warn { border-left-color: var(--gold); }
+  .stat.bad { border-left-color: var(--red); }
+
+  .checker { margin-top: 1.25rem; }
+  .checker h3 { font-family: 'Georgia', serif; font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+  .pills { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.8rem; }
+  .pill { display: inline-block; padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.78rem; font-weight: 600; border: 1.5px solid; }
+  .pill.hit { background: #E8F5EC; color: var(--green); border-color: #B4D8C0; }
+  .pill.miss { background: #FCEAEA; color: var(--red); border-color: #E8B4B4; }
+  .pill.flag { background: #FFF8E7; color: #8B6500; border-color: #E8D38A; }
+  .pill.none { color: var(--muted); font-style: italic; border: none; background: transparent; padding-left: 0; }
+
+  footer { text-align: center; padding: 2rem 1rem 3rem; color: var(--muted); font-size: 0.85rem; }
+  footer a { color: var(--blue); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--navy); color: var(--white); padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; box-shadow: var(--shadow-lg); opacity: 0; transition: opacity 0.2s, transform 0.2s; pointer-events: none; z-index: 100; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<header class="tool-header">
+  <div class="inner">
+    <a href="index.html" class="back">← All Tools</a>
+    <h1>Professor Tony's Cover Letter Builder</h1>
+    <p class="tag">The 2026 formula — short, specific, human, ATS-safe.</p>
+    <p class="by">Built for kinesiology majors. Works for any field.</p>
+  </div>
+</header>
+
+<main>
+  <section class="panel">
+    <div class="panel-header"><span class="dot"></span> Fill In the Blanks</div>
+    <div class="panel-body">
+
+      <div class="step">
+        <div class="step-header"><div class="step-num">1</div><div class="step-title">You</div></div>
+        <div class="field"><label>Full Name</label><input id="name" type="text" placeholder="Tony Camedia" /></div>
+        <div class="two-col">
+          <div class="field"><label>City, State</label><input id="city" type="text" placeholder="San Marcos, CA" /></div>
+          <div class="field"><label>Phone</label><input id="phone" type="text" placeholder="(760) 555-0199" /></div>
+        </div>
+        <div class="two-col">
+          <div class="field"><label>Email</label><input id="email" type="text" placeholder="tony@email.com" /></div>
+          <div class="field"><label>LinkedIn URL</label><input id="linkedin" type="text" placeholder="linkedin.com/in/tonycamedia" /></div>
+        </div>
+        <div class="field"><label>Your One-Liner Credential</label><input id="credential" type="text" placeholder="e.g., May 2026 CSUSM kinesiology graduate with 240 hours in cardiac rehab" /><div class="help">One sentence. Degree + standout number + focus area.</div></div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><div class="step-num">2</div><div class="step-title">The Role</div></div>
+        <div class="two-col">
+          <div class="field"><label>Role Title</label><input id="role" type="text" placeholder="Exercise Physiologist" /></div>
+          <div class="field"><label>Company / Org</label><input id="company" type="text" placeholder="Palomar Health" /></div>
+        </div>
+        <div class="two-col">
+          <div class="field"><label>Hiring Manager (if known)</label><input id="hm" type="text" placeholder="Dr. Lauren Patel" /><div class="help">Leave blank for "Hiring Manager."</div></div>
+          <div class="field"><label>How You Found It</label><input id="source" type="text" placeholder="LinkedIn, company site, referral…" /></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><div class="step-num">3</div><div class="step-title">The Connection</div></div>
+        <div class="field">
+          <label>One Specific Thing About the Company</label>
+          <textarea id="connection" placeholder="A recent announcement, program, mission, value, or population they serve. Something no other company's cover letter could copy-paste."></textarea>
+          <div class="help">This is the #1 anti-AI tell. Spend 10 min on their newsroom before writing.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><div class="step-num">4</div><div class="step-title">Your Proof</div></div>
+        <div class="field">
+          <label>Strongest Quantified Example</label>
+          <textarea id="proof1" placeholder="Action verb + what you did + measurable result. e.g., Built 8-week programs for 27 faculty; 22 completed and improved 6-min walk scores by 14%."></textarea>
+        </div>
+        <div class="field">
+          <label>Second Example (optional)</label>
+          <textarea id="proof2" placeholder="Another quantified example that maps to a different requirement in the posting."></textarea>
+        </div>
+        <div class="field">
+          <label>Certs / Tools / Languages</label>
+          <input id="extras" type="text" placeholder="e.g., BLS-certified, ACSM-CEP eligible, bilingual Spanish" />
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><div class="step-num">5</div><div class="step-title">The Job Description</div></div>
+        <div class="field">
+          <label>Paste Full Job Description</label>
+          <textarea id="jd" rows="6" placeholder="Paste the entire posting here. We'll auto-extract the top keywords and check your letter against them."></textarea>
+          <div class="help">Required for the keyword match check.</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="actions">
+      <button class="btn-primary" onclick="generateLetter()">Generate Cover Letter</button>
+      <button class="btn-secondary" onclick="loadDemo()">Load Demo Data</button>
+      <button class="btn-ghost" onclick="clearForm()">Clear</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-header"><span class="dot"></span> Your Cover Letter</div>
+    <div class="panel-body">
+
+      <div class="stats" id="stats">
+        <div class="stat"><div class="num" id="stat-words">—</div><div class="lbl">Words</div></div>
+        <div class="stat"><div class="num" id="stat-read">—</div><div class="lbl">Read time</div></div>
+        <div class="stat"><div class="num" id="stat-match">—</div><div class="lbl">Keyword match</div></div>
+        <div class="stat"><div class="num" id="stat-flags">—</div><div class="lbl">AI red flags</div></div>
+      </div>
+
+      <div id="letter-output" class="empty">Fill in the form and click <strong>&nbsp;Generate Cover Letter&nbsp;</strong> to see your draft here.</div>
+
+      <div class="checker" id="checker" style="display:none;">
+        <h3>Keyword Match (from the posting)</h3>
+        <div class="pills" id="kw-hits"></div>
+        <h3 style="margin-top: 1rem;">Missing Keywords (add these if true)</h3>
+        <div class="pills" id="kw-miss"></div>
+        <h3 style="margin-top: 1rem;">AI Red Flags Detected</h3>
+        <div class="pills" id="ai-flags"></div>
+      </div>
+
+    </div>
+    <div class="actions">
+      <button class="btn-primary" onclick="copyLetter()">Copy to Clipboard</button>
+      <button class="btn-secondary" onclick="downloadLetter()">Download .txt</button>
+      <button class="btn-ghost" onclick="downloadDocx()">Download .doc</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Built by Professor Tony — based on current (2025–2026) recruiter surveys and career services guidance.</p>
+  <p style="margin-top: 0.5rem;">Formula: <strong>Hook → Connection → Value → Close.</strong> 250–400 words. ATS-safe. Always human-reviewed before sending.</p>
+</footer>
+
+<div class="toast" id="toast">Copied!</div>
+
+<script>
+const AI_FLAGS = [
+  "delve", "tapestry", "navigate the landscape", "in today's fast-paced world",
+  "i am thrilled", "leverage", "synergy", "a testament to", "passionate about excellence",
+  "ever-evolving", "dive deep", "it is worth noting", "cutting-edge", "seamlessly",
+  "robust", "utilize", "meticulous", "embark on", "unwavering", "foster"
+];
+
+const STOPWORDS = new Set("a an the and or but of in on at to for with by from is are was were be been being have has had do does did will would could should may might must can this that these those i you he she it we they them my your his her its our their me us him anyone someone all any each every other some no not as if so than too very just only also then here there when where why how what who which whose while because about over under out up down into onto off through during before after above below between among".split(" "));
+
+function extractKeywords(text, topN = 12) {
+  if (!text) return [];
+  const words = text.toLowerCase().replace(/[^a-z0-9\s\-]/g, " ").split(/\s+/).filter(w => w.length > 3 && !STOPWORDS.has(w));
+  const freq = {};
+  words.forEach(w => freq[w] = (freq[w] || 0) + 1);
+  const raw = text.toLowerCase().replace(/[^a-z0-9\s\-]/g, " ").split(/\s+/);
+  for (let i = 0; i < raw.length - 1; i++) {
+    const a = raw[i], b = raw[i + 1];
+    if (a.length > 3 && b.length > 3 && !STOPWORDS.has(a) && !STOPWORDS.has(b)) {
+      const p = a + " " + b;
+      freq[p] = (freq[p] || 0) + 2;
+    }
+  }
+  return Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, topN).map(e => e[0]);
+}
+
+function val(id) { return (document.getElementById(id).value || "").trim(); }
+
+function generateLetter() {
+  const name = val("name") || "[Your Name]";
+  const city = val("city");
+  const phone = val("phone");
+  const email = val("email");
+  const linkedin = val("linkedin");
+  const credential = val("credential");
+  const role = val("role") || "[Role]";
+  const company = val("company") || "[Company]";
+  const hm = val("hm");
+  const source = val("source") || "on your careers page";
+  const connection = val("connection");
+  const proof1 = val("proof1");
+  const proof2 = val("proof2");
+  const extras = val("extras");
+  const jd = val("jd");
+
+  const today = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  const header = [
+    name,
+    [city, phone, email, linkedin].filter(Boolean).join("  •  "),
+    "",
+    today,
+    "",
+    hm ? "Dear " + hm + "," : "Dear Hiring Manager,",
+    ""
+  ].join("\n");
+
+  const hookParts = [];
+  if (connection) {
+    hookParts.push("When I saw " + (source.toLowerCase().includes("referr") ? "the " + role + " opening at " + company : role + " posted " + source + " at " + company) + ", I reorganized my week to apply.");
+  } else {
+    hookParts.push("I am writing about the " + role + " position at " + company + " that I found " + source + ".");
+  }
+  if (credential) {
+    hookParts.push("As " + (credential.match(/^[aeiouAEIOU]/) ? "an " : "a ") + credential + ", I'd love to bring that experience to your team.");
+  }
+  const hook = hookParts.join(" ");
+
+  let connPara = "";
+  if (connection) {
+    connPara = "What drew me specifically to " + company + " is " + connection.replace(/\.$/, "") + ". That is the kind of environment I've been training for, and it lines up directly with where I want to grow.";
+  }
+
+  const valueParts = [];
+  if (proof1) valueParts.push(proof1.replace(/\.$/, "") + ".");
+  if (proof2) valueParts.push(proof2.replace(/\.$/, "") + ".");
+  let valPara = "";
+  if (valueParts.length) {
+    valPara = "A couple of specific examples from my recent experience: " + valueParts.join(" ");
+    if (extras) {
+      valPara += " In addition, I bring " + extras.replace(/\.$/, "") + " — all of which map to the requirements you listed.";
+    }
+  } else if (extras) {
+    valPara = "Relevant credentials I bring: " + extras + ".";
+  }
+
+  const close = "I would welcome the chance to talk about how I could contribute to the " + (role.toLowerCase().includes("team") ? role : role + " role") + " at " + company + ". Thank you for considering my application — I can be reached at " + (phone || email || "[contact]") + " any weekday.";
+
+  const sig = "\n\nSincerely,\n" + name;
+
+  const body = [hook, connPara, valPara, close].filter(Boolean).join("\n\n");
+  const letter = header + body + sig;
+
+  const out = document.getElementById("letter-output");
+  out.textContent = letter;
+  out.classList.remove("empty");
+
+  const wordCount = body.split(/\s+/).filter(Boolean).length;
+  document.getElementById("stat-words").textContent = wordCount;
+  document.getElementById("stat-read").textContent = Math.max(1, Math.round(wordCount / 200)) + " min";
+
+  const wordStat = document.getElementById("stat-words").parentElement;
+  wordStat.className = "stat";
+  if (wordCount >= 250 && wordCount <= 400) wordStat.classList.add("good");
+  else if (wordCount < 180 || wordCount > 500) wordStat.classList.add("bad");
+  else wordStat.classList.add("warn");
+
+  const checker = document.getElementById("checker");
+  checker.style.display = "block";
+  const kwHits = document.getElementById("kw-hits");
+  const kwMiss = document.getElementById("kw-miss");
+  const flagsBox = document.getElementById("ai-flags");
+  kwHits.innerHTML = "";
+  kwMiss.innerHTML = "";
+  flagsBox.innerHTML = "";
+
+  if (jd) {
+    const keywords = extractKeywords(jd, 14);
+    const lowerLetter = letter.toLowerCase();
+    let hits = 0;
+    keywords.forEach(kw => {
+      const present = lowerLetter.includes(kw);
+      const pill = document.createElement("span");
+      pill.className = "pill " + (present ? "hit" : "miss");
+      pill.textContent = kw;
+      (present ? kwHits : kwMiss).appendChild(pill);
+      if (present) hits++;
+    });
+    const pct = keywords.length ? Math.round((hits / keywords.length) * 100) : 0;
+    document.getElementById("stat-match").textContent = pct + "%";
+    const matchStat = document.getElementById("stat-match").parentElement;
+    matchStat.className = "stat";
+    if (pct >= 75) matchStat.classList.add("good");
+    else if (pct >= 50) matchStat.classList.add("warn");
+    else matchStat.classList.add("bad");
+    if (!kwHits.children.length) kwHits.innerHTML = '<span class="pill none">None yet — add these to your draft.</span>';
+    if (!kwMiss.children.length) kwMiss.innerHTML = '<span class="pill none">Nice — you covered them all.</span>';
+  } else {
+    kwHits.innerHTML = '<span class="pill none">Paste the job description in Step 5 to enable keyword checking.</span>';
+    kwMiss.innerHTML = "";
+    document.getElementById("stat-match").textContent = "—";
+  }
+
+  const lowerAll = letter.toLowerCase();
+  const foundFlags = AI_FLAGS.filter(f => lowerAll.includes(f));
+  document.getElementById("stat-flags").textContent = foundFlags.length;
+  const flagStat = document.getElementById("stat-flags").parentElement;
+  flagStat.className = "stat";
+  if (foundFlags.length === 0) flagStat.classList.add("good");
+  else if (foundFlags.length <= 2) flagStat.classList.add("warn");
+  else flagStat.classList.add("bad");
+  if (foundFlags.length) {
+    foundFlags.forEach(f => {
+      const p = document.createElement("span");
+      p.className = "pill flag";
+      p.textContent = f;
+      flagsBox.appendChild(p);
+    });
+  } else {
+    flagsBox.innerHTML = '<span class="pill none">Clean — no AI buzzwords detected.</span>';
+  }
+
+  window.scrollTo({ top: document.querySelector("#stats").getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
+}
+
+function copyLetter() {
+  const text = document.getElementById("letter-output").textContent;
+  if (!text || document.getElementById("letter-output").classList.contains("empty")) {
+    return toast("Generate a letter first.");
+  }
+  navigator.clipboard.writeText(text).then(() => toast("Copied to clipboard!"));
+}
+
+function downloadLetter() {
+  const text = document.getElementById("letter-output").textContent;
+  if (!text || document.getElementById("letter-output").classList.contains("empty")) {
+    return toast("Generate a letter first.");
+  }
+  const blob = new Blob([text], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "cover-letter.txt";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function downloadDocx() {
+  const text = document.getElementById("letter-output").textContent;
+  if (!text || document.getElementById("letter-output").classList.contains("empty")) {
+    return toast("Generate a letter first.");
+  }
+  const html = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Cover Letter</title><style>body{font-family:Calibri,sans-serif;font-size:11pt;line-height:1.5;margin:1in;} p{margin:0 0 10pt 0;}</style></head><body>` +
+    text.split("\n").map(line => "<p>" + (line.replace(/&/g, "&amp;").replace(/</g, "&lt;") || "&nbsp;") + "</p>").join("") +
+    `</body></html>`;
+  const blob = new Blob([html], { type: "application/msword" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "cover-letter.doc";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function clearForm() {
+  if (!confirm("Clear all fields?")) return;
+  document.querySelectorAll("input, textarea").forEach(el => el.value = "");
+  const out = document.getElementById("letter-output");
+  out.textContent = "Fill in the form and click  Generate Cover Letter  to see your draft here.";
+  out.classList.add("empty");
+  document.getElementById("checker").style.display = "none";
+  ["stat-words", "stat-read", "stat-match", "stat-flags"].forEach(id => document.getElementById(id).textContent = "—");
+  document.querySelectorAll(".stat").forEach(s => s.className = "stat");
+}
+
+function loadDemo() {
+  const demo = {
+    name: "Tony Camedia",
+    city: "San Marcos, CA",
+    phone: "(760) 555-0199",
+    email: "tony.camedia@email.com",
+    linkedin: "linkedin.com/in/tonycamedia",
+    credential: "May 2026 CSUSM kinesiology graduate with 240 internship hours in cardiac and neuro rehab",
+    role: "Exercise Physiologist",
+    company: "Palomar Health",
+    hm: "Dr. Lauren Patel",
+    source: "on LinkedIn",
+    connection: "your new stroke recovery unit at the Escondido campus and your team's commitment to interdisciplinary patient education",
+    proof1: "At the CSUSM Employee Wellness Center I built individualized 8-week programs for 27 faculty and staff; 22 completed the program and improved their 6-minute walk test scores by an average of 14%, all tracked in TrainHeroic and adjusted weekly based on RPE data",
+    proof2: "During my fall internship at Palomar Medical Center I assisted with 60+ Phase II cardiac rehab sessions and led bilingual patient education for Spanish-speaking patients",
+    extras: "BLS-certified through the American Heart Association, ACSM Certified Exercise Physiologist (CEP) exam-eligible in June, and conversational in Spanish",
+    jd: "Palomar Health is seeking an Exercise Physiologist to support our outpatient cardiac rehabilitation program and new stroke recovery unit. Responsibilities include individualized exercise prescription, patient education, EHR documentation, and interdisciplinary collaboration with nursing and physical therapy. Required: Bachelor's degree in Exercise Science or Kinesiology, BLS certification, strong patient communication skills. Preferred: ACSM CEP, bilingual Spanish, experience with EHR systems, cardiac rehab internship experience."
+  };
+  Object.entries(demo).forEach(([k, v]) => {
+    const el = document.getElementById(k);
+    if (el) el.value = v;
+  });
+  toast("Demo data loaded — click Generate.");
+}
+
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2200);
+}
+</script>
+
+</body>
+</html>

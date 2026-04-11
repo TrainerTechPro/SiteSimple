@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools & Resources | Professional Development</title>
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="../../css/styles.css" as="style">
+    <link rel="preload" href="../../js/navigation.js" as="script">
+
+    <!-- Google Fonts - Distinctive Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="manifest" href="../../manifest.json">
+    <meta name="theme-color" content="#1d1d1f">
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+
+    <!-- Skip to Main Content (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Apple-Style Navigation -->
+    <nav class="nav-wrapper">
+        <div class="main-nav">
+            <a href="../../index.html" class="nav-logo">
+                <span class="nav-logo-mark">PT</span>
+                Professor Tony
+            </a>
+
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../../index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        Courses
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="career-readiness.html" class="dropdown-item">
+                            <div class="dropdown-item-title">Career Readiness</div>
+                            <div class="dropdown-item-desc">LinkedIn optimization & professional branding</div>
+                        </a>
+                        <a href="ai-tools.html" class="dropdown-item">
+                            <div class="dropdown-item-title">AI Tools & Learning</div>
+                            <div class="dropdown-item-desc">Claude courses & AI model comparison</div>
+                        </a>
+                        <a href="../ai-prompt-engineering/rice-q-framework.html" class="dropdown-item">
+                            <div class="dropdown-item-title">AI Prompt Engineering</div>
+                            <div class="dropdown-item-desc">RICE-Q Framework for health & fitness professionals</div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="../../index.html#courses" class="dropdown-item">
+                            <div class="dropdown-item-title">View All Courses</div>
+                            <div class="dropdown-item-desc">Browse the complete course catalog</div>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="../../resources.html" class="nav-link">Resources</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../../mentorship.html" class="nav-link">Mentorship</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../../resume/" class="nav-link">Resume</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../../tools/" class="nav-link">Tools</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../../index.html#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../../index.html#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" aria-label="Toggle dark mode">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-spacer"></div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <div class="logo-mark">AI Tools</div>
+                <div class="course-tag">Professional Development Series</div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-label">AI Resources</div>
+                <h1>Master <em>AI Tools</em> for Your Career</h1>
+                <p class="hero-intro">Learn which AI models excel at different tasks and access courses to build valuable skills that set you apart in the health & fitness industry.</p>
+            </div>
+        </section>
+
+        <!-- AI Model Comparison Section -->
+        <section style="padding: var(--space-16) 0;">
+            <div class="container">
+                <div class="section-header" style="margin-bottom: var(--space-8);">
+                    <span class="section-number">01</span>
+                    <h2 class="section-title">Which AI Model to Use?</h2>
+                </div>
+
+                <p class="section-intro" style="margin-bottom: var(--space-10);">Want to know which tool or model is performing best for a specific task? Here's our current recommendation for health & fitness professionals, based on <a href="https://creatoreconomy.so/p/chatgpt-vs-claude-vs-gemini-the-best-ai-model-for-each-use-case-2025" target="_blank" rel="noopener">2025 benchmarks and testing</a>.</p>
+
+                <!-- Tier Tabs -->
+                <div class="tier-tabs" style="display: flex; gap: var(--space-3); margin-bottom: var(--space-8); flex-wrap: wrap;">
+                    <button class="tier-tab active" data-tier="free" style="padding: var(--space-3) var(--space-5); border-radius: 100px; border: 1px solid var(--border-primary); background: var(--accent-primary); color: white; font-weight: 500; cursor: pointer; transition: all 0.2s;">Free Tier</button>
+                    <button class="tier-tab" data-tier="mid" style="padding: var(--space-3) var(--space-5); border-radius: 100px; border: 1px solid var(--border-primary); background: var(--surface-secondary); color: var(--ink-primary); font-weight: 500; cursor: pointer; transition: all 0.2s;">Mid Tier · $5-20/mo</button>
+                    <button class="tier-tab" data-tier="premium" style="padding: var(--space-3) var(--space-5); border-radius: 100px; border: 1px solid var(--border-primary); background: var(--surface-secondary); color: var(--ink-primary); font-weight: 500; cursor: pointer; transition: all 0.2s;">Premium · $100-250/mo</button>
+                </div>
+
+                <!-- FREE TIER TABLE -->
+                <div class="tier-content" data-tier="free">
+                    <div class="ai-comparison-table-wrapper">
+                        <table class="ai-comparison-table">
+                            <thead>
+                                <tr>
+                                    <th class="task-column">Task</th>
+                                    <th>Claude<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Free · Sonnet</span></th>
+                                    <th>ChatGPT<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Free · GPT-4o</span></th>
+                                    <th>Gemini<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Free · Flash</span></th>
+                                    <th>Perplexity<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Free · 5/day</span></th>
+                                    <th>ElevenLabs<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Free · 10k chars</span></th>
+                                    <th>Gamma<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Free · 400 credits</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="task-column">General Purpose</td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Writing & Copywriting</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Complex Reasoning</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Deep Research</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Code Generation</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Image Analysis</td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Image Generation</td>
+                                    <td>-</td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Text to Speech</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Presentations</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Long Document Analysis</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Patient Education</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Exercise Programming</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="margin-top: var(--space-4); font-size: var(--text-sm); color: var(--ink-tertiary);"><strong>Free tier limitations:</strong> Daily usage limits, slower response times during peak hours, limited features. Great for casual use and testing.</p>
+                </div>
+
+                <!-- MID TIER TABLE -->
+                <div class="tier-content" data-tier="mid" style="display: none;">
+                    <div class="ai-comparison-table-wrapper">
+                        <table class="ai-comparison-table">
+                            <thead>
+                                <tr>
+                                    <th class="task-column">Task</th>
+                                    <th>Claude<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Pro · $20/mo</span></th>
+                                    <th>ChatGPT<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Plus · $20/mo</span></th>
+                                    <th>Gemini<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Advanced · $20/mo</span></th>
+                                    <th>Perplexity<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Pro · $20/mo</span></th>
+                                    <th>ElevenLabs<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Starter · $5/mo</span></th>
+                                    <th>Gamma<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Plus · $8/mo</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="task-column">General Purpose</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Writing & Copywriting</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Complex Reasoning</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Deep Research</td>
+                                    <td>-</td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Code Generation</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Image Analysis</td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Image Generation</td>
+                                    <td>-</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Text to Speech</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Presentations</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Long Document Analysis</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Patient Education</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Exercise Programming</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="margin-top: var(--space-4); font-size: var(--text-sm); color: var(--ink-tertiary);"><strong>Best value tier:</strong> This is where most professionals should start. Higher limits, faster responses, and access to the best models for most tasks.</p>
+                </div>
+
+                <!-- PREMIUM TIER TABLE -->
+                <div class="tier-content" data-tier="premium" style="display: none;">
+                    <div class="ai-comparison-table-wrapper">
+                        <table class="ai-comparison-table">
+                            <thead>
+                                <tr>
+                                    <th class="task-column">Task</th>
+                                    <th>Claude<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Max · $100/mo</span></th>
+                                    <th>ChatGPT<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Pro · $200/mo</span></th>
+                                    <th>Gemini<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Ultra · $250/mo</span></th>
+                                    <th>Perplexity<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Max · $200/mo</span></th>
+                                    <th>ElevenLabs<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Pro · $99/mo</span></th>
+                                    <th>Gamma<br><span style="font-weight: 400; font-size: 0.75em; opacity: 0.7;">Ultra · $100/mo</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="task-column">General Purpose</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Writing & Copywriting</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Complex Reasoning</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Deep Research</td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Code Generation</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Image Analysis</td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Image Generation</td>
+                                    <td>-</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Video Generation</td>
+                                    <td>-</td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Text to Speech</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Presentations</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Long Document Analysis</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Patient Education</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="task-column">Exercise Programming</td>
+                                    <td><span class="check-icon best">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td><span class="check-icon">&#10003;</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="margin-top: var(--space-4); font-size: var(--text-sm); color: var(--ink-tertiary);"><strong>Power user tier:</strong> Unlimited usage, fastest models, priority access to new features. Best for heavy daily use or business-critical applications.</p>
+                </div>
+
+                <div class="table-legend">
+                    <span class="legend-item"><span class="check-icon best">&#10003;</span> Best in class</span>
+                    <span class="legend-item"><span class="check-icon">&#10003;</span> Capable</span>
+                    <span class="legend-item">- Not recommended for this task</span>
+                </div>
+
+                <script>
+                    document.querySelectorAll('.tier-tab').forEach(tab => {
+                        tab.addEventListener('click', () => {
+                            // Remove active from all tabs
+                            document.querySelectorAll('.tier-tab').forEach(t => {
+                                t.style.background = 'var(--surface-secondary)';
+                                t.style.color = 'var(--ink-primary)';
+                                t.classList.remove('active');
+                            });
+                            // Add active to clicked tab
+                            tab.style.background = 'var(--accent-primary)';
+                            tab.style.color = 'white';
+                            tab.classList.add('active');
+                            // Hide all content
+                            document.querySelectorAll('.tier-content').forEach(c => c.style.display = 'none');
+                            // Show selected content
+                            document.querySelector(`.tier-content[data-tier="${tab.dataset.tier}"]`).style.display = 'block';
+                        });
+                    });
+                </script>
+
+                <div class="pro-tip">
+                    <div class="pro-tip-label">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Pro Tip
+                    </div>
+                    <h4>Start with Claude for healthcare tasks</h4>
+                    <p>For most health and fitness professional workflows—writing protocols, patient education, exercise programming, and complex reasoning—Claude consistently delivers the most nuanced and safety-conscious outputs. Use specialized tools like ElevenLabs for audio or Gamma for presentations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Claude AI Courses Section -->
+        <section>
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2 class="section-title">Claude AI Courses</h2>
+                </div>
+
+                <div class="cert-layout">
+                    <div class="cert-intro">
+                        <h3>Master <strong>Claude AI</strong> for professional workflows</h3>
+                        <p>Anthropic's Claude is rapidly becoming an essential tool in healthcare and fitness settings. These courses will help you leverage Claude effectively and add valuable credentials to your profile.</p>
+                    </div>
+
+                    <div class="cert-steps">
+                        <div class="step-card">
+                            <span class="step-indicator">1</span>
+                            <h4 class="step-title">Intro to Claude AI (Coursera)</h4>
+                            <p style="font-size: 14px; color: var(--ink-secondary); margin-bottom: 16px;">Comprehensive introduction to Claude covering fundamentals, use cases, and practical applications for professionals.</p>
+                            <div class="card-meta" style="margin-bottom: 12px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+                                <span>Self-paced • Certificate available</span>
+                            </div>
+                            <a href="https://www.coursera.org/learn/intro-to-claude-ai" target="_blank" rel="noopener" class="btn btn-primary">
+                                Start Course
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+                            </a>
+                        </div>
+
+                        <div class="step-card">
+                            <span class="step-indicator">2</span>
+                            <h4 class="step-title">Anthropic Academy (Free)</h4>
+                            <p style="font-size: 14px; color: var(--ink-secondary); margin-bottom: 16px;">Official free courses from Anthropic including AI Fluency, Claude API Fundamentals, and Claude Code training with certificates.</p>
+                            <div class="card-meta" style="margin-bottom: 12px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+                                <span>Free • Official Anthropic courses</span>
+                            </div>
+                            <a href="https://anthropic.skilljar.com/" target="_blank" rel="noopener" class="btn btn-primary">
+                                Browse Courses
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-grid" style="margin-top: var(--space-10);">
+                    <div class="resource-card">
+                        <span class="card-badge">Free Resource</span>
+                        <h3 class="card-title">Anthropic's Learning Hub</h3>
+                        <p class="card-description">11 free courses covering AI fundamentals, prompt engineering, and Claude best practices directly from Anthropic.</p>
+                        <div class="card-meta">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>Official Documentation</span>
+                        </div>
+                        <a href="https://www.anthropic.com/learn" target="_blank" rel="noopener" class="btn btn-outline">
+                            Explore Resources
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+                        </a>
+                    </div>
+
+                    <div class="resource-card">
+                        <span class="card-badge">On-Site Course</span>
+                        <h3 class="card-title">RICE-Q Framework</h3>
+                        <p class="card-description">Our in-house prompt engineering course designed specifically for health and fitness professionals. Build prompts that get results.</p>
+                        <div class="card-meta">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+                            <span>Interactive • Templates Included</span>
+                        </div>
+                        <a href="../ai-prompt-engineering/rice-q-framework.html" class="btn btn-outline">
+                            View Course
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pro Tip for Claude -->
+                <div class="pro-tip">
+                    <div class="pro-tip-label">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Why Claude for Health Professionals?
+                    </div>
+                    <h4>Claude excels at complex reasoning and safety</h4>
+                    <p>Claude is particularly well-suited for healthcare and fitness applications due to its nuanced understanding of context, ability to handle sensitive topics appropriately, and strong performance on complex analytical tasks like protocol development and patient education materials.</p>
+                    <div class="skill-tags" style="margin-top: var(--space-5);">
+                        <span class="skill-tag">Claude AI</span>
+                        <span class="skill-tag">Anthropic</span>
+                        <span class="skill-tag">Healthcare AI</span>
+                        <span class="skill-tag">AI Safety</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <ul class="footer-nav">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../index.html#courses">Courses</a></li>
+                    <li><a href="../../resources.html">Resources</a></li>
+                    <li><a href="../../resume/">Resume</a></li>
+                    <li><a href="../../index.html#about">About</a></li>
+                    <li><a href="../../index.html#contact">Contact</a></li>
+                </ul>
+                <p class="footer-text">Professional Development Series <span></span> AI Tools & Resources</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/navigation.js" defer></script>
+</body>
+</html>

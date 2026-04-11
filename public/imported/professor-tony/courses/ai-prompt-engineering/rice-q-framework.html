@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RICE-Q Framework | Prompt Engineering for Health & Fitness Professionals</title>
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="../../css/styles.css" as="style">
+    <link rel="preload" href="../../js/navigation.js" as="script">
+
+    <!-- Google Fonts - Distinctive Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="manifest" href="../../manifest.json">
+    <meta name="theme-color" content="#1d1d1f">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        /* RICE-Q Page - Using new design system variables */
+
+        /* RICE-Q specific colors */
+        :root {
+            --riceq-red: #dc2626;
+            --riceq-orange: #ea580c;
+            --riceq-yellow: #ca8a04;
+            --riceq-green: #059669;
+            --riceq-blue: #0071e3;
+        }
+
+        /* Content Navigation Tabs */
+        .content-nav {
+            border-bottom: 1px solid var(--border);
+            background: var(--paper);
+            position: sticky;
+            top: 48px;
+            z-index: 100;
+        }
+
+        .content-tabs {
+            display: flex;
+            gap: 0;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .content-tab {
+            padding: var(--space-4) var(--space-6);
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: var(--ink-tertiary);
+            font-family: inherit;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+
+        .content-tab:hover {
+            color: var(--ink);
+        }
+
+        .content-tab.active {
+            color: var(--ink);
+            border-bottom-color: var(--riceq-blue);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            padding: var(--space-16) 0;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Framework Grid */
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: var(--space-4);
+            margin-bottom: var(--space-12);
+        }
+
+        @media (max-width: 900px) {
+            .framework-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .framework-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .framework-card {
+            background: var(--paper-elevated);
+            border-radius: 16px;
+            padding: var(--space-6);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-out);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .framework-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-letter {
+            font-size: var(--text-4xl);
+            font-weight: 700;
+            margin-bottom: var(--space-3);
+            line-height: 1;
+        }
+
+        .card-r .card-letter { color: var(--riceq-red); }
+        .card-i .card-letter { color: var(--riceq-orange); }
+        .card-c .card-letter { color: var(--riceq-yellow); }
+        .card-e .card-letter { color: var(--riceq-green); }
+        .card-q .card-letter { color: var(--riceq-blue); }
+
+        .framework-card .card-title {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: var(--space-1);
+        }
+
+        .framework-card .card-desc {
+            font-size: var(--text-xs);
+            color: var(--ink-secondary);
+            line-height: 1.4;
+        }
+
+        /* Deep Dive Cards */
+        .deep-dive-card {
+            background: var(--paper-elevated);
+            border-radius: 16px;
+            padding: var(--space-8);
+            margin-bottom: var(--space-6);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .deep-dive-card h3 {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .deep-dive-card h3 .letter {
+            font-weight: 700;
+        }
+
+        .deep-dive-card > p {
+            color: var(--ink-secondary);
+            margin-bottom: var(--space-4);
+        }
+
+        .example-box {
+            background: #f8f9fa;
+            border-left: 3px solid var(--border);
+            padding: var(--space-4) var(--space-5);
+            margin: var(--space-4) 0;
+            font-size: var(--text-sm);
+            color: var(--ink);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-box.good {
+            border-left-color: var(--riceq-green);
+            background: #ecfdf5;
+        }
+
+        .example-box.bad {
+            border-left-color: var(--riceq-red);
+            background: #fef2f2;
+        }
+
+        .example-label {
+            display: inline-block;
+            padding: var(--space-1) var(--space-2);
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-2);
+        }
+
+        .label-good {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .label-bad {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .tips-list {
+            list-style: none;
+            margin-top: var(--space-6);
+        }
+
+        .tips-list li {
+            padding: var(--space-3) 0;
+            padding-left: var(--space-6);
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            color: var(--ink-secondary);
+            font-size: var(--text-sm);
+        }
+
+        .tips-list li:last-child {
+            border-bottom: none;
+        }
+
+        .tips-list li::before {
+            content: '\2192';
+            position: absolute;
+            left: 0;
+            color: var(--riceq-blue);
+            font-weight: 500;
+        }
+
+        /* Builder Section */
+        .builder-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-8);
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .builder-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .builder-form {
+            background: var(--paper-elevated);
+            border-radius: 16px;
+            padding: var(--space-8);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .builder-form h3 {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: var(--space-6);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-6);
+        }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-weight: 600;
+            font-size: var(--text-sm);
+            margin-bottom: var(--space-2);
+            color: var(--ink);
+        }
+
+        .form-group label .badge {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .badge-r { background: var(--riceq-red); }
+        .badge-i { background: var(--riceq-orange); }
+        .badge-c { background: var(--riceq-yellow); }
+        .badge-e { background: var(--riceq-green); }
+        .badge-q { background: var(--riceq-blue); }
+
+        .form-group textarea {
+            width: 100%;
+            padding: var(--space-4);
+            background: var(--paper);
+            border: 1px solid var(--border-strong);
+            border-radius: 10px;
+            color: var(--ink);
+            font-family: inherit;
+            font-size: var(--text-sm);
+            min-height: 100px;
+            resize: vertical;
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--riceq-blue);
+            box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
+        }
+
+        .form-hint {
+            font-size: var(--text-xs);
+            color: var(--ink-tertiary);
+            margin-top: var(--space-2);
+        }
+
+        /* Output Panel */
+        .output-panel {
+            background: var(--paper-elevated);
+            border-radius: 16px;
+            padding: var(--space-8);
+            position: sticky;
+            top: 120px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-4);
+        }
+
+        .output-header h3 {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .copy-btn {
+            padding: var(--space-2) var(--space-4);
+            background: var(--riceq-blue);
+            border: none;
+            border-radius: 980px;
+            color: white;
+            font-family: inherit;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+
+        .copy-btn:hover {
+            background: #005ecb;
+        }
+
+        .copy-btn.copied {
+            background: var(--riceq-green);
+        }
+
+        .output-content {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: var(--space-5);
+            min-height: 200px;
+            font-size: var(--text-sm);
+            line-height: 1.7;
+            white-space: pre-wrap;
+            color: var(--ink);
+            font-family: inherit;
+        }
+
+        /* Score Section */
+        .score-section {
+            margin-top: var(--space-6);
+            padding: var(--space-5);
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .score-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-3);
+        }
+
+        .score-label {
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .score-value {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            color: var(--riceq-green);
+        }
+
+        .score-meter {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: var(--space-4);
+        }
+
+        .score-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: var(--riceq-green);
+            transition: all 0.4s var(--ease-out);
+        }
+
+        .checklist {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            font-size: var(--text-xs);
+            color: var(--ink-tertiary);
+            padding: var(--space-1) var(--space-3);
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+        }
+
+        .check-item.complete {
+            color: var(--riceq-green);
+            border-color: var(--riceq-green);
+            background: #ecfdf5;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: var(--space-8);
+            margin-top: var(--space-4);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+        }
+
+        .stats-row .stat-value {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .stats-row .stat-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--ink-tertiary);
+        }
+
+        /* Templates Grid */
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .template-card {
+            background: var(--paper-elevated);
+            border-radius: 16px;
+            padding: var(--space-6);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-out);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .template-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .template-badge {
+            display: inline-block;
+            padding: var(--space-1) var(--space-3);
+            background: rgba(0, 113, 227, 0.08);
+            color: var(--riceq-blue);
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border-radius: 100px;
+            margin-bottom: var(--space-4);
+        }
+
+        .template-card h4 {
+            font-size: var(--text-base);
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: var(--space-2);
+        }
+
+        .template-card p {
+            font-size: var(--text-sm);
+            color: var(--ink-secondary);
+            margin-bottom: var(--space-5);
+            line-height: 1.5;
+        }
+
+        .use-template-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-5);
+            background: var(--riceq-blue);
+            border: none;
+            border-radius: 980px;
+            color: white;
+            font-family: inherit;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+
+        .use-template-btn:hover {
+            background: #005ecb;
+        }
+
+        .use-template-btn::after {
+            content: '\2192';
+        }
+
+        /* Before/After Comparison - Fixed contrast */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-4);
+            margin-top: var(--space-6);
+        }
+
+        @media (max-width: 600px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .comparison-box {
+            padding: var(--space-5);
+            border-radius: 12px;
+        }
+
+        .comparison-box.before {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+
+        .comparison-box.after {
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+        }
+
+        .comparison-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-3);
+        }
+
+        .comparison-box.before .comparison-label {
+            color: #991b1b;
+        }
+
+        .comparison-box.after .comparison-label {
+            color: #065f46;
+        }
+
+        .comparison-text {
+            font-style: italic;
+            color: var(--ink);
+            font-size: var(--text-sm);
+            line-height: 1.5;
+        }
+
+        /* Template Filters */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-bottom: var(--space-8);
+            padding-bottom: var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .filter-btn {
+            padding: var(--space-2) var(--space-4);
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 980px;
+            color: var(--ink-secondary);
+            font-family: inherit;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--ink-tertiary);
+            color: var(--ink);
+        }
+
+        .filter-btn.active {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: white;
+        }
+
+        .template-card {
+            transition: all var(--duration-normal) var(--ease-out), opacity 0.3s ease;
+        }
+
+        .template-card.hidden {
+            display: none;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: var(--space-12) var(--space-6);
+            color: var(--ink-tertiary);
+        }
+
+        .no-results h4 {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--ink-secondary);
+            margin-bottom: var(--space-2);
+        }
+
+        .template-count {
+            font-size: var(--text-sm);
+            color: var(--ink-tertiary);
+            margin-left: auto;
+            padding: var(--space-1) var(--space-3);
+            background: var(--paper-elevated);
+            border-radius: 980px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Skip to Main Content (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Apple-Style Navigation -->
+    <nav class="nav-wrapper">
+        <div class="main-nav">
+            <a href="../../index.html" class="nav-logo">
+                <span class="nav-logo-mark">PT</span>
+                Professor Tony
+            </a>
+
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../../index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        Courses
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="../kinesiology-internship/career-readiness.html" class="dropdown-item">
+                            <div class="dropdown-item-title">Career Readiness</div>
+                            <div class="dropdown-item-desc">LinkedIn optimization & professional branding</div>
+                        </a>
+                        <a href="../kinesiology-internship/ai-tools.html" class="dropdown-item">
+                            <div class="dropdown-item-title">AI Tools & Learning</div>
+                            <div class="dropdown-item-desc">Claude courses & AI model comparison</div>
+                        </a>
+                        <a href="rice-q-framework.html" class="dropdown-item">
+                            <div class="dropdown-item-title">AI Prompt Engineering</div>
+                            <div class="dropdown-item-desc">RICE-Q Framework for health & fitness professionals</div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="../../index.html#courses" class="dropdown-item">
+                            <div class="dropdown-item-title">View All Courses</div>
+                            <div class="dropdown-item-desc">Browse the complete course catalog</div>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="../../resources.html" class="nav-link">Resources</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../../mentorship.html" class="nav-link">Mentorship</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../../resume/" class="nav-link">Resume</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../../tools/" class="nav-link">Tools</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../../index.html#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../../index.html#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" aria-label="Toggle dark mode">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-spacer"></div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <div class="logo-mark">AI Essentials</div>
+                <div class="course-tag">Professional Development Series</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-label">Prompt Engineering</div>
+            <h1>Master the <em>RICE-Q Framework</em> & Get Better AI Results</h1>
+            <p class="hero-intro">A structured approach to crafting precise, powerful prompts that transform vague requests into targeted AI outputs for health and fitness professionals.</p>
+        </div>
+    </section>
+
+    <!-- Content Navigation -->
+    <nav class="content-nav">
+        <div class="content-tabs">
+            <button class="content-tab active" data-section="overview">Overview</button>
+            <button class="content-tab" data-section="learn">Deep Dive</button>
+            <button class="content-tab" data-section="builder">Prompt Builder</button>
+            <button class="content-tab" data-section="templates">Templates</button>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <!-- Overview Section -->
+        <section id="overview" class="content-section active">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2 class="section-title">The Framework</h2>
+                </div>
+
+                <div class="cert-intro" style="margin-bottom: 2rem;">
+                    <h3>Five elements for <strong>perfect prompts</strong></h3>
+                    <p>Each component reduces ambiguity and helps AI understand exactly what you need. Click any card to learn more.</p>
+                </div>
+
+                <div class="framework-grid">
+                    <div class="framework-card card-r" data-detail="role">
+                        <div class="card-letter">R</div>
+                        <div class="card-title">Role</div>
+                        <div class="card-desc">Define who the AI should become</div>
+                    </div>
+                    <div class="framework-card card-i" data-detail="instructions">
+                        <div class="card-letter">I</div>
+                        <div class="card-title">Instructions</div>
+                        <div class="card-desc">Specify the exact task to perform</div>
+                    </div>
+                    <div class="framework-card card-c" data-detail="context">
+                        <div class="card-letter">C</div>
+                        <div class="card-title">Context</div>
+                        <div class="card-desc">Provide background information</div>
+                    </div>
+                    <div class="framework-card card-e" data-detail="examples">
+                        <div class="card-letter">E</div>
+                        <div class="card-title">Examples</div>
+                        <div class="card-desc">Show the desired output format</div>
+                    </div>
+                    <div class="framework-card card-q" data-detail="quality">
+                        <div class="card-letter">Q</div>
+                        <div class="card-title">Quality</div>
+                        <div class="card-desc">Set constraints and standards</div>
+                    </div>
+                </div>
+
+                <div class="pro-tip">
+                    <div class="pro-tip-label">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Why It Works
+                    </div>
+                    <h4>From vague to precise in seconds</h4>
+                    <p>The RICE-Q framework addresses the five critical dimensions AI models need to generate accurate, relevant responses.</p>
+                    <div class="comparison-grid">
+                        <div class="comparison-box before">
+                            <div class="comparison-label">Before</div>
+                            <div class="comparison-text">"Write me a workout plan"</div>
+                        </div>
+                        <div class="comparison-box after">
+                            <div class="comparison-label">After RICE-Q</div>
+                            <div class="comparison-text">"As a CSCS with 10+ years experience, create a 12-week hypertrophy program for a 35-year-old intermediate lifter training 4x/week..."</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learn Section -->
+        <section id="learn" class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2 class="section-title">Deep Dive</h2>
+                </div>
+
+                <div class="deep-dive-card" id="role-detail">
+                    <h3><span class="letter" style="color: var(--riceq-red);">R</span> Role — Set the Expertise</h3>
+                    <p style="color: var(--muted); margin-bottom: 1rem;">
+                        Assigning a role activates relevant knowledge patterns and writing styles. The more specific the role, the more targeted the response.
+                    </p>
+                    <div class="example-box bad">
+                        <div class="example-label label-bad">Weak</div>
+                        <div>"You are a fitness expert"</div>
+                    </div>
+                    <div class="example-box good">
+                        <div class="example-label label-good">Strong</div>
+                        <div>"You are a Doctor of Physical Therapy (DPT) with 15+ years of orthopedic rehabilitation experience, certified in dry needling and IASTM, who stays current with JOSPT guidelines"</div>
+                    </div>
+                    <ul class="tips-list">
+                        <li>Include years of experience or seniority level</li>
+                        <li>Mention specific certifications (CSCS, RDN, DPT, etc.)</li>
+                        <li>Reference relevant methodologies or evidence sources</li>
+                        <li>Combine roles for hybrid expertise: "Sports dietitian with strength coaching background"</li>
+                    </ul>
+                </div>
+
+                <div class="deep-dive-card" id="instructions-detail">
+                    <h3><span class="letter" style="color: var(--riceq-orange);">I</span> Instructions — Define the Action</h3>
+                    <p style="color: var(--muted); margin-bottom: 1rem;">
+                        Clear instructions eliminate guesswork. Use action verbs and be explicit about deliverables.
+                    </p>
+                    <div class="example-box bad">
+                        <div class="example-label label-bad">Weak</div>
+                        <div>"Help me with a patient education handout"</div>
+                    </div>
+                    <div class="example-box good">
+                        <div class="example-label label-good">Strong</div>
+                        <div>"Create a 1-page patient education handout for ACL post-op care. Include: 1) Week 1-2 exercises with sets/reps, 2) Ice/elevation protocol, 3) Red flags requiring immediate contact, 4) Follow-up appointment schedule"</div>
+                    </div>
+                    <ul class="tips-list">
+                        <li>Start with a strong action verb: create, design, analyze, develop</li>
+                        <li>Specify quantity: "5 exercises," "3 meal options," "8-week program"</li>
+                        <li>Break complex tasks into numbered components</li>
+                        <li>State what NOT to include (equally important)</li>
+                    </ul>
+                </div>
+
+                <div class="deep-dive-card" id="context-detail">
+                    <h3><span class="letter" style="color: var(--riceq-yellow);">C</span> Context — Provide Background</h3>
+                    <p style="color: var(--muted); margin-bottom: 1rem;">
+                        Context grounds the AI in your specific situation. Without it, you get generic responses.
+                    </p>
+                    <div class="example-box bad">
+                        <div class="example-label label-bad">Weak</div>
+                        <div>"Write a meal plan for weight loss"</div>
+                    </div>
+                    <div class="example-box good">
+                        <div class="example-label label-good">Strong</div>
+                        <div>"Client: 28-year-old female CrossFit athlete (5x/week), desk job, 5'6" 155lbs, goal is body recomposition while supporting training. Prefers to limit dairy, budget $100-125/week, meal preps on Sundays."</div>
+                    </div>
+                    <ul class="tips-list">
+                        <li>Include patient/client demographics and relevant history</li>
+                        <li>Mention constraints: equipment, time, budget, setting</li>
+                        <li>Share goals and what success looks like</li>
+                        <li>Provide industry-specific details that affect the output</li>
+                    </ul>
+                </div>
+
+                <div class="deep-dive-card" id="examples-detail">
+                    <h3><span class="letter" style="color: var(--riceq-green);">E</span> Examples — Show Don't Tell</h3>
+                    <p style="color: var(--muted); margin-bottom: 1rem;">
+                        Examples are the most powerful way to communicate style, tone, and format. One good example beats paragraphs of description.
+                    </p>
+                    <div class="example-box good">
+                        <div class="example-label label-good">Example Pattern</div>
+                        <div>Phase 1 (Weeks 0-2) - Protection Phase:<br><br>GOALS:<br>• Control pain and swelling (VAS &lt;3/10)<br>• Achieve full passive extension (0°)<br><br>EXERCISES:<br>1. Quad sets - 10 reps × 10 sec holds, 3x/day<br>   Cue: "Tighten thigh, push knee flat into towel"</div>
+                    </div>
+                    <ul class="tips-list">
+                        <li>Provide 2-3 examples for pattern recognition</li>
+                        <li>Include both positive examples (do this) and negative (not this)</li>
+                        <li>Match examples to your exact use case</li>
+                        <li>Show the transformation: input → desired output</li>
+                    </ul>
+                </div>
+
+                <div class="deep-dive-card" id="quality-detail">
+                    <h3><span class="letter" style="color: var(--riceq-blue);">Q</span> Quality — Set Standards</h3>
+                    <p style="color: var(--muted); margin-bottom: 1rem;">
+                        Quality constraints shape the final output. Be specific about format, length, tone, and evaluation criteria.
+                    </p>
+                    <div class="example-box good">
+                        <div class="example-label label-good">Quality Constraints</div>
+                        <div>Requirements:<br>• All exercises must include specific dosing (sets × reps × frequency)<br>• Cite relevant CPGs where applicable (e.g., MOON guidelines)<br>• Use standardized outcome measures (LEFS, NPRS)<br>• HEP should use 6th-grade reading level<br>• Include regression AND progression for each exercise</div>
+                    </div>
+                    <ul class="tips-list">
+                        <li>Reference clinical guidelines or evidence standards</li>
+                        <li>Set reading level for patient materials (5th-6th grade)</li>
+                        <li>Specify formatting requirements (bullet points, tables, headers)</li>
+                        <li>Include a checklist the AI should verify against</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Builder Section -->
+        <section id="builder" class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2 class="section-title">Prompt Builder</h2>
+                </div>
+
+                <div class="builder-layout">
+                    <div class="builder-form">
+                        <h3>Build Your Prompt</h3>
+
+                        <div class="form-group">
+                            <label for="role-input">
+                                <span class="badge badge-r">R</span>
+                                Role
+                            </label>
+                            <textarea id="role-input" placeholder="e.g., You are a Doctor of Physical Therapy with 15+ years of orthopedic rehabilitation experience..."></textarea>
+                            <p class="form-hint">Who should the AI become? Include credentials and expertise level.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="instructions-input">
+                                <span class="badge badge-i">I</span>
+                                Instructions
+                            </label>
+                            <textarea id="instructions-input" placeholder="e.g., Create an 8-week rehabilitation protocol including: 1) Phase breakdown with progression criteria, 2) Therapeutic exercises with sets/reps..."></textarea>
+                            <p class="form-hint">What specific task should be performed? Be explicit about deliverables.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="context-input">
+                                <span class="badge badge-c">C</span>
+                                Context
+                            </label>
+                            <textarea id="context-input" placeholder="e.g., Patient: Active adult (35yo male) 2 weeks post-ACL reconstruction (BTB autograft). Goal: Return to recreational basketball at 9-12 months..."></textarea>
+                            <p class="form-hint">What background information is relevant? Include patient/client details.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="examples-input">
+                                <span class="badge badge-e">E</span>
+                                Examples
+                            </label>
+                            <textarea id="examples-input" placeholder="e.g., Format each exercise like this:&#10;&#10;1. Quad sets - 10 reps × 10 sec holds, 3x/day&#10;   Cue: &quot;Tighten thigh, push knee flat into towel&quot;"></textarea>
+                            <p class="form-hint">Show a sample of the desired output format.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quality-input">
+                                <span class="badge badge-q">Q</span>
+                                Quality
+                            </label>
+                            <textarea id="quality-input" placeholder="e.g., Requirements:&#10;• Include specific dosing for all exercises&#10;• Cite relevant CPGs (MOON guidelines)&#10;• Use 6th-grade reading level for patient handouts&#10;• Provide regression and progression options"></textarea>
+                            <p class="form-hint">What constraints and standards should the output meet?</p>
+                        </div>
+                    </div>
+
+                    <div class="output-panel">
+                        <div class="output-header">
+                            <h3>Generated Prompt</h3>
+                            <button class="copy-btn" id="copy-btn">Copy</button>
+                        </div>
+                        <div class="output-content" id="output-content">Start filling in the form to see your RICE-Q prompt build in real-time...</div>
+
+                        <div class="score-section">
+                            <div class="score-header">
+                                <span class="score-label">Prompt Completeness</span>
+                                <span class="score-value" id="score-value">0%</span>
+                            </div>
+                            <div class="score-meter">
+                                <div class="score-fill" id="score-fill" style="width: 0%;"></div>
+                            </div>
+                            <div class="checklist">
+                                <div class="check-item" id="check-r">
+                                    <span class="check-icon">○</span>
+                                    <span>Role</span>
+                                </div>
+                                <div class="check-item" id="check-i">
+                                    <span class="check-icon">○</span>
+                                    <span>Instructions</span>
+                                </div>
+                                <div class="check-item" id="check-c">
+                                    <span class="check-icon">○</span>
+                                    <span>Context</span>
+                                </div>
+                                <div class="check-item" id="check-e">
+                                    <span class="check-icon">○</span>
+                                    <span>Examples</span>
+                                </div>
+                                <div class="check-item" id="check-q">
+                                    <span class="check-icon">○</span>
+                                    <span>Quality</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stats-row">
+                            <div class="stat">
+                                <div class="stat-value" id="word-count">0</div>
+                                <div class="stat-label">Words</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value" id="char-count">0</div>
+                                <div class="stat-label">Characters</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Templates Section -->
+        <section id="templates" class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2 class="section-title">Ready-Made Templates</h2>
+                </div>
+
+                <div class="cert-intro" style="margin-bottom: 2rem;">
+                    <h3>Start with a <strong>professional template</strong></h3>
+                    <p>High-quality prompts designed for health and fitness professionals. Click any template to load it into the builder.</p>
+                </div>
+
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">All Templates</button>
+                    <button class="filter-btn" data-filter="clinical">Clinical</button>
+                    <button class="filter-btn" data-filter="fitness">Fitness</button>
+                    <button class="filter-btn" data-filter="nutrition">Nutrition</button>
+                    <button class="filter-btn" data-filter="wellness">Wellness</button>
+                    <button class="filter-btn" data-filter="content">Content</button>
+                    <span class="template-count" id="template-count">16 templates</span>
+                </div>
+
+                <div class="templates-grid" id="templates-grid">
+                    <!-- Clinical Templates -->
+                    <div class="template-card" data-template="physicaltherapy" data-category="clinical">
+                        <div class="template-badge">Physical Therapy</div>
+                        <h4>Rehabilitation Protocols</h4>
+                        <p>Evidence-based rehab programs with phase progressions, HEP design, and outcome measures for PT clinicians.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <div class="template-card" data-template="occupationaltherapy" data-category="clinical">
+                        <div class="template-badge">Occupational Therapy</div>
+                        <h4>ADL Intervention Plans</h4>
+                        <p>Functional activity analysis, adaptive equipment recommendations, and home modification strategies for OT practitioners.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <div class="template-card" data-template="nursing" data-category="clinical">
+                        <div class="template-badge">Nursing</div>
+                        <h4>Patient Education Materials</h4>
+                        <p>Health literacy-appropriate handouts, medication guides, and discharge teaching tools for nursing staff.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <div class="template-card" data-template="patientcomms" data-category="clinical">
+                        <div class="template-badge">Clinical Communication</div>
+                        <h4>Patient Messaging</h4>
+                        <p>Health literacy-appropriate communication for PAs, NPs, and clinicians with teach-back friendly language.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <div class="template-card" data-template="athletictraining" data-category="clinical">
+                        <div class="template-badge">Athletic Training</div>
+                        <h4>Injury Management</h4>
+                        <p>Return-to-play protocols, sideline assessment tools, and emergency action plans for certified athletic trainers.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <div class="template-card" data-template="chiropractic" data-category="clinical">
+                        <div class="template-badge">Chiropractic</div>
+                        <h4>Treatment Plans</h4>
+                        <p>Comprehensive care plans with examination findings, treatment frequency, and patient outcome tracking.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <!-- Fitness Templates -->
+                    <div class="template-card" data-template="personaltrainer" data-category="fitness">
+                        <div class="template-badge">Personal Training</div>
+                        <h4>Periodized Programs</h4>
+                        <p>12-week training plans with RPE/percentage-based programming, progressive overload, and client customization.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <div class="template-card" data-template="groupfitness" data-category="fitness">
+                        <div class="template-badge">Group Fitness</div>
+                        <h4>Class Programming</h4>
+                        <p>Complete class formats with cueing scripts, BPM recommendations, modifications, and motivational language.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <div class="template-card" data-template="sportscoach" data-category="fitness">
+                        <div class="template-badge">Sports Coaching</div>
+                        <h4>Season Planning</h4>
+                        <p>Periodization frameworks, practice plans with coaching cues, and athlete development programs.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <div class="template-card" data-template="yogatraining" data-category="fitness">
+                        <div class="template-badge">Yoga & Mind-Body</div>
+                        <h4>Sequence Design</h4>
+                        <p>Themed yoga sequences with Sanskrit cues, breath work integration, and modifications for all levels.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <!-- Nutrition Templates -->
+                    <div class="template-card" data-template="nutritionist" data-category="nutrition">
+                        <div class="template-badge">Nutrition</div>
+                        <h4>Meal Planning</h4>
+                        <p>Macro-calculated nutrition plans with recipes, timing recommendations, and practical grocery strategies.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <div class="template-card" data-template="sportsnutrition" data-category="nutrition">
+                        <div class="template-badge">Sports Nutrition</div>
+                        <h4>Performance Fueling</h4>
+                        <p>Periodized nutrition for athletes with race-day protocols, supplement guidance, and recovery strategies.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <!-- Wellness Templates -->
+                    <div class="template-card" data-template="wellness" data-category="wellness">
+                        <div class="template-badge">Corporate Wellness</div>
+                        <h4>Program Design</h4>
+                        <p>Comprehensive wellness initiatives with ROI measurement, engagement strategies, and multi-dimensional programming.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <div class="template-card" data-template="healthcoaching" data-category="wellness">
+                        <div class="template-badge">Health Coaching</div>
+                        <h4>Behavior Change</h4>
+                        <p>Motivational interviewing scripts, SMART goal frameworks, and accountability session structures.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <!-- Content Templates -->
+                    <div class="template-card" data-template="socialmedia" data-category="content">
+                        <div class="template-badge">Social Media</div>
+                        <h4>Health Content Creation</h4>
+                        <p>Educational posts, carousel scripts, and video content outlines for health professionals building their brand.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+
+                    <div class="template-card" data-template="casestudy" data-category="content">
+                        <div class="template-badge">Case Studies</div>
+                        <h4>Clinical Analysis</h4>
+                        <p>Structured case presentations with differential diagnosis, treatment rationale, and outcome documentation.</p>
+                        <button class="use-template-btn">Use Template</button>
+                    </div>
+                </div>
+
+                <div class="pro-tip" style="margin-top: 3rem;">
+                    <div class="pro-tip-label">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Pro Tip
+                    </div>
+                    <h4>Customize templates to your specialty</h4>
+                    <p>These templates are starting points. After loading a template, modify the Context section to match your specific patient population, setting, and goals. The more specific you are, the better your results.</p>
+                    <div class="example-post">
+                        <p>"A prompt tailored to your exact use case will always outperform a generic template—but a great template gets you 80% of the way there."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <ul class="footer-nav">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../index.html#courses">Courses</a></li>
+                    <li><a href="../../resources.html">Resources</a></li>
+                    <li><a href="../../resume/">Resume</a></li>
+                    <li><a href="../../index.html#about">About</a></li>
+                    <li><a href="../../index.html#contact">Contact</a></li>
+                </ul>
+                <p class="footer-text">RICE-Q Framework <span></span> Professional Development Series</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/navigation.js" defer></script>
+    <script>
+        // Templates data
+        const templates = {
+            physicaltherapy: {
+                role: "You are a Doctor of Physical Therapy (DPT) with 15+ years of clinical experience in orthopedic and sports rehabilitation. You hold certifications in Orthopedic Clinical Specialist (OCS), Certified Strength and Conditioning Specialist (CSCS), and are trained in dry needling and IASTM. You stay current with evidence-based practice guidelines from JOSPT and APTA.",
+                instructions: "Create a comprehensive 8-week rehabilitation protocol for the specified condition. Include:\n1. Phase breakdown with specific timeframes and criteria for progression\n2. Therapeutic exercises with sets, reps, and frequency\n3. Manual therapy techniques with indications\n4. Home Exercise Program (HEP) with patient-friendly descriptions\n5. Functional progression milestones\n6. Red flags and precautions\n7. Discharge criteria",
+                context: "Patient population: Active adults (25-55) recovering from ACL reconstruction (BTB autograft, 2 weeks post-op). Setting: Outpatient orthopedic clinic seeing patients 2-3x/week. Goal: Return to recreational sports at 9-12 months. Patients have access to standard PT equipment and gym facilities.",
+                examples: "Phase 1 (Weeks 0-2) - Protection Phase:\n\nGOALS:\n• Control pain and swelling (VAS <3/10)\n• Achieve full passive extension (0°)\n• Quad activation with minimal lag\n\nEXERCISES:\n1. Quad sets - 10 reps × 10 sec holds, 3x/day\n   Cue: \"Tighten thigh, push knee flat into towel\"\n2. Heel slides - 3×15, pain-free ROM\n3. SLR (4-way) - 3×10 with brace locked\n\nPROGRESSION CRITERIA:\n✓ <1 inch effusion\n✓ Full passive extension equal to contralateral\n✓ SLR without extensor lag",
+                quality: "Requirements:\n• All exercises must include specific dosing (sets × reps × frequency)\n• Cite relevant research or CPGs where applicable (e.g., MOON guidelines)\n• Include patient education points for each phase\n• Provide regression AND progression options for each exercise\n• Use standardized outcome measures (LEFS, NPRS, IKDC)\n• Precautions and contraindications clearly stated\n• HEP should be printable with simple language (6th-grade reading level)"
+            },
+            personaltrainer: {
+                role: "You are a NSCA Certified Strength and Conditioning Specialist (CSCS) and NASM Certified Personal Trainer (CPT) with 10+ years of experience training general population clients and recreational athletes. You specialize in hypertrophy, fat loss, and functional fitness using evidence-based periodization models.",
+                instructions: "Design a 12-week periodized training program for the client profile provided. Include:\n1. Needs analysis and goal setting\n2. Weekly training split with session breakdown\n3. Exercise selection with alternatives for each movement pattern\n4. Progressive overload strategy with specific %1RM or RPE targets\n5. Deload protocol\n6. Warm-up and cool-down templates\n7. Key performance indicators to track progress",
+                context: "Client: 35-year-old male, intermediate lifter (2 years consistent training), works desk job 50 hrs/week. Goals: Build muscle mass while improving overall fitness. Available: 4 days/week, 60-75 minutes per session. Equipment: Full commercial gym access. No injuries but reports occasional lower back tightness. Previous best lifts: Squat 225×5, Bench 185×5, Deadlift 275×5.",
+                examples: "WEEK 1-4: Hypertrophy Block (Accumulation)\n\nDAY 1 - UPPER PUSH FOCUS\nA1. Barbell Bench Press\n    Week 1: 3×8 @ RPE 7 (est. 155 lbs)\n    Week 2: 3×8 @ RPE 7.5\n    Week 3: 4×8 @ RPE 8\n    Week 4: 3×6 @ RPE 6 (deload)\n    Alt: DB Bench Press, Machine Chest Press\n\nB1. Seated DB Shoulder Press - 3×10-12 @ RPE 8\nB2. Cable Lateral Raise - 3×15 @ RPE 8\n    Superset, 90 sec rest between rounds\n\nC1. Tricep Pushdown - 3×12-15\nC2. Overhead Tricep Extension - 3×12-15",
+                quality: "Requirements:\n• Include RPE AND percentage guidelines for main lifts\n• Provide video exercise reference names (YouTube-searchable)\n• Each session: 4-6 exercises, clear exercise order rationale\n• Account for progressive overload week-over-week\n• Include mobility work targeting desk-job postural issues\n• Nutrition timing suggestions around training\n• Weekly volume targets per muscle group (10-20 sets)\n• Recovery recommendations including sleep and stress management"
+            },
+            nursing: {
+                role: "You are a Registered Nurse (RN, BSN) with 12+ years of experience in cardiac care and patient education. You hold certifications in Cardiac Vascular Nursing (CVRN) and are trained in health literacy best practices. You've developed patient education materials that improved medication adherence by 40% in your unit.",
+                instructions: "Create comprehensive patient education materials for the specified condition. Include:\n1. Condition overview in plain language\n2. Medication guide with administration instructions\n3. Warning signs requiring immediate medical attention\n4. Daily self-monitoring checklist\n5. Lifestyle modification guidance\n6. Follow-up care schedule\n7. Family/caregiver instructions",
+                context: "Patient population: Post-MI patients being discharged from cardiac step-down unit. Average age 62, mixed health literacy levels (assume 5th-grade reading level). Many patients are managing multiple comorbidities (diabetes, hypertension). Materials will be provided in print and discussed verbally during discharge teaching.",
+                examples: "TAKING YOUR HEART MEDICATIONS\n\n💊 ASPIRIN (81mg) - Take 1 pill every morning\n   → Take with food to protect your stomach\n   → DO NOT stop taking without calling your doctor\n   → Purpose: Keeps blood from clotting in your heart\n\n⚠️ CALL YOUR DOCTOR IF:\n   • You have unusual bleeding or bruising\n   • Your stool looks black or tarry\n   • You feel dizzy or weak\n\n✓ DAILY CHECKLIST:\n   □ Took morning medications\n   □ Checked blood pressure: ___/___\n   □ Weighed myself: ___ lbs\n   □ Checked for swelling in ankles\n   □ Ate heart-healthy meals",
+                quality: "Requirements:\n• All content at 5th-grade reading level (Flesch-Kincaid)\n• Use teach-back friendly language\n• Include visual cues (icons, checkboxes, color coding)\n• Avoid medical jargon—use \"heart attack\" not \"myocardial infarction\"\n• Provide specific numbers for warning signs (e.g., \"weight gain >3 lbs in one day\")\n• Include space for personalization (patient's specific medications, doses, times)\n• Culturally sensitive and inclusive imagery references\n• Available for translation consideration (simple sentence structure)"
+            },
+            sportscoach: {
+                role: "You are a USATF Level 2 certified coach and former collegiate track athlete with 8+ years coaching high school and club athletes. You specialize in sprint/hurdles development and have produced multiple state qualifiers. You integrate sport science principles including periodization, biomechanics, and athlete monitoring.",
+                instructions: "Design a comprehensive training plan for the specified sport/event and timeframe. Include:\n1. Season periodization breakdown (GPP, SPP, Competition, Taper)\n2. Weekly microcycle structure with daily themes\n3. Practice plan templates with time allocations\n4. Technical drill progressions with coaching cues\n5. Strength training integration\n6. Competition strategy and meet preparation\n7. Athlete monitoring and recovery protocols",
+                context: "Team: High school boys track, 100m/200m sprint group (8 athletes). Season: Outdoor track, 12-week season starting mid-February. Current status: Off-season base training complete. Facilities: 400m track, weight room, limited indoor space. Goal: Qualify 3+ athletes for state meet. Current PRs range from 11.2-12.0 (100m).",
+                examples: "WEEK 6 - SPECIAL PREPARATION PHASE\n\nMONDAY - Speed Development\nWarm-up (20 min):\n• Jog 800m → Dynamic flexibility circuit\n• Sprint drills: A-skip, B-skip, straight leg bounds (2×30m each)\n• Build-ups: 3×60m @ 70-80-90%\n\nMain Set (35 min):\n• Block starts technique: 3×30m (focus: drive phase)\n• Speed work: 4×60m @ 95% (walk-back recovery)\n• Coaching cue: \"Push the ground away, patient with arm action\"\n\nCool-down (15 min):\n• 800m easy jog + static stretching\n• Foam roll: quads, hamstrings, hip flexors\n\nTUESDAY - Strength + Recovery\n• Weight room: Speed-strength emphasis\n  - Hang clean: 4×3 @ 75%\n  - Back squat: 4×5 @ 80%\n  - RDL: 3×8\n• Pool recovery or light tempo (6×100m @ 70%)",
+                quality: "Requirements:\n• Include specific volume/intensity targets for each training phase\n• Provide athlete monitoring markers (subjective wellness, times)\n• Technical cues must be actionable and age-appropriate\n• Balance training load across the week (hard-easy principle)\n• Include meet simulation workouts in competition prep phase\n• Address common injuries for the sport with prevention exercises\n• Provide modification guidelines for different ability levels\n• Include parent/athlete communication templates for buy-in"
+            },
+            nutritionist: {
+                role: "You are a Registered Dietitian Nutritionist (RDN) and Certified Specialist in Sports Dietetics (CSSD) with 10+ years of experience in clinical and sports nutrition. You work with athletes, active adults, and clinical populations managing chronic conditions. You emphasize sustainable, whole-food approaches backed by current nutrition science.",
+                instructions: "Create a personalized nutrition plan for the client profile provided. Include:\n1. Caloric and macronutrient targets with rationale\n2. 7-day sample meal plan with recipes\n3. Meal timing recommendations around activity\n4. Supplement considerations (if applicable)\n5. Hydration guidelines\n6. Grocery shopping list\n7. Strategies for eating out and social situations",
+                context: "Client: 28-year-old female, recreational CrossFit athlete (trains 5x/week), desk job. Goals: Improve body composition (reduce body fat while maintaining muscle), support training performance. Stats: 5'6\", 155 lbs, estimated 28% body fat. No food allergies, but prefers to limit dairy. Budget: moderate ($100-125/week for groceries). Cooking ability: intermediate, meal preps on Sundays.",
+                examples: "DAILY MACRO TARGETS:\n• Calories: 1,850-1,950 kcal (moderate deficit)\n• Protein: 140g (0.9g/lb bodyweight)\n• Carbs: 180g (timed around training)\n• Fat: 65g\n\nSAMPLE TRAINING DAY:\n\n☀️ PRE-WORKOUT (6:00 AM) - 200 kcal\nGreek yogurt parfait:\n• 3/4 cup non-fat Greek yogurt (18g protein)\n• 1/2 cup berries\n• 1 tbsp honey\n→ Easy to digest, fast-acting carbs + protein\n\n💪 POST-WORKOUT (8:30 AM) - 450 kcal\nProtein smoothie bowl:\n• 1 scoop whey protein (25g)\n• 1 frozen banana\n• 1 cup spinach\n• 1 tbsp almond butter\n• Topped with: 1/4 cup granola, sliced strawberries\n→ Protein + carbs for recovery, 45g carbs to replenish glycogen",
+                quality: "Requirements:\n• All macro calculations shown with scientific rationale\n• Recipes include prep time, cook time, and make-ahead notes\n• Each meal shows macro breakdown (protein/carbs/fat/calories)\n• Include 2-3 vegetarian protein options per day for variety\n• Provide swaps for common ingredients (dairy-free, budget, convenience)\n• Hydration targets specific to training (oz/lb bodyweight + exercise)\n• Address common nutrition myths relevant to client goals\n• Include progress tracking metrics beyond scale weight"
+            },
+            wellness: {
+                role: "You are a Certified Wellness Practitioner with credentials in Corporate Wellness (CWWPC), Health Coaching (NBC-HWC), and Stress Management. You've designed and implemented wellness programs for Fortune 500 companies with measurable outcomes including 25% reduction in health claims and 40% improvement in employee engagement scores.",
+                instructions: "Design a comprehensive wellness program for the organization profile provided. Include:\n1. Needs assessment framework\n2. Program objectives with measurable outcomes (SMART goals)\n3. Multi-dimensional wellness components (physical, mental, social, financial)\n4. Implementation timeline (90-day launch plan)\n5. Engagement and incentive strategies\n6. Technology and tracking recommendations\n7. ROI measurement framework",
+                context: "Organization: Mid-size tech company, 350 employees, 70% remote workforce. Demographics: Average age 34, high-stress roles (engineering, customer support), sedentary work patterns. Current challenges: Rising health insurance costs, burnout reports up 60% YoY, poor participation in previous wellness initiatives (gym subsidies had 15% uptake). Budget: $150/employee/year. Leadership wants measurable outcomes.",
+                examples: "PROGRAM PILLAR 1: STRESS MANAGEMENT\n\nOBJECTIVE: Reduce reported burnout symptoms by 30% within 6 months\n\nINTERVENTIONS:\n\n1. \"Mindful Minutes\" - Async Meditation Program\n   • Platform: Calm or Headspace (group subscription)\n   • Structure: 5-10 min daily guided sessions\n   • Incentive: Complete 20 sessions/month → $25 wellness credit\n   • Tracking: App analytics + monthly pulse surveys\n\n2. \"No-Meeting Wednesdays\" Policy\n   • Protected deep work time: 9 AM - 12 PM company-wide\n   • Leadership modeling required for adoption\n   • Measure: Calendar audit, employee feedback\n\n3. Manager Training: \"Recognizing Burnout\"\n   • 60-min live webinar + 30-min breakout discussions\n   • Quarterly refresher with case studies\n   • Toolkit: 1:1 conversation guides, escalation pathways\n\nSUCCESS METRICS:\n• Maslach Burnout Inventory (baseline + 6-month)\n• Pulse survey: \"I have the support I need to manage stress\" (target: 75%+ favorable)\n• PTO utilization rate (increase from 65% to 80%)",
+                quality: "Requirements:\n• Include evidence base for each intervention (cite research)\n• Budget breakdown for each program component\n• Address remote-first/hybrid accessibility for all initiatives\n• Provide communication templates for launch (email, Slack, all-hands)\n• Include manager/leadership engagement components\n• DEI considerations embedded throughout (inclusive language, accessibility)\n• Define both leading indicators (participation) and lagging indicators (health outcomes)\n• Include contingency plans for low engagement scenarios"
+            },
+            patientcomms: {
+                role: "You are a Physician Assistant (PA-C) with 10+ years of primary care experience and specialized training in health literacy and patient communication. You've published research on improving patient comprehension and reducing 30-day readmission rates through better discharge communication. You're skilled at translating complex medical information for diverse patient populations.",
+                instructions: "Create patient communication materials for the clinical scenario provided. Include:\n1. Plain-language explanation of the diagnosis\n2. Treatment plan overview with expected timeline\n3. Medication instructions (if applicable)\n4. Actionable self-care guidance\n5. Red flags/warning signs for return visit\n6. Follow-up instructions and resources\n7. Addressing common patient questions and concerns",
+                context: "Scenario: New diagnosis of Type 2 Diabetes in a 52-year-old patient. Patient is overwhelmed and anxious, limited health literacy, works two jobs with irregular schedule. Starting on Metformin 500mg BID. Needs to understand blood glucose monitoring, lifestyle modifications, and when to seek urgent care. Will be referred to diabetes educator but appointment is 3 weeks out.",
+                examples: "UNDERSTANDING YOUR NEW DIAGNOSIS\n\nYOU HAVE TYPE 2 DIABETES\n\nWhat does this mean?\nYour body has trouble using a hormone called insulin to move sugar from your blood into your cells for energy. This causes sugar to build up in your blood. Too much sugar in your blood over time can hurt your heart, kidneys, eyes, and nerves.\n\nThe good news: Many people with diabetes live long, healthy lives by managing their blood sugar.\n\n---\n\nYOUR MEDICATION: METFORMIN\n\n💊 How to take it:\n• Take 1 pill (500mg) TWO times a day\n• Take it WITH food (breakfast and dinner)\n• Taking it with food prevents stomach upset\n\n⏰ Set reminders on your phone:\n• Morning: [___:___ AM]\n• Evening: [___:___ PM]\n\n🚫 Common side effects (usually go away in 1-2 weeks):\n• Upset stomach\n• Diarrhea\n• Metallic taste in mouth\n\n⚠️ CALL US RIGHT AWAY IF:\n• Severe stomach pain that doesn't go away\n• Muscle pain or weakness\n• Trouble breathing\n• Feeling very tired or weak",
+                quality: "Requirements:\n• All content at 5th-6th grade reading level\n• Use \"you\" and \"your\" for patient engagement\n• Include specific numbers where applicable (blood sugar targets, medication doses)\n• Provide actionable next steps patient can do TODAY\n• Address emotional component (\"it's normal to feel overwhelmed\")\n• Include visuals/icons for key concepts\n• Leave fill-in spaces for personalization (times, phone numbers, names)\n• Provide reliable resource links (ADA, CDC) for patients who want more info\n• Include teach-back questions for clinical staff to verify understanding"
+            },
+            groupfitness: {
+                role: "You are an ACE Certified Group Fitness Instructor and AFAA Group Exercise Specialist with 8+ years teaching diverse formats including HIIT, strength, cycling, and mind-body classes. You've trained over 500 instructors and developed programming for boutique studios and large gym chains. You specialize in inclusive cueing, class design, and creating memorable group fitness experiences.",
+                instructions: "Design a complete group fitness class format for the specifications provided. Include:\n1. Class structure with time breakdown\n2. Music BPM recommendations by section\n3. Full exercise sequence with cue scripts\n4. Modification and progression options for each exercise\n5. Motivational cues and coaching language\n6. Equipment needs and setup\n7. Safety considerations and contraindications",
+                context: "Class: 45-minute Total Body Strength using dumbbells. Population: Mixed-level gym members (beginners to intermediate). Class size: 15-20 participants. Available equipment: Dumbbells (5-25 lbs), mats. Typical demographic: 70% female, ages 30-55, some participants with knee/shoulder modifications needed. Goal: Effective strength training with high energy and community feel.",
+                examples: "BLOCK 2: LOWER BODY CIRCUIT (12 minutes)\nMusic: 125-130 BPM, driving beat\n\nEXERCISE 2A: GOBLET SQUATS\nTime: 45 seconds work / 15 seconds transition\nEquipment: 1 medium-heavy dumbbell\n\n🎤 SETUP CUE:\n\"Grab your medium-heavy weight, hold it at chest height like you're hugging it. Feet shoulder-width apart, toes slightly turned out.\"\n\n🎤 MOVEMENT CUES:\n\"Send your hips BACK and DOWN like you're sitting into a chair behind you...\nChest stays proud, weight in your heels...\nDrive through those heels to stand TALL... squeeze your glutes at the top!\"\n\n🎤 MOTIVATION:\n\"This is YOUR pace—you control the tempo! 20 more seconds, let's see those strong legs!\"\n\n📝 MODIFICATIONS:\n• Beginner: Bodyweight squat, or hold lighter weight\n• Knee issues: Limit depth to 90°, widen stance\n• Progression: Add pulse at bottom, or slow 3-count lowering\n\n⚠️ WATCH FOR:\n• Knees caving inward → Cue \"push knees out over pinky toes\"\n• Forward lean → Cue \"proud chest, show me your shirt logo\"",
+                quality: "Requirements:\n• Include exact verbal cues in quotation marks (ready to read)\n• Provide specific BPM ranges for each class section\n• Every exercise needs: setup cue, movement cue, motivation cue\n• Minimum 2 modifications AND 1 progression per exercise\n• Include visual cues for form correction (\"I'm seeing...\")\n• Balance muscle groups (push/pull, anterior/posterior)\n• Provide transition language between exercises\n• Include participant engagement strategies (call-and-response, partner work)\n• Note potential injury risks and prevention cues\n• Format should be print-ready for instructor reference card"
+            },
+            occupationaltherapy: {
+                role: "You are a registered Occupational Therapist (OTR/L) with 12+ years of experience in adult rehabilitation and geriatrics. You hold specialty certification in Low Vision (SCLV) and Aging in Place (CAPS). You're trained in evidence-based assessment tools including the Canadian Occupational Performance Measure (COPM) and focus on client-centered, occupation-based interventions.",
+                instructions: "Create a comprehensive OT intervention plan for the client profile provided. Include:\n1. Occupational profile summary\n2. Performance analysis of key ADLs/IADLs\n3. Short-term and long-term functional goals (SMART format)\n4. Intervention strategies organized by occupation area\n5. Adaptive equipment recommendations with rationale\n6. Home modification suggestions\n7. Caregiver training components\n8. Discharge criteria and community resources",
+                context: "Client: 72-year-old female, 3 weeks post right CVA (left hemiparesis). Living alone in 2-story home, daughter lives 20 min away. Prior: Independent in all ADLs, drove, volunteered at library. Current: Requires moderate assist for transfers, min assist for dressing, supervision for bathing. Goals: Return home safely, resume driving within 6 months. Cognitively intact, highly motivated.",
+                examples: "INTERVENTION AREA: DRESSING (UPPER BODY)\n\nCURRENT STATUS:\n• Requires min A for donning shirt due to L UE weakness\n• Unable to manage buttons/zippers independently\n• Demonstrates motor planning difficulties with sequencing\n\nSHORT-TERM GOAL (2 weeks):\nClient will don pullover shirt using one-handed technique with SBA and verbal cues for sequencing, 4/5 trials.\n\nINTERVENTIONS:\n1. Teach one-handed dressing technique:\n   • Affected arm first, head, then unaffected arm\n   • Verbal cue: \"Weak arm, head, strong arm\"\n   • Practice with loose-fitting shirts initially\n\n2. Seated dressing at edge of bed for stability\n   • Progress to standing with walker nearby\n\nADAPTIVE EQUIPMENT:\n• Button hook with built-up handle ($12-15)\n• Zipper pull with large loop ($8)\n• Front-closure bras (recommend specific brands)\n\nCATION: Monitor for L shoulder subluxation during overhead movements",
+                quality: "Requirements:\n• All goals must be measurable and occupation-based\n• Include specific adaptive equipment with approximate costs\n• Provide step-by-step technique instructions for client handouts\n• Address both remediation AND compensation approaches\n• Include safety precautions specific to diagnosis\n• Document objective measures for progress tracking\n• Consider client's meaningful occupations (library volunteering)\n• Include caregiver burden assessment and respite resources\n• Format for easy integration into medical documentation"
+            },
+            athletictraining: {
+                role: "You are a Board Certified Athletic Trainer (ATC) with 10+ years of experience in collegiate and professional sports. You hold additional certifications in Performance Enhancement Specialist (PES) and Corrective Exercise Specialist (CES). You've managed return-to-play protocols for Division I athletes and developed comprehensive injury prevention programs.",
+                instructions: "Create a detailed injury management protocol for the specified condition. Include:\n1. Mechanism of injury and clinical presentation\n2. Sideline/acute assessment procedures\n3. Phase-based rehabilitation timeline\n4. Objective criteria for each progression phase\n5. Sport-specific functional testing battery\n6. Return-to-play decision tree\n7. Prevention strategies for recurrence\n8. Communication templates for medical team and coaches",
+                context: "Sport: NCAA Division I Women's Soccer. Injury: Grade II lateral ankle sprain (ATFL). Athlete: 20-year-old midfielder, junior, starter. Occurred during practice (inversion mechanism). Initial presentation: Moderate swelling, difficulty bearing weight, positive anterior drawer. Timeline pressure: Conference tournament in 4 weeks. No previous ankle injuries to this extremity.",
+                examples: "PHASE 2: EARLY REHABILITATION (Days 4-10)\n\nENTRY CRITERIA:\n✓ Pain ≤3/10 at rest\n✓ Swelling: <1cm difference from contralateral\n✓ Full passive ROM achieved\n✓ Can perform heel raises without pain\n\nGOALS:\n• Restore functional ROM\n• Begin proprioceptive training\n• Progress to full weight-bearing without assistive device\n\nINTERVENTIONS:\n\n1. ROM & Mobility (2x/day)\n   • Ankle alphabet - 2 sets full alphabet\n   • 4-way ankle resistance band (yellow) - 3×15\n   • Gastrocnemius/soleus stretching - 3×30 sec holds\n\n2. Proprioception (daily)\n   • Single-leg stance (eyes open) - 3×30 sec\n   • Progress: Eyes closed when >45 sec stable\n   • BOSU balance (bilateral → unilateral)\n\n3. Strengthening\n   • Heel raises (bilateral) - 3×15\n   • Progress to unilateral when 20 reps achieved\n   • Resisted inversion/eversion - 3×15 (green band)\n\nMODALITIES:\n• Contrast bath: 3 min warm / 1 min cold × 4 cycles (post-exercise)\n• Compression wrap overnight\n\n⚠️ RED FLAGS - REFER TO TEAM PHYSICIAN:\n• Inability to bear weight by Day 5\n• Persistent instability with functional testing\n• Numbness/tingling in foot",
+                quality: "Requirements:\n• Include objective measurements for all progression criteria\n• Provide sport-specific functional tests with passing standards\n• Document communication workflow (athlete → AT → physician → coach)\n• Include psychological readiness screening for RTP\n• Reference current evidence (NATA position statements)\n• Address NCAA regulations for medical clearance\n• Provide daily treatment log template\n• Include criteria for specialist referral\n• Format compatible with athletic training documentation systems"
+            },
+            chiropractic: {
+                role: "You are a Doctor of Chiropractic (DC) with 15+ years of clinical experience and additional certifications in sports chiropractic (CCSP) and rehabilitation (CCRS). You practice evidence-based chiropractic care integrating manual therapy, rehabilitation exercises, and patient education. You're experienced with multidisciplinary collaboration and maintaining detailed clinical documentation.",
+                instructions: "Develop a comprehensive chiropractic treatment plan for the case presented. Include:\n1. Chief complaint and history summary\n2. Examination findings (orthopedic, neurological, functional)\n3. Working diagnosis with differential considerations\n4. Treatment plan with frequency and duration\n5. Manual therapy techniques with clinical rationale\n6. Therapeutic exercises with progressions\n7. Patient education and self-care instructions\n8. Outcome measures and re-evaluation criteria",
+                context: "Patient: 42-year-old male, office worker (desk job 50+ hrs/week). Chief complaint: Chronic low back pain (LBP) with intermittent right leg radiculopathy x 6 months. Aggravating factors: Prolonged sitting, forward bending. Relieving: Walking, lying supine. No red flags on screening. Previous imaging: Lumbar MRI shows L4-5 disc bulge with mild right foraminal narrowing. Failed PT 3 months ago (poor compliance). Goals: Return to recreational golf, reduce reliance on NSAIDs.",
+                examples: "TREATMENT PLAN OVERVIEW\n\nDIAGNOSIS:\n• Primary: Lumbar disc herniation with radiculopathy (M51.16)\n• Secondary: Myofascial pain syndrome, lumbar region (M54.5)\n• Functional: Movement system impairment - lumbar flexion syndrome\n\nPROGNOSIS: Good with consistent care and exercise compliance\n\nTREATMENT FREQUENCY:\nPhase 1 (Weeks 1-4): 2-3x/week - Pain reduction, mobility\nPhase 2 (Weeks 5-8): 1-2x/week - Stabilization, function\nPhase 3 (Weeks 9-12): 1x/week to PRN - Maintenance, return to golf\n\nVISIT STRUCTURE (30-45 min):\n\n1. MANUAL THERAPY (15-20 min)\n   • Spinal manipulation:\n     - Side-posture lumbar adjustment L4-5 (right)\n     - Supine thoracolumbar junction mobilization\n     - Technique: Diversified, low-amplitude high-velocity\n   • Soft tissue:\n     - Piriformis release (right) - 2 min IASTM\n     - QL trigger point therapy - 90 sec holds\n     - Psoas release (prone) - contract-relax technique\n\n2. THERAPEUTIC EXERCISES (10-15 min in-office, HEP daily)\n   • McKenzie extension progression:\n     - Week 1-2: Prone prop (sphinx) - 10 reps, hold 30 sec\n     - Week 3-4: Press-up with pelvic sag\n   • Motor control:\n     - Dead bug progression - 3×10 each side\n     - Bird-dog with 5 sec holds - 3×8 each\n\n3. PATIENT EDUCATION\n   • Sitting posture: Lumbar support, stand every 30 min\n   • Sleeping: Side-lying with pillow between knees\n   • Golf: Delay 4 weeks, then modified swing mechanics",
+                quality: "Requirements:\n• Include ICD-10 codes for all diagnoses\n• Document examination findings that support treatment approach\n• Provide frequency recommendations with evidence-based rationale\n• Include specific technique names and parameters\n• Track outcomes using validated tools (ODI, NPRS, FABQ)\n• Define clear criteria for re-evaluation and discharge\n• Address yellow flags (fear-avoidance, catastrophizing)\n• Include referral criteria if no improvement\n• Format compatible with EHR documentation requirements"
+            },
+            yogatraining: {
+                role: "You are a 500-hour Registered Yoga Teacher (E-RYT 500) with 10+ years teaching experience and additional training in yoga therapy (C-IAYT). You specialize in alignment-based vinyasa and therapeutic applications. You're trained in anatomy, Sanskrit pronunciation, and trauma-informed teaching approaches.",
+                instructions: "Design a complete yoga class sequence for the specifications provided. Include:\n1. Class theme and intention setting\n2. Opening centering/breathwork\n3. Warm-up sequence with transitions\n4. Standing sequence building to peak pose\n5. Cool-down and counterposes\n6. Savasana and closing\n7. Verbal cues with Sanskrit and English names\n8. Modifications and use of props",
+                context: "Class: 60-minute All-Levels Vinyasa. Theme: Hip opening for desk workers. Students: Mixed levels (beginners to intermediate), ages 30-50, mostly work office jobs. Peak pose: Pigeon (Eka Pada Rajakapotasana). Setting: Studio class, full prop availability (blocks, straps, blankets, bolsters). Time: Evening class (6 PM) - students arriving after work, need stress relief.",
+                examples: "WARM-UP SEQUENCE (12 minutes)\n\n1. TABLETOP MOVEMENTS (4 min)\n\n🧘 Cat-Cow (Marjaryasana-Bitilasana)\nReps: 8-10 cycles, breath-led\n\nCUES:\n\"Find your tabletop, wrists under shoulders, knees under hips...\nINHALE: Drop the belly, lift the heart, gaze forward - Cow...\nEXHALE: Round the spine, tuck the chin, push the floor away - Cat...\nFind YOUR rhythm. Let the breath move the body.\"\n\n→ Transition: Return to neutral spine\n\n🧘 Hip Circles (Tabletop)\nReps: 5 circles each direction\n\nCUES:\n\"Keep hands planted, begin to draw circles with your hips...\nMake them as big or small as feels good...\nReverse direction... Notice any sticky spots...\"\n\n2. THREAD THE NEEDLE (3 min each side)\n\n🧘 Parsva Balasana\nHold: 5-8 breaths per side\n\nCUES:\n\"Inhale, reach right arm up... Exhale, thread it under, right shoulder and temple to the mat...\nLeft hand can stay planted, OR walk it forward, OR reach it overhead for a deeper twist...\"\n\n📝 MODIFICATIONS:\n• Place blanket under knees for sensitivity\n• Use block under head if shoulder doesn't reach floor\n• Skip if recent shoulder injury\n\n✨ TEACHING TIP:\nWalk around room during holds to offer gentle assists (with consent)",
+                quality: "Requirements:\n• Include both Sanskrit and English pose names\n• Provide breath cues for each movement (inhale/exhale)\n• Every pose needs: setup, action cues, and breath instruction\n• Include 2+ modifications for each pose (beginner + props)\n• Note contraindications for major poses\n• Build logically toward peak pose (progressive hip opening)\n• Include transition cues between poses\n• Add timing estimates for each section\n• Provide theme-related dharma talk prompts\n• Format as instructor reference card (printable)"
+            },
+            sportsnutrition: {
+                role: "You are a Board Certified Specialist in Sports Dietetics (CSSD) and Registered Dietitian with 8+ years working with collegiate and professional athletes. You specialize in performance nutrition, body composition optimization, and fueling strategies for endurance and strength sports. You stay current with ISSN position stands and sports nutrition research.",
+                instructions: "Create a comprehensive sports nutrition plan for the athlete profile provided. Include:\n1. Energy and macronutrient periodization strategy\n2. Training day vs. rest day nutrition differences\n3. Pre-, during, and post-workout fueling protocols\n4. Race/competition day nutrition timeline\n5. Hydration and electrolyte strategy\n6. Supplement recommendations with evidence review\n7. Practical implementation (meal timing, travel nutrition)\n8. Body composition monitoring approach",
+                context: "Athlete: 26-year-old male marathon runner. Current stats: 5'10\", 155 lbs, ~8% body fat. Training: 70-80 miles/week, goal Boston qualifier (sub-3:00). Current issues: GI distress during long runs, energy dips at mile 18-20. Race in 12 weeks. Dietary preferences: Mostly plant-based (eats fish occasionally), no major allergies. Previous PR: 3:08.",
+                examples: "RACE WEEK NUTRITION PROTOCOL\n\n📅 DAYS 7-4 (NORMAL TRAINING)\nMaintain regular intake: ~3,200 kcal\n• Carbs: 6g/kg (420g)\n• Protein: 1.6g/kg (112g)\n• Fat: remainder (~80g)\n\n📅 DAYS 3-1 (CARB LOADING)\nIncrease to: ~3,500 kcal\n• Carbs: 10-12g/kg (700-840g)\n• Reduce fiber to <25g/day\n• Reduce fat to <50g/day\n\nFOOD FOCUS:\n• White rice, pasta, bread (not whole grain)\n• Bananas, applesauce, well-cooked vegetables\n• Maple syrup, honey in oatmeal\n• Low-fiber cereals (Rice Chex, Cornflakes)\n\n⚠️ AVOID DAYS 1-3:\n• High fiber foods (beans, raw vegetables, whole grains)\n• Gas-producing foods (broccoli, cabbage, carbonated drinks)\n• New foods (nothing untested!)\n• Alcohol\n\n📅 RACE DAY TIMELINE\n\n⏰ 3-4 HOURS PRE (5:00 AM for 9 AM start):\nMeal: ~600-800 kcal, 100-150g carbs\n• 2 cups white rice + 2 tbsp maple syrup\n• 1 banana\n• 8 oz sports drink\n• Salt: 500mg (for pre-hydration)\n\n⏰ 1 HOUR PRE:\n• 8 oz water or sports drink\n• Optional: 1 gel with caffeine (if tolerated in training)\n\n⏰ DURING RACE:\nTarget: 60-90g carbs/hour after mile 5\n• Every 20 min: 1 gel (25g carbs) OR\n• Every 3 miles: 1 gel + sips sports drink\n• Alternate caffeine/non-caffeine gels\n• Practice in training: Same products, same timing",
+                quality: "Requirements:\n• Include specific gram targets (g/kg body weight)\n• Provide calorie and macro breakdowns for each scenario\n• Reference current ISSN/ACSM position stands\n• Address the specific issue mentioned (GI distress, energy dips)\n• Include practical product recommendations (brand examples)\n• Provide alternatives for plant-based preferences\n• Include hydration calculations (sweat rate estimation)\n• Document supplement recommendations with safety notes\n• Create portable race-day reference card\n• Include monitoring metrics (training logs, GI symptom tracker)"
+            },
+            healthcoaching: {
+                role: "You are a National Board Certified Health & Wellness Coach (NBC-HWC) with 8+ years of experience in behavior change and chronic disease prevention. You're trained in motivational interviewing, positive psychology, and the transtheoretical model of change. You work with clients on sustainable lifestyle modifications for weight management, stress, and chronic condition management.",
+                instructions: "Create a comprehensive health coaching session structure and behavior change plan for the client profile. Include:\n1. Initial assessment framework (wheel of life, readiness rulers)\n2. Motivational interviewing question bank\n3. Vision and values clarification exercises\n4. SMART goal development process\n5. Accountability structures and tracking tools\n6. Common obstacles and reframe strategies\n7. Session-by-session progression (12-week program)\n8. Maintenance and relapse prevention plan",
+                context: "Client: 48-year-old female, recently diagnosed with prediabetes (A1c 6.2%). Busy executive, travels 30% of time. Goals: Lose 20 lbs, prevent diabetes progression. Barriers: Stress eating, inconsistent schedule, perfectionist mindset ('all or nothing'). Strengths: Competitive, goal-oriented, financially resourced. Previous attempts: Multiple diets (lost weight, regained). Stage of change: Preparation.",
+                examples: "SESSION 3: VALUES & VISION CLARIFICATION\n\nSESSION OBJECTIVES:\n• Connect health goals to core values\n• Create compelling future vision\n• Identify values-based motivators for difficult moments\n\nOPENING CHECK-IN (5 min):\n\"On a scale of 1-10, how would you rate your week in terms of living aligned with what matters most to you?\"\n\n🎯 EXERCISE 1: VALUES CARD SORT (15 min)\n\nInstructions:\n\"I'm going to show you some value words. Sort them into three piles: Very Important, Somewhat Important, Not Important to me.\"\n\nDig deeper questions:\n• \"You chose 'Health' - what does being healthy mean to you specifically?\"\n• \"I notice 'Achievement' is in your top 5. How does your current health support or conflict with achievement?\"\n• \"If you fully lived your value of 'Family,' what would that look like?\"\n\n🎯 EXERCISE 2: FUTURE SELF VISUALIZATION (15 min)\n\nGuided prompt:\n\"Close your eyes. Imagine it's one year from now. You've successfully reversed your prediabetes and lost the weight. Walk me through a typical Tuesday...\"\n\nFollow-up questions:\n• \"What are you wearing? How do you feel putting on those clothes?\"\n• \"You have a stressful day at work. What do you do instead of stress eating?\"\n• \"Your travel schedule hasn't changed. How does Future You handle airport meals?\"\n\n📝 REFRAME FOR PERFECTIONISM:\n\nWhen client says: \"I blew my diet this weekend, might as well start over Monday.\"\n\nCoach response: \"I hear the frustration. Let's look at this differently - you mentioned you ate according to plan for 18 of 21 meals. That's 86%. In your business, would you consider 86% achievement a failure?\"\n\nAlternative reframe: \"What would you tell a direct report who made one mistake on a project and wanted to scrap the whole thing?\"",
+                quality: "Requirements:\n• Include actual coaching questions in quotation marks\n• Provide specific MI techniques labeled (OARS, rolling with resistance)\n• Include printable worksheets and tracking tools\n• Address the specific barriers mentioned (stress eating, travel, perfectionism)\n• Document session timing (how long for each segment)\n• Include 'if-then' scenarios for common obstacles\n• Reference evidence-based behavior change models\n• Provide scripts for difficult conversations (low motivation, missed sessions)\n• Include measurable outcomes beyond weight (confidence, self-efficacy)\n• Format for easy note-taking during sessions"
+            },
+            socialmedia: {
+                role: "You are a health and fitness content strategist with 7+ years of experience building personal brands for health professionals. You understand platform algorithms (Instagram, LinkedIn, TikTok), health communication best practices, and regulatory considerations (FTC, HIPAA). You help professionals create educational content that builds authority without crossing ethical lines.",
+                instructions: "Create a comprehensive social media content strategy and content package for the professional profile provided. Include:\n1. Platform-specific strategy (which platforms, posting frequency)\n2. Content pillars and topic clusters\n3. 30-day content calendar with specific post ideas\n4. Post templates for different content types\n5. Hashtag strategy and SEO keywords\n6. Engagement and community building tactics\n7. Analytics KPIs and growth benchmarks\n8. Compliance guidelines (disclaimers, scope of practice)",
+                context: "Professional: Physical therapist (DPT) specializing in running injuries. Goals: Build referral pipeline, establish thought leadership, eventually launch online course. Target audience: Recreational runners (25-45), marathon trainers, running coaches. Current following: 500 Instagram followers, minimal LinkedIn presence. Available time: 3-4 hours/week for content creation. Comfortable on camera, good at explaining complex topics simply.",
+                examples: "CONTENT PILLAR 2: INJURY PREVENTION\nTheme: \"Run Smarter\" - Proactive content that positions you as the go-to expert\n\n📱 POST TYPE: EDUCATIONAL CAROUSEL\nTopic: \"5 Hip Exercises Every Runner Should Be Doing\"\nPlatform: Instagram\nFormat: 10-slide carousel\n\nSLIDE BREAKDOWN:\n1. Hook slide: \"Your hips might be why your knees hurt 👀\" (bold text, eye-catching)\n2. The problem: \"Weak hip stabilizers → Knee, IT band, and shin issues\"\n3-7. One exercise per slide:\n   • Exercise name (big text)\n   • GIF or image of you demonstrating\n   • Reps/sets prescription\n   • Key coaching cue\n8. \"How often?\" - Frequency recommendation\n9. CTA: \"Save this post for your next strength day 💪\"\n10. \"Want a full hip strength program? Link in bio\"\n\nCAPTION TEMPLATE:\n\"Your running might be suffering because of your hips. Here's why: [explain mechanism in 2-3 sentences]\n\nI see this pattern constantly in my clinic with [specific runner type].\n\nThese 5 exercises target the exact muscles that keep your legs tracking straight and absorbing impact.\n\nTry them before your next run and let me know how they feel 👇\n\n#runninginjuries #hipstrength #marathontraining #PTtips [add 10-15 more relevant hashtags]\"\n\n⏱️ BEST POSTING TIME: Tuesday 7 AM or Thursday 6 PM\n\n📊 SUCCESS METRICS:\n• Save rate >5% (this is reference content people keep)\n• Carousel completion rate >60%\n• Comments asking follow-up questions",
+                quality: "Requirements:\n• Include specific post templates with fill-in-the-blank sections\n• Provide platform-specific formatting (character limits, aspect ratios)\n• Include hashtag research with reach estimates\n• Address compliance: disclaimer language, avoiding medical advice online\n• Provide batching workflow for efficiency (3-4 hrs/week constraint)\n• Include repurposing strategy (one idea → multiple platforms)\n• Document analytics to track and benchmarks for success\n• Include engagement scripts (how to respond to DMs, comments)\n• Provide content bank of 20+ evergreen topic ideas\n• Address algorithm best practices for each platform"
+            },
+            casestudy: {
+                role: "You are a clinical educator with 15+ years of experience in health professions education. You've published case studies in peer-reviewed journals and developed case-based learning curricula for medical, PT, and nursing programs. You specialize in creating realistic, educational clinical scenarios that develop critical thinking and clinical reasoning skills.",
+                instructions: "Develop a comprehensive clinical case study for the educational context provided. Include:\n1. Patient presentation and chief complaint\n2. History of present illness (detailed timeline)\n3. Past medical/surgical history and medications\n4. Review of systems findings\n5. Physical examination findings\n6. Diagnostic results (labs, imaging as appropriate)\n7. Discussion questions at multiple difficulty levels\n8. Differential diagnosis framework\n9. Evidence-based treatment rationale\n10. Follow-up and outcomes",
+                context: "Educational setting: DPT program, second-year students in orthopedic clinical reasoning course. Learning objectives: Develop differential diagnosis skills for lumbar spine conditions, integrate red/yellow flag screening, create evidence-based treatment plans. Complexity: Intermediate - straightforward presentation with one complicating factor. Should take 60-90 minutes for full case discussion.",
+                examples: "CASE STUDY: \"The Weekend Warrior\"\n\n📋 PATIENT PRESENTATION\n\nDemographics: 45-year-old male, high school teacher and basketball coach\nChief Complaint: \"My back went out again after the game on Saturday\"\n\n📖 HISTORY OF PRESENT ILLNESS\n\nOnset: 3 days ago during recreational basketball game\nMechanism: \"I went up for a rebound and felt a pop in my lower back when I landed\"\nLocation: Central low back pain, currently radiating to right buttock\nIntensity: 7/10 at worst (with movement), 4/10 at rest\nQuality: \"Sharp with movement, dull ache at rest\"\nTiming: Constant since onset, worse in morning\nAggravating: Sitting >20 min, forward bending, transitioning sit→stand\nRelieving: Walking, lying supine with knees bent, ice\nPrevious episodes: Similar episode 18 months ago, resolved with chiropractic care (4 visits)\n\n🚩 RED FLAG SCREENING\n• Bowel/bladder changes: Denies\n• Saddle anesthesia: Denies\n• Progressive neurological symptoms: Denies\n• Night pain: Mild, improves with position change\n• Unexplained weight loss: Denies\n• History of cancer: Denies\n• Recent infection/fever: Denies\n• Trauma: Mechanism described above (no fall, no direct blow)\n→ RED FLAG STATUS: Negative\n\n🟡 YELLOW FLAG SCREENING\n• Fear-avoidance: Moderate (\"I'm worried I'll make it worse\")\n• Catastrophizing: Low (\"I know I'll get better, just frustrated\")\n• Work concerns: Mild (\"I have to coach a game Thursday\")\n→ YELLOW FLAG STATUS: Address fear-avoidance beliefs\n\n[Case continues with examination findings...]\n\n❓ DISCUSSION QUESTIONS\n\nLevel 1 (Knowledge):\n• What structures could produce central low back pain with buttock referral?\n• List 5 differential diagnoses for this presentation.\n\nLevel 2 (Application):\n• Based on the mechanism, which structures are most likely involved?\n• What special tests would you prioritize and why?\n\nLevel 3 (Analysis):\n• How does the presence of yellow flags influence your treatment approach?\n• Compare and contrast this presentation with lumbar radiculopathy.",
+                quality: "Requirements:\n• Include realistic vital signs, lab values, and examination findings\n• Provide answer keys for discussion questions (for instructor use)\n• Include evidence citations for treatment rationale (CPGs, systematic reviews)\n• Add \"teaching pearls\" highlighting key clinical reasoning points\n• Create patient handout materials as appendices\n• Include grading rubric for student case presentations\n• Format for both in-class discussion and asynchronous learning\n• Provide 2-3 alternative scenarios for case variations\n• Include interprofessional considerations (when to refer)\n• Document learning objectives mapped to accreditation standards"
+            }
+        };
+
+        // DOM Elements
+        const contentTabs = document.querySelectorAll('.content-tab');
+        const contentSections = document.querySelectorAll('.content-section');
+        const inputs = {
+            role: document.getElementById('role-input'),
+            instructions: document.getElementById('instructions-input'),
+            context: document.getElementById('context-input'),
+            examples: document.getElementById('examples-input'),
+            quality: document.getElementById('quality-input')
+        };
+        const outputContent = document.getElementById('output-content');
+        const copyBtn = document.getElementById('copy-btn');
+        const scoreValue = document.getElementById('score-value');
+        const scoreFill = document.getElementById('score-fill');
+        const wordCount = document.getElementById('word-count');
+        const charCount = document.getElementById('char-count');
+        const templateCards = document.querySelectorAll('.template-card');
+        const frameworkCards = document.querySelectorAll('.framework-card');
+
+        // Content Navigation
+        contentTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                contentTabs.forEach(t => t.classList.remove('active'));
+                contentSections.forEach(s => s.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.section).classList.add('active');
+            });
+        });
+
+        // Framework card clicks - navigate to learn section
+        frameworkCards.forEach(card => {
+            card.addEventListener('click', () => {
+                contentTabs.forEach(t => t.classList.remove('active'));
+                contentSections.forEach(s => s.classList.remove('active'));
+                document.querySelector('[data-section="learn"]').classList.add('active');
+                document.getElementById('learn').classList.add('active');
+
+                const detailId = card.dataset.detail + '-detail';
+                const detailElement = document.getElementById(detailId);
+                if (detailElement) {
+                    setTimeout(() => {
+                        detailElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
+                }
+            });
+        });
+
+        // Build prompt output
+        function buildPrompt() {
+            const parts = [];
+
+            if (inputs.role.value.trim()) {
+                parts.push(`**ROLE:**\n${inputs.role.value.trim()}`);
+            }
+            if (inputs.instructions.value.trim()) {
+                parts.push(`**INSTRUCTIONS:**\n${inputs.instructions.value.trim()}`);
+            }
+            if (inputs.context.value.trim()) {
+                parts.push(`**CONTEXT:**\n${inputs.context.value.trim()}`);
+            }
+            if (inputs.examples.value.trim()) {
+                parts.push(`**EXAMPLES:**\n${inputs.examples.value.trim()}`);
+            }
+            if (inputs.quality.value.trim()) {
+                parts.push(`**QUALITY REQUIREMENTS:**\n${inputs.quality.value.trim()}`);
+            }
+
+            if (parts.length === 0) {
+                outputContent.textContent = 'Start filling in the form to see your RICE-Q prompt build in real-time...';
+                outputContent.style.color = 'var(--muted)';
+            } else {
+                outputContent.textContent = parts.join('\n\n');
+                outputContent.style.color = 'var(--ink)';
+            }
+
+            updateStats();
+            updateScore();
+        }
+
+        function updateStats() {
+            const text = outputContent.textContent;
+            const words = text.trim() && !text.includes('Start filling') ? text.trim().split(/\s+/).length : 0;
+            const chars = text.includes('Start filling') ? 0 : text.length;
+
+            wordCount.textContent = words;
+            charCount.textContent = chars;
+        }
+
+        function updateScore() {
+            const checks = {
+                r: inputs.role.value.trim().length > 20,
+                i: inputs.instructions.value.trim().length > 20,
+                c: inputs.context.value.trim().length > 20,
+                e: inputs.examples.value.trim().length > 20,
+                q: inputs.quality.value.trim().length > 20
+            };
+
+            let completed = 0;
+            Object.keys(checks).forEach(key => {
+                const checkEl = document.getElementById(`check-${key}`);
+                const icon = checkEl.querySelector('.check-icon');
+                if (checks[key]) {
+                    checkEl.classList.add('complete');
+                    icon.textContent = '✓';
+                    completed++;
+                } else {
+                    checkEl.classList.remove('complete');
+                    icon.textContent = '○';
+                }
+            });
+
+            const percentage = (completed / 5) * 100;
+            scoreValue.textContent = `${percentage}%`;
+            scoreFill.style.width = `${percentage}%`;
+
+            if (percentage < 40) {
+                scoreFill.style.background = 'var(--riceq-red)';
+                scoreValue.style.color = 'var(--riceq-red)';
+            } else if (percentage < 80) {
+                scoreFill.style.background = 'var(--riceq-orange)';
+                scoreValue.style.color = 'var(--riceq-orange)';
+            } else {
+                scoreFill.style.background = 'var(--riceq-green)';
+                scoreValue.style.color = 'var(--riceq-green)';
+            }
+        }
+
+        // Input listeners
+        Object.values(inputs).forEach(input => {
+            input.addEventListener('input', buildPrompt);
+        });
+
+        // Copy functionality
+        copyBtn.addEventListener('click', () => {
+            const text = outputContent.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                copyBtn.textContent = 'Copied!';
+                copyBtn.classList.add('copied');
+                setTimeout(() => {
+                    copyBtn.textContent = 'Copy';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            });
+        });
+
+        // Template loading
+        templateCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const templateKey = card.dataset.template;
+                const template = templates[templateKey];
+
+                if (template) {
+                    inputs.role.value = template.role;
+                    inputs.instructions.value = template.instructions;
+                    inputs.context.value = template.context;
+                    inputs.examples.value = template.examples;
+                    inputs.quality.value = template.quality;
+
+                    contentTabs.forEach(t => t.classList.remove('active'));
+                    contentSections.forEach(s => s.classList.remove('active'));
+                    document.querySelector('[data-section="builder"]').classList.add('active');
+                    document.getElementById('builder').classList.add('active');
+
+                    buildPrompt();
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Template Filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const templatesGrid = document.getElementById('templates-grid');
+        const templateCountEl = document.getElementById('template-count');
+
+        function filterTemplates(category) {
+            const allCards = templatesGrid.querySelectorAll('.template-card');
+            let visibleCount = 0;
+
+            allCards.forEach(card => {
+                const cardCategory = card.dataset.category;
+                if (category === 'all' || cardCategory === category) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // Update count
+            templateCountEl.textContent = `${visibleCount} template${visibleCount !== 1 ? 's' : ''}`;
+
+            // Update active button
+            filterBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === category) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterTemplates(btn.dataset.filter);
+            });
+        });
+
+        // Initialize
+        buildPrompt();
+        filterTemplates('all');
+    </script>
+</body>
+</html>

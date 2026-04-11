@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health & Fitness Resume Template | Professor Tony</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ink: #1d1d1f;
+            --ink-secondary: #424245;
+            --ink-tertiary: #86868b;
+            --paper: #ffffff;
+            --accent: #0071e3;
+            --border: #e5e5e7;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f7;
+            color: var(--ink);
+            line-height: 1.5;
+        }
+
+        .download-header {
+            background: var(--paper);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .download-header a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .download-header a:hover { text-decoration: underline; }
+
+        .download-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover { background: #0077ed; }
+
+        .btn-secondary {
+            background: #e5e5e7;
+            color: var(--ink);
+        }
+
+        .btn-secondary:hover { background: #d1d1d6; }
+
+        .document-container {
+            max-width: 816px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .document {
+            background: var(--paper);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 60px;
+            min-height: 1056px;
+        }
+
+        .resume-header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--ink);
+        }
+
+        .resume-name {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .resume-contact {
+            font-size: 13px;
+            color: var(--ink-secondary);
+        }
+
+        .resume-contact span { margin: 0 8px; }
+
+        .resume-section {
+            margin-bottom: 24px;
+        }
+
+        .resume-section-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--ink);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+        }
+
+        .resume-entry {
+            margin-bottom: 16px;
+        }
+
+        .resume-entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+
+        .resume-entry-title {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .resume-entry-date {
+            font-size: 13px;
+            color: var(--ink-tertiary);
+        }
+
+        .resume-entry-subtitle {
+            font-size: 14px;
+            color: var(--ink-secondary);
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+
+        .resume-entry ul {
+            margin-left: 18px;
+            font-size: 14px;
+        }
+
+        .resume-entry li {
+            margin-bottom: 4px;
+        }
+
+        .resume-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .resume-skill {
+            background: #f5f5f7;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .placeholder {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        .instructions {
+            background: #e8f4fd;
+            border: 1px solid #b3d9f7;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .instructions h3 {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+
+        .instructions ul {
+            margin-left: 18px;
+        }
+
+        @media print {
+            .download-header, .instructions { display: none; }
+            body { background: white; }
+            .document-container { margin: 0; padding: 0; }
+            .document { box-shadow: none; padding: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="download-header">
+        <a href="../resources.html">&larr; Back to Resources</a>
+        <div class="download-actions">
+            <button class="btn btn-secondary" onclick="window.print()">Print / Save PDF</button>
+        </div>
+    </div>
+
+    <div class="document-container">
+        <div class="instructions">
+            <h3>How to Use This Template</h3>
+            <ul>
+                <li>Replace all <span class="placeholder">highlighted text</span> with your information</li>
+                <li>Customize bullet points to match your specific experiences</li>
+                <li>Click "Print / Save PDF" to save as a PDF file</li>
+                <li>Keep your resume to one page for entry-level positions</li>
+            </ul>
+        </div>
+
+        <div class="document">
+            <header class="resume-header">
+                <h1 class="resume-name"><span class="placeholder">Your Full Name</span></h1>
+                <div class="resume-contact">
+                    <span class="placeholder">City, State</span> |
+                    <span class="placeholder">(555) 123-4567</span> |
+                    <span class="placeholder">email@example.com</span> |
+                    <span class="placeholder">linkedin.com/in/yourprofile</span>
+                </div>
+            </header>
+
+            <section class="resume-section">
+                <h2 class="resume-section-title">Professional Summary</h2>
+                <p style="font-size: 14px;"><span class="placeholder">Motivated Kinesiology graduate with hands-on experience in [specialty area]. Skilled in exercise prescription, client assessment, and program design. Passionate about helping clients achieve their health and fitness goals through evidence-based practices. Seeking to leverage academic training and internship experience in a [target position] role.</span></p>
+            </section>
+
+            <section class="resume-section">
+                <h2 class="resume-section-title">Education</h2>
+                <div class="resume-entry">
+                    <div class="resume-entry-header">
+                        <span class="resume-entry-title"><span class="placeholder">Bachelor of Science in Kinesiology</span></span>
+                        <span class="resume-entry-date"><span class="placeholder">May 2024</span></span>
+                    </div>
+                    <div class="resume-entry-subtitle"><span class="placeholder">California State University San Marcos</span></div>
+                    <ul>
+                        <li>Concentration: <span class="placeholder">Exercise Science / Pre-Physical Therapy / Fitness Management</span></li>
+                        <li>GPA: <span class="placeholder">3.5/4.0</span> (include if 3.0 or higher)</li>
+                        <li>Relevant Coursework: Exercise Physiology, Biomechanics, Motor Learning, Nutrition</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="resume-section">
+                <h2 class="resume-section-title">Experience</h2>
+                <div class="resume-entry">
+                    <div class="resume-entry-header">
+                        <span class="resume-entry-title"><span class="placeholder">Fitness Intern / Personal Training Intern</span></span>
+                        <span class="resume-entry-date"><span class="placeholder">Jan 2024 - May 2024</span></span>
+                    </div>
+                    <div class="resume-entry-subtitle"><span class="placeholder">Company Name, City, State</span></div>
+                    <ul>
+                        <li>Conducted <span class="placeholder">25+</span> fitness assessments including body composition, cardiovascular endurance, and flexibility testing</li>
+                        <li>Designed and implemented individualized exercise programs for <span class="placeholder">10+</span> clients with diverse fitness goals</li>
+                        <li>Assisted certified trainers with group fitness classes serving <span class="placeholder">15-20</span> participants per session</li>
+                        <li>Maintained detailed client records and tracked progress toward established fitness goals</li>
+                    </ul>
+                </div>
+
+                <div class="resume-entry">
+                    <div class="resume-entry-header">
+                        <span class="resume-entry-title"><span class="placeholder">Previous Relevant Position</span></span>
+                        <span class="resume-entry-date"><span class="placeholder">Dates</span></span>
+                    </div>
+                    <div class="resume-entry-subtitle"><span class="placeholder">Company Name, City, State</span></div>
+                    <ul>
+                        <li><span class="placeholder">Action verb + specific task + quantifiable result</span></li>
+                        <li><span class="placeholder">Action verb + specific task + quantifiable result</span></li>
+                        <li><span class="placeholder">Action verb + specific task + quantifiable result</span></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="resume-section">
+                <h2 class="resume-section-title">Certifications</h2>
+                <ul style="font-size: 14px; margin-left: 18px;">
+                    <li><span class="placeholder">CPR/AED Certified</span> - American Heart Association (<span class="placeholder">Exp. Date</span>)</li>
+                    <li><span class="placeholder">Certified Personal Trainer</span> - <span class="placeholder">NASM/ACE/NSCA</span> (<span class="placeholder">In Progress / Date</span>)</li>
+                    <li>Google AI Essentials - Google/Coursera (<span class="placeholder">Date</span>)</li>
+                </ul>
+            </section>
+
+            <section class="resume-section">
+                <h2 class="resume-section-title">Skills</h2>
+                <div class="resume-skills">
+                    <span class="resume-skill">Exercise Prescription</span>
+                    <span class="resume-skill">Fitness Assessment</span>
+                    <span class="resume-skill">Program Design</span>
+                    <span class="resume-skill">Client Communication</span>
+                    <span class="resume-skill">Microsoft Office</span>
+                    <span class="resume-skill">EMR Systems</span>
+                    <span class="resume-skill"><span class="placeholder">Add More</span></span>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

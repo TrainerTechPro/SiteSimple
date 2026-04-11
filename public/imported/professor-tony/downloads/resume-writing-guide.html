@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Writing Guide | Professor Tony</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ink: #1d1d1f;
+            --ink-secondary: #424245;
+            --accent: #0071e3;
+            --border: #e5e5e7;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f7;
+            color: var(--ink);
+            line-height: 1.6;
+        }
+        .download-header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .download-header a { color: var(--accent); text-decoration: none; font-size: 14px; }
+        .btn { padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; background: #e5e5e7; }
+        .btn:hover { background: #d1d1d6; }
+        .document-container { max-width: 816px; margin: 40px auto; padding: 0 20px 60px; }
+        .document { background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.1); padding: 60px; }
+        h1 { font-size: 32px; margin-bottom: 8px; }
+        .subtitle { font-size: 18px; color: var(--ink-secondary); margin-bottom: 40px; }
+        h2 { font-size: 22px; margin: 40px 0 16px; padding-top: 24px; border-top: 1px solid var(--border); }
+        h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+        h3 { font-size: 16px; margin: 24px 0 12px; color: var(--accent); }
+        p { margin-bottom: 16px; font-size: 15px; }
+        ul, ol { margin: 0 0 16px 24px; font-size: 15px; }
+        li { margin-bottom: 8px; }
+        .tip-box { background: #e8f4fd; border-left: 4px solid var(--accent); padding: 16px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .tip-box strong { color: var(--accent); }
+        .warning-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 16px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .example { background: #f5f5f7; padding: 16px; border-radius: 8px; margin: 16px 0; font-size: 14px; }
+        .example-label { font-size: 12px; font-weight: 600; color: var(--ink-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .good { border-left: 4px solid #34c759; }
+        .bad { border-left: 4px solid #ff3b30; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: #f5f5f7; font-weight: 600; }
+        @media print {
+            .download-header { display: none; }
+            body { background: white; }
+            .document { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="download-header">
+        <a href="../resources.html">&larr; Back to Resources</a>
+        <button class="btn" onclick="window.print()">Print / Save PDF</button>
+    </div>
+
+    <div class="document-container">
+        <div class="document">
+            <h1>Resume Writing Guide</h1>
+            <p class="subtitle">A step-by-step guide for health and fitness professionals</p>
+
+            <h2>1. Resume Fundamentals</h2>
+
+            <h3>Format & Length</h3>
+            <ul>
+                <li><strong>One page</strong> for entry-level and early career (0-5 years experience)</li>
+                <li><strong>Two pages</strong> acceptable for experienced professionals with extensive relevant experience</li>
+                <li>Use consistent formatting: same font, spacing, and alignment throughout</li>
+                <li>Save as PDF to preserve formatting across devices</li>
+            </ul>
+
+            <h3>Font & Styling</h3>
+            <ul>
+                <li>Use professional fonts: Arial, Calibri, Garamond, or Times New Roman</li>
+                <li>Font size: 10-12pt for body text, 14-16pt for your name</li>
+                <li>Margins: 0.5" to 1" on all sides</li>
+                <li>Use bold and caps sparingly for emphasis</li>
+            </ul>
+
+            <div class="tip-box">
+                <strong>Pro Tip:</strong> Most companies use Applicant Tracking Systems (ATS) to screen resumes. Use a simple, single-column format without tables, graphics, or headers/footers to ensure your resume parses correctly.
+            </div>
+
+            <h2>2. Contact Information</h2>
+            <p>Place at the top of your resume. Include:</p>
+            <ul>
+                <li>Full name (make it prominent)</li>
+                <li>City and State (full address not necessary)</li>
+                <li>Phone number</li>
+                <li>Professional email address</li>
+                <li>LinkedIn profile URL (customized)</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>Avoid:</strong> Unprofessional email addresses (partyguy@email.com), photos, age, marital status, or other personal information not relevant to the job.
+            </div>
+
+            <h2>3. Professional Summary</h2>
+            <p>A 2-3 sentence overview that highlights your value proposition. Tailor this to each position.</p>
+
+            <div class="example bad">
+                <div class="example-label">Weak Example</div>
+                "Recent graduate looking for a job in fitness. Hard worker who is passionate about helping people."
+            </div>
+
+            <div class="example good">
+                <div class="example-label">Strong Example</div>
+                "Kinesiology graduate with 400+ hours of hands-on experience in personal training and group fitness instruction. Skilled in exercise prescription, fitness assessments, and client motivation. Seeking to leverage evidence-based training methods and strong interpersonal skills as a Personal Trainer at XYZ Fitness."
+            </div>
+
+            <h2>4. Writing Powerful Bullet Points</h2>
+
+            <h3>The Formula</h3>
+            <p><strong>Action Verb + Task + Result/Impact</strong></p>
+
+            <h3>Strong Action Verbs for Health & Fitness</h3>
+            <table>
+                <tr>
+                    <th>Category</th>
+                    <th>Verbs</th>
+                </tr>
+                <tr>
+                    <td>Training</td>
+                    <td>Coached, Trained, Instructed, Demonstrated, Guided, Mentored</td>
+                </tr>
+                <tr>
+                    <td>Assessment</td>
+                    <td>Evaluated, Assessed, Analyzed, Measured, Monitored, Tracked</td>
+                </tr>
+                <tr>
+                    <td>Program Design</td>
+                    <td>Designed, Developed, Created, Implemented, Customized, Structured</td>
+                </tr>
+                <tr>
+                    <td>Results</td>
+                    <td>Achieved, Improved, Increased, Enhanced, Reduced, Exceeded</td>
+                </tr>
+                <tr>
+                    <td>Communication</td>
+                    <td>Educated, Communicated, Presented, Collaborated, Coordinated</td>
+                </tr>
+            </table>
+
+            <h3>Quantify Your Achievements</h3>
+            <p>Numbers make your accomplishments concrete and memorable:</p>
+
+            <div class="example bad">
+                <div class="example-label">Without Numbers</div>
+                "Helped clients achieve their fitness goals"
+            </div>
+
+            <div class="example good">
+                <div class="example-label">With Numbers</div>
+                "Coached 15 clients to achieve an average 12% improvement in cardiovascular endurance over 8-week programs"
+            </div>
+
+            <h2>5. Education Section</h2>
+            <p>For recent graduates, place education before experience. Include:</p>
+            <ul>
+                <li>Degree name and major/concentration</li>
+                <li>University name and location</li>
+                <li>Graduation date (month and year)</li>
+                <li>GPA if 3.0 or higher</li>
+                <li>Relevant coursework, honors, or academic achievements</li>
+            </ul>
+
+            <h2>6. Certifications</h2>
+            <p>Essential for health and fitness careers. List:</p>
+            <ul>
+                <li>Certification name</li>
+                <li>Issuing organization</li>
+                <li>Date obtained or expiration date</li>
+                <li>Certification number (optional)</li>
+            </ul>
+
+            <h3>Common Certifications to Include</h3>
+            <ul>
+                <li>CPR/AED/First Aid</li>
+                <li>Personal Training (NASM, ACE, NSCA, ACSM)</li>
+                <li>Group Fitness (ACE, AFAA)</li>
+                <li>Specialty certifications (corrective exercise, nutrition, etc.)</li>
+            </ul>
+
+            <h2>7. Skills Section</h2>
+            <p>Include a mix of technical and soft skills relevant to the position:</p>
+
+            <h3>Technical Skills</h3>
+            <ul>
+                <li>Fitness assessment protocols</li>
+                <li>Exercise prescription</li>
+                <li>Program design</li>
+                <li>EMR/EHR systems</li>
+                <li>Fitness tracking software</li>
+                <li>Microsoft Office / Google Workspace</li>
+            </ul>
+
+            <h3>Soft Skills</h3>
+            <ul>
+                <li>Client communication</li>
+                <li>Motivational techniques</li>
+                <li>Time management</li>
+                <li>Problem-solving</li>
+                <li>Team collaboration</li>
+            </ul>
+
+            <h2>8. Final Checklist</h2>
+            <ul>
+                <li>☐ No spelling or grammar errors</li>
+                <li>☐ Consistent formatting throughout</li>
+                <li>☐ Contact information is current</li>
+                <li>☐ Tailored to the specific job posting</li>
+                <li>☐ Keywords from job description included</li>
+                <li>☐ All dates are accurate</li>
+                <li>☐ PDF format for submission</li>
+                <li>☐ File named professionally (FirstName_LastName_Resume.pdf)</li>
+            </ul>
+
+            <div class="tip-box">
+                <strong>Final Step:</strong> Have someone else review your resume before submitting. Fresh eyes catch errors and can provide valuable feedback on clarity and impact.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

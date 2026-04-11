@@ -16,6 +16,7 @@ export const authConfig: NextAuthConfig = {
       if (
         pathname.startsWith("/login") ||
         pathname.startsWith("/sites/") ||
+        pathname.startsWith("/imported/") ||
         pathname.startsWith("/api/auth") ||
         pathname.startsWith("/_next") ||
         pathname.startsWith("/uploads") ||

@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import SectionRenderer from "@/components/sections/SectionRenderer";
 import type { Metadata } from "next";
@@ -52,6 +52,11 @@ export default async function PublicSitePage({ params }: PageProps) {
 
   if (!site || site.status === "DRAFT") {
     notFound();
+  }
+
+  // If this is an imported static site, redirect to the imported HTML
+  if (site.importedPath) {
+    redirect(site.importedPath);
   }
 
   const { pages } = site;

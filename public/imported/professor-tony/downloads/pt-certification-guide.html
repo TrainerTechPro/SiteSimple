@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Training Certification Guide | Professor Tony</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --ink: #1d1d1f; --ink-secondary: #424245; --accent: #0071e3; --border: #e5e5e7; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f7; color: var(--ink); line-height: 1.6; }
+        .download-header { background: white; border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        .download-header a { color: var(--accent); text-decoration: none; font-size: 14px; }
+        .btn { padding: 8px 16px; border-radius: 8px; font-size: 14px; cursor: pointer; border: none; background: #e5e5e7; }
+        .document-container { max-width: 900px; margin: 40px auto; padding: 0 20px 60px; }
+        .document { background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.1); padding: 60px; }
+        h1 { font-size: 32px; margin-bottom: 8px; }
+        .subtitle { font-size: 18px; color: var(--ink-secondary); margin-bottom: 40px; }
+        h2 { font-size: 22px; margin: 40px 0 20px; }
+        h3 { font-size: 16px; margin: 24px 0 12px; color: var(--accent); }
+        p { margin-bottom: 16px; font-size: 15px; }
+        table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+        th, td { padding: 12px; text-align: left; border: 1px solid var(--border); }
+        th { background: #f5f5f7; font-weight: 600; }
+        .cert-card { border: 2px solid var(--border); border-radius: 12px; padding: 24px; margin: 24px 0; }
+        .cert-name { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .cert-org { font-size: 14px; color: var(--ink-secondary); margin-bottom: 16px; }
+        .cert-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 16px; }
+        .stat { background: #f5f5f7; padding: 12px; border-radius: 8px; text-align: center; }
+        .stat-value { font-size: 18px; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 12px; color: var(--ink-secondary); }
+        .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .pros, .cons { padding: 16px; border-radius: 8px; }
+        .pros { background: #e8f5e9; }
+        .cons { background: #fff3e0; }
+        .pros h4, .cons h4 { font-size: 14px; margin-bottom: 8px; }
+        .pros ul, .cons ul { margin-left: 16px; font-size: 13px; }
+        .tip { background: #e8f4fd; padding: 16px; border-radius: 8px; margin: 24px 0; font-size: 14px; }
+        .recommendation { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 24px; border-radius: 12px; margin: 32px 0; }
+        .recommendation h3 { color: white; margin-top: 0; }
+        @media print { .download-header { display: none; } body { background: white; } .document { box-shadow: none; } }
+        @media (max-width: 600px) { .pros-cons { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="download-header">
+        <a href="../resources.html">&larr; Back to Resources</a>
+        <button class="btn" onclick="window.print()">Print / Save PDF</button>
+    </div>
+
+    <div class="document-container">
+        <div class="document">
+            <h1>Personal Training Certification Guide</h1>
+            <p class="subtitle">Comparison of top certifications for aspiring personal trainers</p>
+
+            <h2>Quick Comparison</h2>
+            <table>
+                <tr>
+                    <th>Certification</th>
+                    <th>Cost</th>
+                    <th>Exam Format</th>
+                    <th>Prerequisites</th>
+                    <th>Best For</th>
+                </tr>
+                <tr>
+                    <td><strong>NSCA-CPT</strong></td>
+                    <td>$300-475</td>
+                    <td>155 questions, 3 hrs</td>
+                    <td>18+, HS Diploma, CPR/AED</td>
+                    <td>Science-focused trainers</td>
+                </tr>
+                <tr>
+                    <td><strong>NASM-CPT</strong></td>
+                    <td>$629-2,699</td>
+                    <td>120 questions, 2 hrs</td>
+                    <td>18+, HS Diploma, CPR/AED</td>
+                    <td>Corrective exercise focus</td>
+                </tr>
+                <tr>
+                    <td><strong>ACE-CPT</strong></td>
+                    <td>$449-999</td>
+                    <td>150 questions, 3 hrs</td>
+                    <td>18+, HS Diploma, CPR/AED</td>
+                    <td>Behavior change focus</td>
+                </tr>
+                <tr>
+                    <td><strong>ACSM-CPT</strong></td>
+                    <td>$349-499</td>
+                    <td>120 questions, 2.5 hrs</td>
+                    <td>18+, HS Diploma, CPR/AED</td>
+                    <td>Clinical/medical settings</td>
+                </tr>
+            </table>
+
+            <h2>Detailed Certification Breakdowns</h2>
+
+            <div class="cert-card">
+                <div class="cert-name">NSCA-CPT</div>
+                <div class="cert-org">National Strength and Conditioning Association</div>
+                <div class="cert-stats">
+                    <div class="stat">
+                        <div class="stat-value">$300-475</div>
+                        <div class="stat-label">Exam Cost</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">3 hours</div>
+                        <div class="stat-label">Exam Length</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">3 years</div>
+                        <div class="stat-label">Recertification</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">6.0 CEUs</div>
+                        <div class="stat-label">Required</div>
+                    </div>
+                </div>
+                <p><strong>Focus:</strong> Evidence-based training principles, exercise science, and program design with a strong research foundation.</p>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Strengths</h4>
+                        <ul>
+                            <li>Highly respected in the industry</li>
+                            <li>Strong scientific foundation</li>
+                            <li>Great for athletic populations</li>
+                            <li>Lower cost than some competitors</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Considerations</h4>
+                        <ul>
+                            <li>More challenging exam</li>
+                            <li>Less marketing/business content</li>
+                            <li>Study materials sold separately</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-name">NASM-CPT</div>
+                <div class="cert-org">National Academy of Sports Medicine</div>
+                <div class="cert-stats">
+                    <div class="stat">
+                        <div class="stat-value">$629-2,699</div>
+                        <div class="stat-label">Package Cost</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">2 hours</div>
+                        <div class="stat-label">Exam Length</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">2 years</div>
+                        <div class="stat-label">Recertification</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">2.0 CEUs</div>
+                        <div class="stat-label">Required</div>
+                    </div>
+                </div>
+                <p><strong>Focus:</strong> The OPT (Optimum Performance Training) model and corrective exercise approach.</p>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Strengths</h4>
+                        <ul>
+                            <li>Most recognized by employers</li>
+                            <li>Excellent study materials</li>
+                            <li>Strong corrective exercise focus</li>
+                            <li>Job guarantee with some packages</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Considerations</h4>
+                        <ul>
+                            <li>Higher cost</li>
+                            <li>Proprietary OPT model</li>
+                            <li>Frequent promotional pricing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-name">ACE-CPT</div>
+                <div class="cert-org">American Council on Exercise</div>
+                <div class="cert-stats">
+                    <div class="stat">
+                        <div class="stat-value">$449-999</div>
+                        <div class="stat-label">Package Cost</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">3 hours</div>
+                        <div class="stat-label">Exam Length</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">2 years</div>
+                        <div class="stat-label">Recertification</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">2.0 CEUs</div>
+                        <div class="stat-label">Required</div>
+                    </div>
+                </div>
+                <p><strong>Focus:</strong> Behavior change, communication skills, and the ACE Integrated Fitness Training (IFT) model.</p>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Strengths</h4>
+                        <ul>
+                            <li>Strong behavior change focus</li>
+                            <li>Good client communication skills</li>
+                            <li>Non-profit organization</li>
+                            <li>Excellent continuing education</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Considerations</h4>
+                        <ul>
+                            <li>Less technical depth</li>
+                            <li>May need supplemental education</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-name">ACSM-CPT</div>
+                <div class="cert-org">American College of Sports Medicine</div>
+                <div class="cert-stats">
+                    <div class="stat">
+                        <div class="stat-value">$349-499</div>
+                        <div class="stat-label">Exam Cost</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">2.5 hours</div>
+                        <div class="stat-label">Exam Length</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">3 years</div>
+                        <div class="stat-label">Recertification</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">45 CECs</div>
+                        <div class="stat-label">Required</div>
+                    </div>
+                </div>
+                <p><strong>Focus:</strong> Clinical exercise prescription, health screening, and working with medical populations.</p>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Strengths</h4>
+                        <ul>
+                            <li>Gold standard for medical settings</li>
+                            <li>Research-based organization</li>
+                            <li>Pathway to clinical certifications</li>
+                            <li>Lower exam cost</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Considerations</h4>
+                        <ul>
+                            <li>Less employer recognition in gyms</li>
+                            <li>More clinical focus</li>
+                            <li>Higher CEC requirements</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recommendation">
+                <h3>Our Recommendation for Kinesiology Students</h3>
+                <p><strong>NSCA-CPT</strong> is often the best choice for Kinesiology graduates because:</p>
+                <ul style="margin-left: 20px; margin-top: 12px;">
+                    <li>Your degree gives you the science foundation to succeed</li>
+                    <li>It's highly respected in performance and clinical settings</li>
+                    <li>Opens doors to the CSCS later in your career</li>
+                    <li>More affordable than competitors</li>
+                </ul>
+            </div>
+
+            <h2>Study Resources</h2>
+            <h3>NSCA-CPT</h3>
+            <ul style="margin-left: 20px;">
+                <li>NSCA's Essentials of Personal Training (textbook)</li>
+                <li>NSCA Practice Exams</li>
+                <li>Pocket Prep App</li>
+            </ul>
+
+            <h3>NASM-CPT</h3>
+            <ul style="margin-left: 20px;">
+                <li>NASM Essentials of Personal Fitness Training</li>
+                <li>NASM Study Guide and Practice Tests</li>
+                <li>NASM Online Learning Portal</li>
+            </ul>
+
+            <div class="tip">
+                <strong>Pro Tip:</strong> Most employers accept any NCCA-accredited certification. Focus on the one that aligns with your career goals and learning style rather than just employer preference.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analyzer | Professor Tony</title>
+    <meta name="description" content="Free ATS resume analyzer for CSUSM students. Upload your PDF resume and get instant feedback on formatting, keywords, and ATS compatibility.">
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Resume Analyzer | Professor Tony">
+    <meta property="og:description" content="Free ATS resume analyzer. Upload your PDF and get instant feedback on formatting, keywords, and scoring.">
+    <meta property="og:url" content="https://www.professortony.com/resume">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#1d1d1f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="../css/styles.css" as="style">
+    <link rel="preload" href="../js/navigation.js" as="script">
+
+    <!-- Google Fonts - Site + Analyzer fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=IBM+Plex+Mono:wght@300;500;700&family=Crimson+Pro:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <style>
+        /* ===========================================
+           Resume Analyzer - Scoped Styles
+           =========================================== */
+
+        .analyzer {
+            --ra-bg: #0c0f14;
+            --ra-surface: #141820;
+            --ra-surface2: #1a1f2a;
+            --ra-border: #2a3040;
+            --ra-text: #d4dae6;
+            --ra-text-dim: #6b7a94;
+            --ra-accent: #4a90d9;
+            --ra-accent-glow: rgba(74,144,217,0.15);
+            --ra-green: #3ddc84;
+            --ra-green-dim: rgba(61,220,132,0.12);
+            --ra-yellow: #f0c040;
+            --ra-yellow-dim: rgba(240,192,64,0.12);
+            --ra-red: #e8654a;
+            --ra-red-dim: rgba(232,101,74,0.12);
+            --ra-mono: 'IBM Plex Mono', monospace;
+            --ra-serif: 'Crimson Pro', Georgia, serif;
+
+            font-family: var(--ra-mono);
+            font-weight: 300;
+            background: var(--ra-bg);
+            color: var(--ra-text);
+            line-height: 1.6;
+            border-radius: 16px;
+            padding: 2.5rem 2rem 3rem;
+            margin-top: var(--space-8);
+        }
+
+        .analyzer-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            animation: raFadeIn 0.6s ease-out;
+        }
+
+        .analyzer-header h2 {
+            font-family: var(--ra-serif);
+            font-weight: 900;
+            font-size: 2.4rem;
+            letter-spacing: -0.02em;
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        .analyzer-header p {
+            color: var(--ra-text-dim);
+            font-family: var(--ra-mono);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .ra-tag {
+            display: inline-block;
+            background: var(--ra-accent-glow);
+            color: var(--ra-accent);
+            font-family: var(--ra-mono);
+            font-size: 0.65rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        /* Upload zone */
+        .upload-zone {
+            border: 2px dashed var(--ra-border);
+            border-radius: 10px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1.2rem;
+            position: relative;
+            background: var(--ra-surface);
+        }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--ra-accent);
+            background: rgba(74,144,217,0.04);
+        }
+        .upload-zone.has-file {
+            border-color: var(--ra-green);
+            border-style: solid;
+            background: var(--ra-green-dim);
+        }
+        .upload-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            display: block;
+            opacity: 0.6;
+        }
+        .upload-zone h3 {
+            font-family: var(--ra-serif);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 0.4rem;
+        }
+        .upload-zone p {
+            font-family: var(--ra-mono);
+            font-size: 0.75rem;
+            color: var(--ra-text-dim);
+        }
+        .upload-zone .file-name {
+            font-weight: 700;
+            color: var(--ra-green);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+        .upload-zone input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .or-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.2rem 0;
+            font-size: 0.65rem;
+            color: var(--ra-text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+        .or-divider::before, .or-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--ra-border);
+        }
+
+        .toggle-paste {
+            font-family: var(--ra-mono);
+            font-size: 0.7rem;
+            color: var(--ra-accent);
+            background: none;
+            border: 1px solid var(--ra-border);
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: block;
+            margin: 0 auto 1.2rem;
+        }
+        .toggle-paste:hover { border-color: var(--ra-accent); }
+
+        .paste-section { display: none; animation: raFadeSlideIn 0.3s ease-out; }
+        .paste-section.visible { display: block; }
+
+        .ra-input-section {
+            display: grid;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+            animation: raFadeSlideIn 0.6s ease-out 0.1s both;
+        }
+
+        .ra-input-group label {
+            display: block;
+            font-family: var(--ra-mono);
+            font-size: 0.7rem;
+            color: var(--ra-text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.4rem;
+        }
+        .ra-input-group label .optional {
+            color: var(--ra-accent);
+            font-size: 0.6rem;
+        }
+
+        .analyzer textarea {
+            width: 100%;
+            background: var(--ra-surface);
+            border: 1px solid var(--ra-border);
+            color: var(--ra-text);
+            font-family: var(--ra-mono);
+            font-size: 0.82rem;
+            font-weight: 300;
+            padding: 1rem;
+            border-radius: 6px;
+            resize: vertical;
+            transition: border-color 0.2s;
+            line-height: 1.7;
+        }
+        .analyzer textarea:focus {
+            outline: none;
+            border-color: var(--ra-accent);
+            box-shadow: 0 0 0 3px var(--ra-accent-glow);
+        }
+        .analyzer textarea::placeholder {
+            color: var(--ra-text-dim);
+            opacity: 0.5;
+        }
+
+        .ra-btn-row { display: flex; gap: 1rem; align-items: center; }
+
+        .ra-btn {
+            font-family: var(--ra-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .ra-btn-primary {
+            background: var(--ra-accent);
+            color: #fff;
+        }
+        .ra-btn-primary:hover {
+            background: #5a9de6;
+            transform: translateY(-1px);
+        }
+        .ra-btn-primary:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .ra-btn-clear {
+            background: transparent;
+            color: var(--ra-text-dim);
+            border: 1px solid var(--ra-border);
+        }
+        .ra-btn-clear:hover {
+            border-color: var(--ra-text-dim);
+            color: var(--ra-text);
+        }
+
+        /* Loading spinner */
+        .ra-loading-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(12,15,20,0.85);
+            z-index: 100000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .ra-loading-overlay.visible { display: flex; }
+        .ra-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--ra-border);
+            border-top-color: var(--ra-accent);
+            border-radius: 50%;
+            animation: raSpin 0.8s linear infinite;
+        }
+        .ra-loading-overlay p {
+            font-family: var(--ra-mono);
+            font-size: 0.8rem;
+            color: var(--ra-text-dim);
+        }
+        @keyframes raSpin { to { transform: rotate(360deg); } }
+
+        /* Source indicator */
+        .source-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: var(--ra-mono);
+            font-size: 0.65rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 3px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .source-badge.pdf { background: var(--ra-red-dim); color: var(--ra-red); }
+        .source-badge.text { background: var(--ra-accent-glow); color: var(--ra-accent); }
+
+        /* Results */
+        .ra-results { animation: raFadeSlideIn 0.5s ease-out; }
+
+        .overall-score {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            background: var(--ra-surface);
+            border: 1px solid var(--ra-border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .score-ring { position: relative; width: 130px; height: 130px; flex-shrink: 0; }
+        .score-ring svg { transform: rotate(-90deg); }
+        .score-ring-bg { fill: none; stroke: var(--ra-surface2); stroke-width: 8; }
+        .score-ring-fill { fill: none; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 1s ease-out, stroke 0.3s; }
+        .score-ring-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .score-ring-text .number {
+            font-family: var(--ra-serif);
+            font-weight: 900;
+            font-size: 2.4rem;
+            color: #fff;
+            line-height: 1;
+        }
+        .score-ring-text .label {
+            font-family: var(--ra-mono);
+            font-size: 0.6rem;
+            color: var(--ra-text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .score-summary h2 {
+            font-family: var(--ra-serif);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 0.4rem;
+        }
+        .score-summary p {
+            color: var(--ra-text-dim);
+            font-family: var(--ra-mono);
+            font-size: 0.78rem;
+            line-height: 1.6;
+        }
+        .grade-badge {
+            display: inline-block;
+            font-family: var(--ra-mono);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 3px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+            letter-spacing: 0.04em;
+        }
+        .grade-good { background: var(--ra-green-dim); color: var(--ra-green); }
+        .grade-ok { background: var(--ra-yellow-dim); color: var(--ra-yellow); }
+        .grade-bad { background: var(--ra-red-dim); color: var(--ra-red); }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .section-card {
+            background: var(--ra-surface);
+            border: 1px solid var(--ra-border);
+            border-radius: 8px;
+            padding: 1.4rem;
+            animation: raFadeSlideIn 0.5s ease-out both;
+        }
+        .section-card:nth-child(1) { animation-delay: 0.05s; }
+        .section-card:nth-child(2) { animation-delay: 0.1s; }
+        .section-card:nth-child(3) { animation-delay: 0.15s; }
+        .section-card:nth-child(4) { animation-delay: 0.2s; }
+        .section-card:nth-child(5) { animation-delay: 0.25s; }
+        .section-card:nth-child(6) { animation-delay: 0.3s; }
+        .section-card:nth-child(7) { animation-delay: 0.35s; }
+        .section-card:nth-child(8) { animation-delay: 0.4s; }
+        .section-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+        .section-card-header h3 {
+            font-family: var(--ra-mono);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--ra-text);
+            font-weight: 700;
+        }
+        .mini-score {
+            font-family: var(--ra-serif);
+            font-weight: 900;
+            font-size: 1.3rem;
+        }
+        .bar-track {
+            width: 100%;
+            height: 4px;
+            background: var(--ra-surface2);
+            border-radius: 2px;
+            margin-bottom: 0.8rem;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.8s ease-out;
+        }
+        .section-card ul { list-style: none; padding: 0; }
+        .section-card li {
+            font-family: var(--ra-mono);
+            font-size: 0.75rem;
+            color: var(--ra-text-dim);
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+            line-height: 1.5;
+        }
+        .section-card li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+        .section-card li.good::before { background: var(--ra-green); }
+        .section-card li.warn::before { background: var(--ra-yellow); }
+        .section-card li.bad::before { background: var(--ra-red); }
+
+        .keyword-section {
+            background: var(--ra-surface);
+            border: 1px solid var(--ra-border);
+            border-radius: 8px;
+            padding: 1.4rem;
+            margin-bottom: 2rem;
+            animation: raFadeSlideIn 0.5s ease-out 0.35s both;
+        }
+        .keyword-section h3 {
+            font-family: var(--ra-mono);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--ra-text);
+        }
+        .keyword-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .chip {
+            font-family: var(--ra-mono);
+            font-size: 0.68rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        .chip-found { background: var(--ra-green-dim); color: var(--ra-green); }
+        .chip-missing { background: var(--ra-red-dim); color: var(--ra-red); border: 1px dashed rgba(232,101,74,0.3); }
+
+        .recommendations {
+            background: var(--ra-surface);
+            border: 1px solid var(--ra-border);
+            border-radius: 8px;
+            padding: 1.4rem;
+            animation: raFadeSlideIn 0.5s ease-out 0.4s both;
+        }
+        .recommendations h3 {
+            font-family: var(--ra-serif);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        .rec-item {
+            display: flex;
+            gap: 0.8rem;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid var(--ra-border);
+        }
+        .rec-item:last-child { border-bottom: none; }
+        .rec-priority {
+            font-family: var(--ra-mono);
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            height: fit-content;
+            white-space: nowrap;
+            margin-top: 0.1rem;
+        }
+        .rec-priority.high { background: var(--ra-red-dim); color: var(--ra-red); }
+        .rec-priority.med { background: var(--ra-yellow-dim); color: var(--ra-yellow); }
+        .rec-priority.low { background: var(--ra-green-dim); color: var(--ra-green); }
+        .rec-text {
+            font-family: var(--ra-mono);
+            font-size: 0.78rem;
+            color: var(--ra-text-dim);
+            line-height: 1.6;
+        }
+        .rec-text strong { color: var(--ra-text); font-weight: 500; }
+
+        /* Raw text preview */
+        .raw-text-toggle {
+            font-family: var(--ra-mono);
+            font-size: 0.68rem;
+            color: var(--ra-text-dim);
+            background: none;
+            border: 1px solid var(--ra-border);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: all 0.2s;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .raw-text-toggle:hover { border-color: var(--ra-text-dim); color: var(--ra-text); }
+        .raw-text-preview {
+            display: none;
+            background: var(--ra-surface);
+            border: 1px solid var(--ra-border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-top: 0.8rem;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: var(--ra-mono);
+            font-size: 0.72rem;
+            color: var(--ra-text-dim);
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+        .raw-text-preview.visible { display: block; }
+
+        .ra-back-btn {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        @keyframes raFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes raFadeSlideIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 700px) {
+            .section-grid { grid-template-columns: 1fr; }
+            .overall-score { flex-direction: column; text-align: center; }
+            .analyzer-header h2 { font-size: 2rem; }
+            .analyzer { padding: 1.5rem 1rem 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Skip to Main Content (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="nav-wrapper">
+        <div class="main-nav">
+            <a href="../index.html" class="nav-logo">
+                <span class="nav-logo-mark">PT</span>
+                Professor Tony
+            </a>
+
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#courses" class="nav-link">
+                        Courses
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="../courses/kinesiology-internship/career-readiness.html" class="dropdown-item">
+                            <div class="dropdown-item-title">Career Readiness</div>
+                            <div class="dropdown-item-desc">LinkedIn optimization & professional branding</div>
+                        </a>
+                        <a href="../courses/kinesiology-internship/ai-tools.html" class="dropdown-item">
+                            <div class="dropdown-item-title">AI Tools & Learning</div>
+                            <div class="dropdown-item-desc">Claude courses & AI model comparison</div>
+                        </a>
+                        <a href="../courses/ai-prompt-engineering/rice-q-framework.html" class="dropdown-item">
+                            <div class="dropdown-item-title">AI Prompt Engineering</div>
+                            <div class="dropdown-item-desc">RICE-Q Framework for health & fitness professionals</div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="../index.html#courses" class="dropdown-item">
+                            <div class="dropdown-item-title">View All Courses</div>
+                            <div class="dropdown-item-desc">Browse the complete course catalog</div>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="../resources.html" class="nav-link">Resources</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../mentorship.html" class="nav-link">Mentorship</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../resume/" class="nav-link active">Resume</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#about" class="nav-link">About</a>
+                </li>
+            </ul>
+
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" aria-label="Toggle dark mode">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-spacer"></div>
+
+    <main id="main-content">
+        <!-- Hero -->
+        <section class="hero" style="padding: var(--space-16) 0 var(--space-8);">
+            <div class="container">
+                <div class="hero-label">Career Tools</div>
+                <h1 class="display-medium">Resume <em>Analyzer</em></h1>
+                <p class="hero-intro" style="max-width: 600px;">Upload your resume PDF and get instant ATS compatibility feedback, keyword analysis, and actionable recommendations to land more interviews.</p>
+            </div>
+        </section>
+
+        <!-- Analyzer Tool -->
+        <section style="padding: 0 0 var(--space-20);">
+            <div class="container">
+                <div class="analyzer" id="analyzer-app">
+
+                    <div class="analyzer-header">
+                        <h2>Resume Analyzer</h2>
+                        <p>CSUSM Internship Capstone &bull; Prof. Camilleri</p>
+                        <span class="ra-tag">PDF Upload &bull; ATS Simulation &bull; Keywords &bull; Scoring</span>
+                    </div>
+
+                    <div id="input-view">
+                        <div class="ra-input-section">
+
+                            <div class="upload-zone" id="upload-zone">
+                                <input type="file" id="file-input" accept=".pdf,.docx,.doc,.txt">
+                                <span class="upload-icon">&#128196;</span>
+                                <h3>Upload Your Resume PDF</h3>
+                                <p>Drag and drop your resume file here, or click to browse.<br>
+                                <span style="color:var(--ra-accent)">PDF recommended</span> — this is what employers and ATS systems receive.</p>
+                                <div class="file-name" id="file-name" style="display:none;"></div>
+                            </div>
+
+                            <div class="or-divider">or paste text manually</div>
+
+                            <button class="toggle-paste" id="toggle-paste-btn">Show text paste option</button>
+
+                            <div class="paste-section" id="paste-section">
+                                <div class="ra-input-group">
+                                    <label>Paste Resume Text</label>
+                                    <textarea id="resume-input" rows="10" placeholder="Copy all the text from your resume and paste it here..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="ra-input-group">
+                                <label>Paste a Job Description <span class="optional">optional — enables keyword matching</span></label>
+                                <textarea id="jd-input" rows="5" placeholder="Paste the full job listing here for keyword gap analysis. Works great with or without it."></textarea>
+                            </div>
+
+                            <div class="ra-btn-row">
+                                <button class="ra-btn ra-btn-primary" id="analyze-btn">Analyze My Resume</button>
+                                <button class="ra-btn ra-btn-clear" id="clear-btn">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="results-view" style="display:none;"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <ul class="footer-nav">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#courses">Courses</a></li>
+                    <li><a href="../resources.html">Resources</a></li>
+                    <li><a href="../resume/">Resume</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+                <p class="footer-text">Professor Tony <span></span> Teaching & Mentorship</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/navigation.js" defer></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    console.log('SW registered:', registration.scope);
+                }).catch(function(error) {
+                    console.log('SW registration failed:', error);
+                });
+            });
+        }
+    </script>
+
+    <!-- Loading overlay -->
+    <div class="ra-loading-overlay" id="ra-loading">
+        <div class="ra-spinner"></div>
+        <p id="ra-loading-text">Parsing PDF like an ATS would...</p>
+    </div>
+
+    <!-- Resume Analyzer Engine -->
+    <script type="module">
+    // ===== PDF.js setup =====
+    const pdfjsLib = await import('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs');
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs';
+
+    let uploadedPdfText = null;
+    let uploadedFileName = null;
+    let pdfMetadata = null;
+
+    // ===== File upload handling =====
+    const uploadZone = document.getElementById('upload-zone');
+    const fileInput = document.getElementById('file-input');
+
+    uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+    uploadZone.addEventListener('dragleave', () => { uploadZone.classList.remove('dragover'); });
+    uploadZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadZone.classList.remove('dragover');
+        if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', (e) => { if (e.target.files.length > 0) handleFile(e.target.files[0]); });
+
+    async function handleFile(file) {
+        const ext = file.name.split('.').pop().toLowerCase();
+        uploadedFileName = file.name;
+
+        if (ext === 'pdf') {
+            showLoading('Parsing PDF like an ATS would...');
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                const numPages = pdf.numPages;
+                let fullText = '';
+                let totalChars = 0;
+                let garbledChars = 0;
+                let lineFragments = 0;
+                let allItems = [];
+
+                for (let i = 1; i <= numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const content = await page.getTextContent();
+                    const pageItems = content.items;
+                    allItems.push(...pageItems);
+
+                    let lastY = null;
+                    let lineText = '';
+                    for (const item of pageItems) {
+                        const y = Math.round(item.transform[5]);
+                        if (lastY !== null && Math.abs(y - lastY) > 5) {
+                            fullText += lineText.trim() + '\n';
+                            if (lineText.trim().length > 0 && lineText.trim().length < 4) lineFragments++;
+                            lineText = '';
+                        }
+                        lineText += item.str + ' ';
+                        lastY = y;
+                    }
+                    if (lineText.trim()) fullText += lineText.trim() + '\n';
+                    if (i < numPages) fullText += '\n';
+                }
+
+                totalChars = fullText.length;
+                const garbled = fullText.match(/[\ufffd\u0000-\u001f\ufffe\uffff]/g) || [];
+                garbledChars = garbled.length;
+                const lines = fullText.split('\n').filter(l => l.trim());
+                const shortFragments = lines.filter(l => l.trim().length > 0 && l.trim().length < 3).length;
+
+                pdfMetadata = {
+                    numPages,
+                    totalChars,
+                    garbledChars,
+                    lineFragments: shortFragments,
+                    totalLines: lines.length,
+                    totalItems: allItems.length,
+                    fileName: file.name,
+                    fileSize: file.size,
+                };
+
+                uploadedPdfText = fullText;
+                document.getElementById('file-name').textContent = file.name + ' (' + numPages + ' page' + (numPages > 1 ? 's' : '') + ')';
+                document.getElementById('file-name').style.display = 'block';
+                uploadZone.classList.add('has-file');
+                uploadZone.querySelector('h3').textContent = 'PDF Loaded';
+                uploadZone.querySelector('.upload-icon').textContent = '\u2705';
+                hideLoading();
+            } catch (err) {
+                hideLoading();
+                alert('Could not parse this PDF. Try a different file or paste your resume text instead.\n\nError: ' + err.message);
+            }
+        } else if (ext === 'txt') {
+            const text = await file.text();
+            uploadedPdfText = text;
+            pdfMetadata = null;
+            document.getElementById('file-name').textContent = file.name;
+            document.getElementById('file-name').style.display = 'block';
+            uploadZone.classList.add('has-file');
+            uploadZone.querySelector('h3').textContent = 'File Loaded';
+            uploadZone.querySelector('.upload-icon').textContent = '\u2705';
+        } else {
+            alert('Please upload a PDF or TXT file. For .docx files, save as PDF first — that\'s what employers receive anyway.');
+        }
+    }
+
+    // ===== UI Helpers =====
+    function showLoading(msg) {
+        document.getElementById('ra-loading-text').textContent = msg;
+        document.getElementById('ra-loading').classList.add('visible');
+    }
+    function hideLoading() {
+        document.getElementById('ra-loading').classList.remove('visible');
+    }
+
+    // Wire up buttons
+    document.getElementById('toggle-paste-btn').addEventListener('click', function() {
+        const section = document.getElementById('paste-section');
+        section.classList.toggle('visible');
+        this.textContent = section.classList.contains('visible') ? 'Hide text paste option' : 'Show text paste option';
+    });
+
+    document.getElementById('clear-btn').addEventListener('click', function() {
+        document.getElementById('resume-input').value = '';
+        document.getElementById('jd-input').value = '';
+        document.getElementById('results-view').style.display = 'none';
+        document.getElementById('input-view').style.display = 'block';
+        uploadedPdfText = null;
+        uploadedFileName = null;
+        pdfMetadata = null;
+        fileInput.value = '';
+        uploadZone.classList.remove('has-file');
+        uploadZone.querySelector('h3').textContent = 'Upload Your Resume PDF';
+        uploadZone.querySelector('.upload-icon').textContent = '\ud83d\udcc4';
+        document.getElementById('file-name').style.display = 'none';
+    });
+
+    document.getElementById('analyze-btn').addEventListener('click', runAnalysis);
+
+    function backToInput() {
+        document.getElementById('results-view').style.display = 'none';
+        document.getElementById('input-view').style.display = 'block';
+        document.querySelector('.analyzer').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function toggleRawText() {
+        const el = document.getElementById('raw-text-preview');
+        el.classList.toggle('visible');
+        document.getElementById('raw-toggle-btn').textContent = el.classList.contains('visible') ? 'Hide extracted text' : 'Show what the ATS extracted from your PDF';
+    }
+
+    // Make these available globally for onclick handlers in rendered HTML
+    window.backToInput = backToInput;
+    window.toggleRawText = toggleRawText;
+
+    // ===== ANALYSIS =====
+    function runAnalysis() {
+        const pastedText = document.getElementById('resume-input').value.trim();
+        const jd = document.getElementById('jd-input').value.trim();
+
+        let resumeText = '';
+        let source = 'text';
+
+        if (uploadedPdfText && uploadedPdfText.trim().length > 30) {
+            resumeText = uploadedPdfText;
+            source = pdfMetadata ? 'pdf' : 'text';
+        } else if (pastedText) {
+            resumeText = pastedText;
+            source = 'text';
+        } else {
+            alert('Upload a PDF or paste your resume text first.');
+            return;
+        }
+
+        const r = scoreResume(resumeText, jd, source);
+        renderResults(r, jd, resumeText, source);
+    }
+
+    function scoreResume(text, jd, source) {
+        const lower = text.toLowerCase();
+        const lines = text.split('\n').filter(l => l.trim());
+        const wordCount = text.split(/\s+/).filter(w => w.length > 0).length;
+
+        // === 1. ATS PARSE QUALITY (PDF only) ===
+        let parsePct = 100;
+        let parseItems = [];
+        if (source === 'pdf' && pdfMetadata) {
+            const m = pdfMetadata;
+            let score = 100;
+            const issues = [];
+
+            if (m.numPages === 1) {
+                issues.push({ text: '1 page \u2014 perfect length for entry-level', ok: true });
+            } else if (m.numPages === 2) {
+                issues.push({ text: '2 pages \u2014 acceptable, but 1 page is stronger at your level', ok: true });
+            } else {
+                issues.push({ text: m.numPages + ' pages \u2014 way too long, cut to 1 page', ok: false });
+                score -= 25;
+            }
+
+            if (m.garbledChars === 0) {
+                issues.push({ text: 'Clean text extraction \u2014 no garbled characters', ok: true });
+            } else if (m.garbledChars < 5) {
+                issues.push({ text: m.garbledChars + ' garbled characters \u2014 minor, but check special characters', ok: true });
+                score -= 5;
+            } else {
+                issues.push({ text: m.garbledChars + ' garbled characters \u2014 ATS may misread your resume. Avoid special fonts/symbols.', ok: false });
+                score -= 20;
+            }
+
+            const fragRatio = m.lineFragments / Math.max(m.totalLines, 1);
+            if (fragRatio > 0.15) {
+                issues.push({ text: 'High text fragmentation detected \u2014 likely multi-column or complex layout. ATS may scramble your content.', ok: false });
+                score -= 30;
+            } else if (fragRatio > 0.05) {
+                issues.push({ text: 'Some text fragmentation \u2014 minor layout parsing issues', ok: true });
+                score -= 10;
+            } else {
+                issues.push({ text: 'Clean text flow \u2014 ATS parsed your layout correctly', ok: true });
+            }
+
+            if (wordCount < 100) {
+                issues.push({ text: 'Very few words extracted (' + wordCount + ') \u2014 PDF may use images for text. ATS can\'t read images.', ok: false });
+                score -= 30;
+            } else {
+                issues.push({ text: wordCount + ' words successfully extracted', ok: true });
+            }
+
+            if (m.fileSize > 5 * 1024 * 1024) {
+                issues.push({ text: 'File over 5MB \u2014 some ATS systems reject large files. Compress it.', ok: false });
+                score -= 10;
+            } else if (m.fileSize > 2 * 1024 * 1024) {
+                issues.push({ text: 'File is ' + (m.fileSize / (1024*1024)).toFixed(1) + 'MB \u2014 a bit large. May contain embedded images.', ok: true });
+            }
+
+            parsePct = Math.max(0, Math.min(100, score));
+            parseItems = issues;
+        } else {
+            parseItems = [{ text: 'Pasted text \u2014 no PDF parse analysis available. Upload a PDF for the full ATS simulation.', ok: true }];
+        }
+
+        // === 2. CONTACT INFO ===
+        const hasEmail = /[\w.-]+@[\w.-]+\.\w{2,}/.test(text);
+        const hasPhone = /(\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4})/.test(text);
+        const hasLinkedIn = /linkedin\.com\/in\//i.test(text) || /linkedin/i.test(lower);
+        const hasLocation = /\b[A-Z][a-z]+,\s*[A-Z]{2}\b/.test(text) || /(city|state)/i.test(text);
+        const contactScore = [hasEmail, hasPhone, hasLinkedIn, hasLocation].filter(Boolean).length;
+        const contactPct = Math.round((contactScore / 4) * 100);
+        const contactItems = [
+            { text: hasEmail ? 'Email address found' : 'Missing email address', ok: hasEmail },
+            { text: hasPhone ? 'Phone number found' : 'Missing phone number', ok: hasPhone },
+            { text: hasLinkedIn ? 'LinkedIn profile included' : 'No LinkedIn URL \u2014 add linkedin.com/in/yourname', ok: hasLinkedIn },
+            { text: hasLocation ? 'Location included' : 'Consider adding city, state', ok: hasLocation },
+        ];
+
+        // === 3. RESUME SECTIONS ===
+        const standardSections = ['experience','education','skills','summary','objective','professional summary','work experience','projects','certifications','awards','volunteer'];
+        const foundSections = standardSections.filter(s => {
+            const regex = new RegExp('(^|\\n)\\s*' + s.replace(/\s+/g, '\\s+') + '\\s*[:\\n]', 'im');
+            return regex.test(text);
+        });
+        const hasExperience = foundSections.some(s => s.includes('experience'));
+        const hasEducation = foundSections.includes('education');
+        const hasSkills = foundSections.includes('skills');
+        const hasSummary = foundSections.some(s => s.includes('summary') || s.includes('objective'));
+        const sectionScore = Math.min(100, Math.round((foundSections.length / 4) * 100));
+        const sectionItems = [
+            { text: hasExperience ? 'Experience section found' : 'Missing Experience section \u2014 critical for ATS', ok: hasExperience },
+            { text: hasEducation ? 'Education section found' : 'Missing Education section', ok: hasEducation },
+            { text: hasSkills ? 'Skills section found' : 'Missing Skills section \u2014 ATS scans this heavily', ok: hasSkills },
+            { text: hasSummary ? 'Summary/Objective found' : 'No Summary \u2014 add 2-3 keyword-loaded sentences at top', ok: hasSummary },
+        ];
+
+        // === 4. ACTION VERBS ===
+        const strongVerbs = ['achieved','analyzed','built','coordinated','created','decreased','delivered','designed','developed','directed','drove','eliminated','established','exceeded','expanded','generated','grew','implemented','improved','increased','initiated','launched','led','managed','mentored','negotiated','optimized','organized','oversaw','piloted','pioneered','produced','reduced','reformed','resolved','revamped','secured','spearheaded','streamlined','supervised','trained','transformed'];
+        const weakStarts = ['responsible for','helped','assisted','worked on','was in charge','did','made','got','handled'];
+        const foundStrong = strongVerbs.filter(v => lower.includes(v));
+        const foundWeak = weakStarts.filter(v => lower.includes(v));
+        const verbPct = Math.min(100, Math.round((foundStrong.length / 6) * 100));
+        const verbItems = [
+            { text: foundStrong.length >= 6 ? 'Strong action verbs: ' + foundStrong.slice(0,8).join(', ') : 'Only ' + foundStrong.length + ' strong action verbs \u2014 aim for 6+', ok: foundStrong.length >= 6 },
+            { text: foundWeak.length === 0 ? 'No weak phrases detected' : 'Weak: "' + foundWeak.join('", "') + '" \u2014 rewrite these', ok: foundWeak.length === 0 },
+        ];
+
+        // === 5. QUANTIFIED RESULTS ===
+        const numberMatches = text.match(/\d+[%$,]|\$[\d,]+|\d+\s*(percent|%|users|clients|customers|projects|hours|team|people|members|accounts|increase|decrease|revenue|sales)/gi) || [];
+        const quantPct = Math.min(100, Math.round((numberMatches.length / 4) * 100));
+        const quantItems = [
+            { text: numberMatches.length >= 4 ? numberMatches.length + ' quantified results \u2014 strong' : 'Only ' + numberMatches.length + ' metrics \u2014 add numbers to your bullets', ok: numberMatches.length >= 4 },
+            { text: numberMatches.length > 0 ? 'Found: ' + numberMatches.slice(0,4).join(', ') : 'Use: "Increased X by Y%" or "Managed team of Z"', ok: numberMatches.length > 0 },
+        ];
+
+        // === 6. ATS FORMATTING ===
+        const hasTable = /<table|│|┃|╔|╗|╚|╝|\|{2,}/.test(text);
+        const hasImage = /<img|photo|headshot/i.test(text);
+        const hasColumns = text.split('\n').some(line => {
+            const parts = line.split(/\s{4,}|\t{2,}/);
+            return parts.length >= 3 && parts.every(p => p.trim().length > 3);
+        });
+        const isTooLong = wordCount > 900;
+        const isTooShort = wordCount < 150;
+        const formatIssues = [hasTable, hasImage, hasColumns, isTooLong, isTooShort].filter(Boolean).length;
+        const formatPct = Math.round(Math.max(0, (1 - formatIssues / 3) * 100));
+        const formatItems = [
+            { text: hasTable ? 'Tables detected \u2014 ATS can\'t parse these' : 'No tables \u2014 good for ATS', ok: !hasTable },
+            { text: hasImage ? 'Image/photo references found \u2014 remove them' : 'No image references', ok: !hasImage },
+            { text: hasColumns ? 'Multi-column layout suspected \u2014 use single column' : 'Single-column layout detected', ok: !hasColumns },
+            { text: isTooLong ? wordCount + ' words \u2014 too long' : isTooShort ? wordCount + ' words \u2014 too short' : wordCount + ' words \u2014 good length', ok: !isTooLong && !isTooShort },
+        ];
+
+        // === 7. KEYWORD MATCH ===
+        let keywordData = null;
+        if (jd) {
+            const jdLower = jd.toLowerCase();
+            const jdWords = jdLower.match(/\b[a-z]{3,}\b/g) || [];
+            const stopWords = new Set(['the','and','for','are','but','not','you','all','can','had','her','was','one','our','out','has','have','from','they','been','said','each','which','their','will','other','about','many','then','them','these','some','would','make','like','into','time','very','when','come','could','more','than','with','that','this','what','there','also','after','work','just','because','while','should','through','being','both','between','such','during','must','able','well','only','over','great','need','does','where','most','year','upon','much','those','best','back','still','even','same','along','here','further','else','every','first','last','help','keep','high','next','part','using','team','role','strong','including','ensure','skills','working','looking','position','experience','please','required','preferred','qualifications','responsibilities','requirements','company','join','opportunity']);
+            const freqMap = {};
+            jdWords.forEach(w => { if (!stopWords.has(w)) freqMap[w] = (freqMap[w]||0) + 1; });
+            const phrases = jdLower.match(/[a-z]+(?:\s+[a-z]+){1,2}/g) || [];
+            const phraseMap = {};
+            phrases.forEach(p => {
+                const words = p.split(/\s+/);
+                if (words.every(w => !stopWords.has(w)) && words.length >= 2) phraseMap[p] = (phraseMap[p]||0) + 1;
+            });
+            const topKeywords = Object.entries(freqMap).sort((a,b) => b[1]-a[1]).slice(0,20).map(e => e[0]);
+            const topPhrases = Object.entries(phraseMap).sort((a,b) => b[1]-a[1]).slice(0,8).map(e => e[0]);
+            const allKeywords = [...new Set([...topKeywords, ...topPhrases])];
+            const found = allKeywords.filter(k => lower.includes(k));
+            const missing = allKeywords.filter(k => !lower.includes(k));
+            const matchPct = allKeywords.length > 0 ? Math.round((found.length / allKeywords.length) * 100) : 0;
+            keywordData = { found, missing, matchPct, total: allKeywords.length };
+        }
+
+        // === OVERALL SCORE ===
+        const scores = [contactPct, sectionScore, verbPct, quantPct, formatPct];
+        if (source === 'pdf') scores.push(parsePct);
+        if (keywordData) scores.push(keywordData.matchPct);
+        const overall = Math.round(scores.reduce((a,b) => a+b, 0) / scores.length);
+
+        // === RECOMMENDATIONS ===
+        const recs = [];
+        if (source === 'pdf' && parsePct < 60) recs.push({ p: 'high', text: '<strong>Your PDF is not ATS-friendly.</strong> The text didn\'t extract cleanly. Avoid fancy templates, multi-column layouts, text boxes, and custom fonts. Use a simple single-column .docx saved as PDF.' });
+        if (!hasSummary) recs.push({ p: 'high', text: '<strong>Add a Professional Summary.</strong> 2-3 sentences at the top. Who you are, what you bring, what you\'re targeting. Load it with keywords.' });
+        if (foundWeak.length > 0) recs.push({ p: 'high', text: '<strong>Eliminate weak phrases.</strong> Replace "' + foundWeak[0] + '" with an action verb + result. Example: "Responsible for social media" becomes "Grew Instagram following by 34% over 3 months."' });
+        if (numberMatches.length < 4) recs.push({ p: 'high', text: '<strong>Quantify your results.</strong> Every bullet: Action Verb + What You Did + Measurable Result. "Managed a team" becomes "Managed team of 8 interns across 3 projects."' });
+        if (!hasLinkedIn) recs.push({ p: 'med', text: '<strong>Add your LinkedIn URL.</strong> Recruiters will Google you. Custom URL: linkedin.com/in/yourname.' });
+        if (!hasSkills) recs.push({ p: 'high', text: '<strong>Add a Skills section.</strong> ATS systems scan for this. List 8-12 relevant skills matching the job description.' });
+        if (keywordData && keywordData.missing.length > 5) recs.push({ p: 'high', text: '<strong>Keyword gap is significant.</strong> Missing ' + keywordData.missing.length + ' keywords from the job description. Mirror the employer\'s exact language.' });
+        if (hasTable) recs.push({ p: 'med', text: '<strong>Remove tables.</strong> ATS can\'t parse them. Use simple bullet points.' });
+        if (isTooLong) recs.push({ p: 'med', text: '<strong>Trim to one page.</strong> At your career stage, one page is the standard.' });
+        if (foundStrong.length < 6) recs.push({ p: 'med', text: '<strong>More action verbs.</strong> Start every bullet with: Led, Built, Designed, Increased, Streamlined, Coordinated.' });
+        if (recs.length === 0) recs.push({ p: 'low', text: '<strong>Looking solid!</strong> Fine-tune by tailoring keywords to each job description.' });
+
+        return { overall, parsePct, parseItems, contactPct, contactItems, sectionScore, sectionItems, verbPct, verbItems, quantPct, quantItems, formatPct, formatItems, keywordData, recs, wordCount, source };
+    }
+
+    // ===== RENDERING =====
+    function gradeClass(pct) { return pct >= 70 ? 'grade-good' : pct >= 40 ? 'grade-ok' : 'grade-bad'; }
+    function gradeLabel(pct) { return pct >= 85 ? 'Excellent' : pct >= 70 ? 'Good' : pct >= 50 ? 'Needs Work' : 'Critical'; }
+    function barColor(pct) { return pct >= 70 ? 'var(--ra-green)' : pct >= 40 ? 'var(--ra-yellow)' : 'var(--ra-red)'; }
+    function ringColor(pct) { return pct >= 70 ? 'var(--ra-green)' : pct >= 40 ? 'var(--ra-yellow)' : 'var(--ra-red)'; }
+
+    function renderCard(title, pct, items) {
+        const lis = items.map(i => '<li class="' + (i.ok ? 'good' : 'bad') + '">' + i.text + '</li>').join('');
+        return '<div class="section-card"><div class="section-card-header"><h3>' + title + '</h3><span class="mini-score" style="color:' + barColor(pct) + '">' + pct + '</span></div><div class="bar-track"><div class="bar-fill" style="width:' + pct + '%;background:' + barColor(pct) + '"></div></div><ul>' + lis + '</ul></div>';
+    }
+
+    function renderResults(r, jd, rawText, source) {
+        const circumference = 2 * Math.PI * 54;
+        const offset = circumference - (r.overall / 100) * circumference;
+        const color = ringColor(r.overall);
+        const verdict = r.overall >= 80 ? 'Your resume is in strong shape. A few tweaks and you\'re golden.' :
+            r.overall >= 60 ? 'Decent foundation but there are gaps that could cost you interviews.' :
+            r.overall >= 40 ? 'Your resume needs serious work before it\'ll get past an ATS.' :
+            'Red alert. This resume is getting auto-rejected. Let\'s fix it.';
+
+        const sourceBadge = source === 'pdf'
+            ? '<div class="source-badge pdf">&#128196; Analyzed from PDF: ' + (uploadedFileName || 'uploaded file') + '</div>'
+            : '<div class="source-badge text">&#128221; Analyzed from pasted text</div>';
+
+        let html = '<div class="ra-results">' + sourceBadge;
+
+        html += '<div class="overall-score"><div class="score-ring"><svg width="130" height="130" viewBox="0 0 120 120"><circle class="score-ring-bg" cx="60" cy="60" r="54"/><circle class="score-ring-fill" cx="60" cy="60" r="54" stroke="' + color + '" stroke-dasharray="' + circumference + '" stroke-dashoffset="' + offset + '"/></svg><div class="score-ring-text"><div class="number">' + r.overall + '</div><div class="label">Overall</div></div></div><div class="score-summary"><h2>' + gradeLabel(r.overall) + ' <span class="grade-badge ' + gradeClass(r.overall) + '">' + r.overall + '/100</span></h2><p>' + verdict + '</p></div></div>';
+
+        html += '<div class="section-grid">';
+
+        if (source === 'pdf') {
+            html += renderCard('ATS Parse Simulation', r.parsePct, r.parseItems);
+        }
+
+        html += renderCard('Contact Information', r.contactPct, r.contactItems);
+        html += renderCard('Resume Sections', r.sectionScore, r.sectionItems);
+        html += renderCard('Action Verbs', r.verbPct, r.verbItems);
+        html += renderCard('Quantified Results', r.quantPct, r.quantItems);
+        html += renderCard('ATS Formatting', r.formatPct, r.formatItems);
+
+        const wcPct = r.wordCount >= 400 && r.wordCount <= 700 ? 100 : r.wordCount >= 250 ? 60 : 30;
+        html += renderCard('Word Count', wcPct, [
+            { text: r.wordCount + ' total words', ok: r.wordCount >= 300 },
+            { text: r.wordCount < 300 ? 'Too short \u2014 flesh out your experience' : r.wordCount > 700 ? 'Consider trimming to one page' : 'Good length for entry-level', ok: r.wordCount >= 300 && r.wordCount <= 700 }
+        ]);
+
+        html += '</div>';
+
+        // Keyword section
+        if (r.keywordData) {
+            const kd = r.keywordData;
+            const foundChips = kd.found.map(k => '<span class="chip chip-found">' + k + '</span>').join('');
+            const missingChips = kd.missing.map(k => '<span class="chip chip-missing">' + k + '</span>').join('');
+            html += '<div class="keyword-section"><h3>Job Description Keyword Match \u2014 ' + kd.matchPct + '% <span class="grade-badge ' + gradeClass(kd.matchPct) + '">' + kd.found.length + '/' + kd.total + '</span></h3><p style="font-size:0.75rem;color:var(--ra-text-dim);margin-bottom:1rem;">Green = found in your resume. Red dashed = missing \u2014 consider adding these.</p><div class="keyword-chips">' + foundChips + missingChips + '</div></div>';
+        }
+
+        // Recommendations
+        const recItems = r.recs.map(rec => '<div class="rec-item"><span class="rec-priority ' + rec.p + '">' + (rec.p === 'high' ? 'Fix Now' : rec.p === 'med' ? 'Should Do' : 'Nice') + '</span><div class="rec-text">' + rec.text + '</div></div>').join('');
+        html += '<div class="recommendations"><h3>What To Do Next</h3>' + recItems + '</div>';
+
+        // Raw text preview (PDF only)
+        if (source === 'pdf') {
+            const escapedText = rawText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+            html += '<button class="raw-text-toggle" id="raw-toggle-btn" onclick="toggleRawText()">Show what the ATS extracted from your PDF</button>';
+            html += '<div class="raw-text-preview" id="raw-text-preview">' + escapedText + '</div>';
+        }
+
+        html += '<div class="ra-back-btn"><button class="ra-btn ra-btn-primary" onclick="backToInput()">Analyze Another</button></div></div>';
+
+        document.getElementById('results-view').innerHTML = html;
+        document.getElementById('results-view').style.display = 'block';
+        document.getElementById('input-view').style.display = 'none';
+        document.querySelector('.analyzer').scrollIntoView({ behavior: 'smooth' });
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STAR Method Worksheet | Professor Tony</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --ink: #1d1d1f; --ink-secondary: #424245; --accent: #0071e3; --border: #e5e5e7; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f7; color: var(--ink); line-height: 1.6; }
+        .download-header { background: white; border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        .download-header a { color: var(--accent); text-decoration: none; font-size: 14px; }
+        .btn { padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; background: #e5e5e7; }
+        .btn:hover { background: #d1d1d6; }
+        .document-container { max-width: 816px; margin: 40px auto; padding: 0 20px 60px; }
+        .document { background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.1); padding: 60px; }
+        h1 { font-size: 32px; margin-bottom: 8px; }
+        .subtitle { font-size: 18px; color: var(--ink-secondary); margin-bottom: 40px; }
+        h2 { font-size: 20px; margin: 32px 0 16px; }
+        p { margin-bottom: 16px; font-size: 15px; }
+        .star-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin: 32px 0; }
+        .star-card { border: 2px solid var(--border); border-radius: 12px; padding: 24px; }
+        .star-letter { display: inline-block; width: 48px; height: 48px; background: var(--accent); color: white; border-radius: 50%; font-size: 24px; font-weight: 700; text-align: center; line-height: 48px; margin-bottom: 12px; }
+        .star-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .star-description { font-size: 14px; color: var(--ink-secondary); margin-bottom: 16px; }
+        .star-prompt { font-size: 14px; font-style: italic; color: var(--accent); margin-bottom: 12px; }
+        .write-area { min-height: 100px; border: 1px dashed var(--border); border-radius: 8px; padding: 12px; font-size: 14px; color: var(--ink-secondary); }
+        .example-box { background: #e8f4fd; border-radius: 12px; padding: 24px; margin: 32px 0; }
+        .example-box h3 { font-size: 16px; margin-bottom: 16px; color: var(--accent); }
+        .example-item { margin-bottom: 16px; }
+        .example-item strong { display: block; margin-bottom: 4px; }
+        .worksheet-section { border: 2px solid var(--border); border-radius: 12px; padding: 24px; margin: 32px 0; page-break-inside: avoid; }
+        .worksheet-section h3 { font-size: 16px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+        .tip { background: #fff3cd; padding: 16px; border-radius: 8px; margin: 24px 0; font-size: 14px; }
+        .tip strong { color: #856404; }
+        @media print {
+            .download-header { display: none; }
+            body { background: white; }
+            .document { box-shadow: none; padding: 40px; }
+            .worksheet-section { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="download-header">
+        <a href="../resources.html">&larr; Back to Resources</a>
+        <button class="btn" onclick="window.print()">Print / Save PDF</button>
+    </div>
+
+    <div class="document-container">
+        <div class="document">
+            <h1>STAR Method Worksheet</h1>
+            <p class="subtitle">Framework for Answering Behavioral Interview Questions</p>
+
+            <h2>What is the STAR Method?</h2>
+            <p>The STAR method is a structured way to respond to behavioral interview questions. These questions typically start with "Tell me about a time when..." or "Give me an example of..." Using STAR helps you provide complete, compelling answers.</p>
+
+            <div class="star-grid">
+                <div class="star-card">
+                    <div class="star-letter">S</div>
+                    <div class="star-title">Situation</div>
+                    <div class="star-description">Set the scene. Describe the context and background. Where were you? What was happening?</div>
+                    <div class="star-prompt">Keep it brief—just enough context for the interviewer to understand.</div>
+                </div>
+
+                <div class="star-card">
+                    <div class="star-letter">T</div>
+                    <div class="star-title">Task</div>
+                    <div class="star-description">Explain your responsibility. What was your specific role? What were you trying to accomplish?</div>
+                    <div class="star-prompt">Focus on YOUR task, not the team's general goal.</div>
+                </div>
+
+                <div class="star-card">
+                    <div class="star-letter">A</div>
+                    <div class="star-title">Action</div>
+                    <div class="star-description">Describe what YOU did. What specific steps did you take? How did you approach the challenge?</div>
+                    <div class="star-prompt">This is the most important part—spend 60% of your answer here. Use "I" not "we."</div>
+                </div>
+
+                <div class="star-card">
+                    <div class="star-letter">R</div>
+                    <div class="star-title">Result</div>
+                    <div class="star-description">Share the outcome. What happened? Quantify if possible. What did you learn?</div>
+                    <div class="star-prompt">Even if the outcome wasn't perfect, highlight what you learned or how you'd do it differently.</div>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h3>Example: "Tell me about a time you helped a client overcome a challenge."</h3>
+                <div class="example-item">
+                    <strong>Situation:</strong> During my internship at a wellness center, I worked with a 55-year-old client who had been sedentary for 10 years and recently received a pre-diabetes diagnosis.
+                </div>
+                <div class="example-item">
+                    <strong>Task:</strong> My responsibility was to design and implement a 12-week exercise program to help improve her metabolic health markers while building sustainable habits.
+                </div>
+                <div class="example-item">
+                    <strong>Action:</strong> I started with a comprehensive assessment and learned she was intimidated by the gym environment. I began with home-based exercises and walking programs. I scheduled weekly check-ins to adjust the program and provide accountability. I also coordinated with her physician to track her A1C levels and created a simple exercise log to celebrate small wins.
+                </div>
+                <div class="example-item">
+                    <strong>Result:</strong> After 12 weeks, she was exercising 4 days per week consistently, lost 12 pounds, and her A1C dropped from 6.3 to 5.8. Most importantly, she expressed that she finally felt confident in a gym setting and continued training after our program ended.
+                </div>
+            </div>
+
+            <div class="tip">
+                <strong>Pro Tip:</strong> Prepare 5-7 STAR stories from your experiences that showcase different skills (teamwork, problem-solving, client success, handling conflict, learning from failure). You can adapt these stories to answer various questions.
+            </div>
+
+            <h2>Your STAR Story Worksheets</h2>
+            <p>Use these templates to prepare your own stories. Print this page and fill in your experiences.</p>
+
+            <div class="worksheet-section">
+                <h3>Story 1: A Client Success</h3>
+                <p><strong>S - Situation:</strong></p>
+                <div class="write-area">Write about the context...</div>
+                <p style="margin-top: 16px;"><strong>T - Task:</strong></p>
+                <div class="write-area">What was your specific responsibility?</div>
+                <p style="margin-top: 16px;"><strong>A - Action:</strong></p>
+                <div class="write-area">What specific steps did YOU take?</div>
+                <p style="margin-top: 16px;"><strong>R - Result:</strong></p>
+                <div class="write-area">What was the outcome? Include numbers if possible.</div>
+            </div>
+
+            <div class="worksheet-section">
+                <h3>Story 2: Overcoming a Challenge</h3>
+                <p><strong>S - Situation:</strong></p>
+                <div class="write-area">Write about the context...</div>
+                <p style="margin-top: 16px;"><strong>T - Task:</strong></p>
+                <div class="write-area">What was your specific responsibility?</div>
+                <p style="margin-top: 16px;"><strong>A - Action:</strong></p>
+                <div class="write-area">What specific steps did YOU take?</div>
+                <p style="margin-top: 16px;"><strong>R - Result:</strong></p>
+                <div class="write-area">What was the outcome? Include numbers if possible.</div>
+            </div>
+
+            <div class="worksheet-section">
+                <h3>Story 3: Teamwork / Collaboration</h3>
+                <p><strong>S - Situation:</strong></p>
+                <div class="write-area">Write about the context...</div>
+                <p style="margin-top: 16px;"><strong>T - Task:</strong></p>
+                <div class="write-area">What was your specific responsibility?</div>
+                <p style="margin-top: 16px;"><strong>A - Action:</strong></p>
+                <div class="write-area">What specific steps did YOU take?</div>
+                <p style="margin-top: 16px;"><strong>R - Result:</strong></p>
+                <div class="write-area">What was the outcome? Include numbers if possible.</div>
+            </div>
+
+            <div class="worksheet-section">
+                <h3>Story 4: Learning from Failure</h3>
+                <p><strong>S - Situation:</strong></p>
+                <div class="write-area">Write about the context...</div>
+                <p style="margin-top: 16px;"><strong>T - Task:</strong></p>
+                <div class="write-area">What was your specific responsibility?</div>
+                <p style="margin-top: 16px;"><strong>A - Action:</strong></p>
+                <div class="write-area">What specific steps did YOU take?</div>
+                <p style="margin-top: 16px;"><strong>R - Result:</strong></p>
+                <div class="write-area">What did you learn? How would you approach it differently?</div>
+            </div>
+
+            <div class="worksheet-section">
+                <h3>Story 5: Going Above and Beyond</h3>
+                <p><strong>S - Situation:</strong></p>
+                <div class="write-area">Write about the context...</div>
+                <p style="margin-top: 16px;"><strong>T - Task:</strong></p>
+                <div class="write-area">What was your specific responsibility?</div>
+                <p style="margin-top: 16px;"><strong>A - Action:</strong></p>
+                <div class="write-area">What specific steps did YOU take?</div>
+                <p style="margin-top: 16px;"><strong>R - Result:</strong></p>
+                <div class="write-area">What was the outcome? Include numbers if possible.</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
