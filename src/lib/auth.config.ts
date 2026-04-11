@@ -18,6 +18,7 @@ export const authConfig: NextAuthConfig = {
         pathname.startsWith("/sites/") ||
         pathname.startsWith("/imported/") ||
         pathname.startsWith("/api/auth") ||
+        pathname.startsWith("/api/render/") ||
         pathname.startsWith("/_next") ||
         pathname.startsWith("/uploads") ||
         pathname === "/favicon.ico" ||

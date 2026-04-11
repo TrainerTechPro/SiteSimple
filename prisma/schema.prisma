@@ -45,6 +45,8 @@ model Site {
   domain       String?
   status       SiteStatus @default(DRAFT)
   importedPath String?
+  templatePath String?
+  templateData Json?
   ownerId      String
   owner        User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   pages        Page[]

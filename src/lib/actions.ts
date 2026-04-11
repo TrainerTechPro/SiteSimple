@@ -185,6 +185,48 @@ export async function deleteSite(siteId: string) {
   redirect("/admin/sites");
 }
 
+// ─── Template Site Management ───
+
+export async function updateTemplateData(
+  siteId: string,
+  templateData: Record<string, string>
+) {
+  const session = await requireAuth();
+
+  const site = await prisma.site.findUnique({
+    where: { id: siteId },
+    select: { ownerId: true, slug: true, templateData: true },
+  });
+
+  if (!site) {
+    throw new Error("Site not found");
+  }
+
+  // Clients can only edit their own sites
+  if (
+    session.user.role === "CLIENT" &&
+    site.ownerId !== session.user.id
+  ) {
+    throw new Error("Unauthorized");
+  }
+
+  // Merge with existing data so partial updates are safe
+  const existingData = (site.templateData as Record<string, string> | null) || {};
+  const mergedData = { ...existingData, ...templateData };
+
+  await prisma.site.update({
+    where: { id: siteId },
+    data: {
+      templateData: mergedData as unknown as Prisma.InputJsonValue,
+    },
+  });
+
+  revalidatePath(`/admin/sites/${siteId}/template`);
+  revalidatePath(`/dashboard/sites/${siteId}/template`);
+  revalidatePath(`/sites/${site.slug}`);
+  revalidatePath(`/api/render/${site.slug}`);
+}
+
 // ─── Page Management ───
 
 export async function createPage(siteId: string, formData: FormData) {

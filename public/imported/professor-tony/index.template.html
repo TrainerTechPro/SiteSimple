@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{SITE_TITLE}}</title>
+    <meta name="description" content="{{SITE_DESCRIPTION}}">
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Professor Tony | Teaching & Mentorship">
+    <meta property="og:description" content="Empowering the next generation of health and fitness professionals through teaching, mentorship, and professional development.">
+    <meta property="og:url" content="https://www.professortony.com">
+    <meta property="og:site_name" content="Professor Tony">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Professor Tony | Teaching & Mentorship">
+    <meta name="twitter:description" content="Empowering the next generation of health and fitness professionals.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1d1d1f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Prof Tony">
+
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="js/navigation.js" as="script">
+
+    <!-- Google Fonts - Distinctive Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Skip to Main Content (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="nav-wrapper">
+        <div class="main-nav">
+            <a href="index.html" class="nav-logo">
+                <span class="nav-logo-mark">PT</span>
+                Professor Tony
+            </a>
+
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#courses" class="nav-link">
+                        Courses
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="courses/kinesiology-internship/career-readiness.html" class="dropdown-item">
+                            <div class="dropdown-item-title">Career Readiness</div>
+                            <div class="dropdown-item-desc">LinkedIn optimization & professional branding</div>
+                        </a>
+                        <a href="courses/kinesiology-internship/ai-tools.html" class="dropdown-item">
+                            <div class="dropdown-item-title">AI Tools & Learning</div>
+                            <div class="dropdown-item-desc">Claude courses & AI model comparison</div>
+                        </a>
+                        <a href="courses/ai-prompt-engineering/rice-q-framework.html" class="dropdown-item">
+                            <div class="dropdown-item-title">AI Prompt Engineering</div>
+                            <div class="dropdown-item-desc">RICE-Q Framework for health & fitness professionals</div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#courses" class="dropdown-item">
+                            <div class="dropdown-item-title">View All Courses</div>
+                            <div class="dropdown-item-desc">Browse the complete course catalog</div>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="resources.html" class="nav-link">Resources</a>
+                </li>
+                <li class="nav-item">
+                    <a href="mentorship.html" class="nav-link">Mentorship</a>
+                </li>
+                <li class="nav-item">
+                    <a href="resume/" class="nav-link">Resume</a>
+                </li>
+                <li class="nav-item">
+                    <a href="tools/" class="nav-link">Tools</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" aria-label="Toggle dark mode">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-spacer"></div>
+
+    <main id="main-content">
+        <!-- Hero -->
+        <section class="hero hero-home">
+            <div class="container">
+                <div class="hero-label">{{HERO_LABEL}}</div>
+                <h1 class="display-large">{{HERO_HEADLINE_START}} <em>{{HERO_HEADLINE_EMPHASIS}}</em> {{HERO_HEADLINE_END}}</h1>
+                <p class="hero-intro">{{HERO_INTRO}}</p>
+                <div class="hero-cta">
+                    <a href="#courses" class="btn btn-primary">
+                        {{HERO_CTA_PRIMARY}}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+                    </a>
+                    <a href="#about" class="btn btn-secondary">{{HERO_CTA_SECONDARY}}</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses -->
+        <section id="courses">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2 class="section-title">{{COURSES_TITLE}}</h2>
+                    <p class="section-intro">{{COURSES_INTRO}}</p>
+                </div>
+
+                <div class="course-grid">
+                    <a href="{{COURSE_1_LINK_URL}}" class="course-card">
+                        <div class="course-card-image">
+                            <div class="course-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="course-card-content">
+                            <div class="course-card-institution">{{COURSE_1_INSTITUTION}}</div>
+                            <h3 class="course-card-title">{{COURSE_1_TITLE}}</h3>
+                            <p class="course-card-desc">{{COURSE_1_DESC}}</p>
+                            <span class="course-card-link">
+                                {{COURSE_1_LINK_TEXT}}
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="{{COURSE_2_LINK_URL}}" class="course-card">
+                        <div class="course-card-image" style="background: linear-gradient(135deg, #0071e3 0%, #40a9ff 100%);">
+                            <div class="course-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
+                                    <circle cx="7.5" cy="14.5" r="1.5"/>
+                                    <circle cx="16.5" cy="14.5" r="1.5"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="course-card-content">
+                            <div class="course-card-institution">{{COURSE_2_INSTITUTION}}</div>
+                            <h3 class="course-card-title">{{COURSE_2_TITLE}}</h3>
+                            <p class="course-card-desc">{{COURSE_2_DESC}}</p>
+                            <span class="course-card-link">
+                                {{COURSE_2_LINK_TEXT}}
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2 class="section-title">About</h2>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-image">
+                        <img src="images/TonySommersHeadshot" alt="Professor Tony Sommers" class="about-photo" loading="lazy">
+                    </div>
+                    <div class="about-content">
+                        <h2>{{ABOUT_HEADLINE_START}} <strong>{{ABOUT_HEADLINE_EMPHASIS}}</strong> {{ABOUT_HEADLINE_END}}</h2>
+                        <p>{{ABOUT_PARAGRAPH_1}}</p>
+                        <p>{{ABOUT_PARAGRAPH_2}}</p>
+                        <p>{{ABOUT_PARAGRAPH_3}}</p>
+                        <p>{{ABOUT_PARAGRAPH_4}}</p>
+                        <div class="about-stats">
+                            <div class="stat">
+                                <div class="stat-number">{{ABOUT_STAT_1_NUMBER}}</div>
+                                <div class="stat-label">{{ABOUT_STAT_1_LABEL}}</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">{{ABOUT_STAT_2_NUMBER}}</div>
+                                <div class="stat-label">{{ABOUT_STAT_2_LABEL}}</div>
+                            </div>
+                        </div>
+                        <div class="social-links" style="justify-content: flex-start; margin-top: var(--space-6);">
+                            <a href="mailto:{{ABOUT_EMAIL}}" class="social-link" aria-label="Email" title="{{ABOUT_EMAIL}}">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </a>
+                            <a href="{{ABOUT_LINKEDIN_URL}}" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Student Feedback -->
+                <div style="margin-top: var(--space-12); text-align: center;">
+                    <a href="{{RMP_URL}}" target="_blank" rel="noopener" style="display: inline-block; padding: var(--space-6) var(--space-8); background: var(--surface-secondary); border-radius: 16px; text-decoration: none; color: inherit; transition: all 0.3s ease;">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: var(--space-6); flex-wrap: wrap;">
+                            <div style="text-align: center;">
+                                <div style="font-size: var(--text-3xl); font-weight: 700; color: #22c55e;">{{RMP_RATING}}</div>
+                                <div style="font-size: var(--text-xs); color: var(--ink-tertiary); text-transform: uppercase; letter-spacing: 0.05em;">Quality Rating</div>
+                            </div>
+                            <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: center;">
+                                <span style="padding: var(--space-1) var(--space-3); background: var(--surface-tertiary); border-radius: 100px; font-size: var(--text-xs); color: var(--ink-secondary);">{{RMP_TAG_1}}</span>
+                                <span style="padding: var(--space-1) var(--space-3); background: var(--surface-tertiary); border-radius: 100px; font-size: var(--text-xs); color: var(--ink-secondary);">{{RMP_TAG_2}}</span>
+                                <span style="padding: var(--space-1) var(--space-3); background: var(--surface-tertiary); border-radius: 100px; font-size: var(--text-xs); color: var(--ink-secondary);">{{RMP_TAG_3}}</span>
+                                <span style="padding: var(--space-1) var(--space-3); background: var(--surface-tertiary); border-radius: 100px; font-size: var(--text-xs); color: var(--ink-secondary);">{{RMP_TAG_4}}</span>
+                            </div>
+                        </div>
+                        <div style="margin-top: var(--space-3); font-size: var(--text-sm); color: var(--ink-tertiary);">View on Rate My Professors →</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Student Success Stories -->
+        <section class="testimonials-section" style="padding: var(--space-20) 0; background: linear-gradient(180deg, var(--surface-secondary) 0%, var(--paper) 100%); overflow: hidden;">
+            <div class="container">
+                <div class="section-header" style="text-align: center; margin-bottom: var(--space-12);">
+                    <span class="section-number" style="display: block; margin: 0 auto var(--space-4);">03</span>
+                    <h2 class="section-title">{{TESTIMONIALS_TITLE}}</h2>
+                    <p style="color: var(--ink-secondary); max-width: 500px; margin: var(--space-4) auto 0;">{{TESTIMONIALS_INTRO}}</p>
+                </div>
+
+                <div class="testimonials-track" style="display: flex; gap: var(--space-6); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; padding: var(--space-4) 0;">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card" style="flex: 0 0 340px; scroll-snap-align: start; background: var(--paper-elevated); border-radius: 20px; padding: var(--space-8); box-shadow: var(--shadow-md); border: 1px solid var(--border);">
+                        <div style="display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-5);">
+                            <div style="width: 56px; height: 56px; background: linear-gradient(135deg, var(--accent) 0%, #40a9ff 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: var(--text-xl); font-weight: 600; color: white;">{{TESTIMONIAL_1_INITIALS}}</div>
+                            <div>
+                                <div style="font-weight: 600; font-size: var(--text-base);">{{TESTIMONIAL_1_NAME}}</div>
+                                <div style="font-size: var(--text-sm); color: var(--ink-tertiary);">{{TESTIMONIAL_1_ROLE}}</div>
+                            </div>
+                        </div>
+                        <blockquote style="font-size: var(--text-base); line-height: 1.7; color: var(--ink-secondary); margin: 0; font-style: italic;">
+                            "{{TESTIMONIAL_1_QUOTE}}"
+                        </blockquote>
+                        <div style="margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--border); font-size: var(--text-xs); color: var(--ink-tertiary); text-transform: uppercase; letter-spacing: 0.05em;">
+                            {{TESTIMONIAL_1_YEAR}}
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card" style="flex: 0 0 340px; scroll-snap-align: start; background: var(--paper-elevated); border-radius: 20px; padding: var(--space-8); box-shadow: var(--shadow-md); border: 1px solid var(--border);">
+                        <div style="display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-5);">
+                            <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: var(--text-xl); font-weight: 600; color: white;">{{TESTIMONIAL_2_INITIALS}}</div>
+                            <div>
+                                <div style="font-weight: 600; font-size: var(--text-base);">{{TESTIMONIAL_2_NAME}}</div>
+                                <div style="font-size: var(--text-sm); color: var(--ink-tertiary);">{{TESTIMONIAL_2_ROLE}}</div>
+                            </div>
+                        </div>
+                        <blockquote style="font-size: var(--text-base); line-height: 1.7; color: var(--ink-secondary); margin: 0; font-style: italic;">
+                            "{{TESTIMONIAL_2_QUOTE}}"
+                        </blockquote>
+                        <div style="margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--border); font-size: var(--text-xs); color: var(--ink-tertiary); text-transform: uppercase; letter-spacing: 0.05em;">
+                            {{TESTIMONIAL_2_YEAR}}
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card" style="flex: 0 0 340px; scroll-snap-align: start; background: var(--paper-elevated); border-radius: 20px; padding: var(--space-8); box-shadow: var(--shadow-md); border: 1px solid var(--border);">
+                        <div style="display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-5);">
+                            <div style="width: 56px; height: 56px; background: linear-gradient(135deg, var(--accent-warm) 0%, #f97316 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: var(--text-xl); font-weight: 600; color: white;">{{TESTIMONIAL_3_INITIALS}}</div>
+                            <div>
+                                <div style="font-weight: 600; font-size: var(--text-base);">{{TESTIMONIAL_3_NAME}}</div>
+                                <div style="font-size: var(--text-sm); color: var(--ink-tertiary);">{{TESTIMONIAL_3_ROLE}}</div>
+                            </div>
+                        </div>
+                        <blockquote style="font-size: var(--text-base); line-height: 1.7; color: var(--ink-secondary); margin: 0; font-style: italic;">
+                            "{{TESTIMONIAL_3_QUOTE}}"
+                        </blockquote>
+                        <div style="margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--border); font-size: var(--text-xs); color: var(--ink-tertiary); text-transform: uppercase; letter-spacing: 0.05em;">
+                            {{TESTIMONIAL_3_YEAR}}
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div class="testimonial-card" style="flex: 0 0 340px; scroll-snap-align: start; background: var(--paper-elevated); border-radius: 20px; padding: var(--space-8); box-shadow: var(--shadow-md); border: 1px solid var(--border);">
+                        <div style="display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-5);">
+                            <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: var(--text-xl); font-weight: 600; color: white;">{{TESTIMONIAL_4_INITIALS}}</div>
+                            <div>
+                                <div style="font-weight: 600; font-size: var(--text-base);">{{TESTIMONIAL_4_NAME}}</div>
+                                <div style="font-size: var(--text-sm); color: var(--ink-tertiary);">{{TESTIMONIAL_4_ROLE}}</div>
+                            </div>
+                        </div>
+                        <blockquote style="font-size: var(--text-base); line-height: 1.7; color: var(--ink-secondary); margin: 0; font-style: italic;">
+                            "{{TESTIMONIAL_4_QUOTE}}"
+                        </blockquote>
+                        <div style="margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--border); font-size: var(--text-xs); color: var(--ink-tertiary); text-transform: uppercase; letter-spacing: 0.05em;">
+                            {{TESTIMONIAL_4_YEAR}}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scroll hint -->
+                <div style="text-align: center; margin-top: var(--space-6); color: var(--ink-tertiary); font-size: var(--text-sm);">
+                    <span style="display: inline-flex; align-items: center; gap: var(--space-2);">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,18 15,12 9,6"/></svg>
+                        Scroll for more stories
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section style="padding: var(--space-12) 0; border-top: none;">
+            <div class="container">
+                <div class="newsletter-section">
+                    <h3>{{NEWSLETTER_TITLE}}</h3>
+                    <p>{{NEWSLETTER_DESC}}</p>
+                    <form class="newsletter-form" action="#" method="POST">
+                        <label for="newsletter-email" class="sr-only">Email address</label>
+                        <input type="email" id="newsletter-email" placeholder="Enter your email" required aria-label="Email address">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2 class="section-title">{{CONTACT_TITLE}}</h2>
+                    <p class="section-intro">{{CONTACT_INTRO}}</p>
+                </div>
+
+                <div class="contact-info-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <h4>{{CONTACT_EMAIL_HEADING}}</h4>
+                        <p>{{CONTACT_EMAIL_DESC}}</p>
+                        <p style="margin-top: var(--space-3);"><a href="mailto:{{CONTACT_EMAIL_ADDRESS}}">{{CONTACT_EMAIL_ADDRESS}}</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon" style="background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                        </div>
+                        <h4>{{CONTACT_HOURS_HEADING}}</h4>
+                        <p>{{CONTACT_HOURS_VALUE}}</p>
+                        <p style="margin-top: var(--space-3); font-size: var(--text-xs); color: var(--ink-tertiary);">{{CONTACT_HOURS_NOTE}}</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon" style="background: linear-gradient(135deg, var(--accent-warm) 0%, #f97316 100%);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <h4>{{CONTACT_LOCATION_HEADING}}</h4>
+                        <p>{{CONTACT_LOCATION_BUILDING}}<br>{{CONTACT_LOCATION_CAMPUS}}</p>
+                        <p style="margin-top: var(--space-3); font-size: var(--text-xs); color: var(--ink-tertiary);">{{CONTACT_LOCATION_ADDRESS}}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <ul class="footer-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="resume/">Resume</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <p class="footer-text">{{FOOTER_NAME}} <span></span> {{FOOTER_TAGLINE}}</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/navigation.js" defer></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    console.log('SW registered:', registration.scope);
+                }).catch(function(error) {
+                    console.log('SW registration failed:', error);
+                });
+            });
+        }
+    </script>
+
+    <!-- Structured Data / SEO Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Professor Tony",
+        "description": "Empowering the next generation of health and fitness professionals through teaching, mentorship, and professional development.",
+        "url": "https://www.professortony.com",
+        "logo": "https://www.professortony.com/favicon.svg",
+        "sameAs": [
+            "https://www.linkedin.com/in/professortony"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "333 S Twin Oaks Valley Rd",
+            "addressLocality": "San Marcos",
+            "addressRegion": "CA",
+            "postalCode": "92096",
+            "addressCountry": "US"
+        },
+        "parentOrganization": {
+            "@type": "EducationalOrganization",
+            "name": "California State University San Marcos",
+            "url": "https://www.csusm.edu"
+        },
+        "hasOfferingCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Professional Development Courses",
+            "itemListElement": [
+                {
+                    "@type": "Course",
+                    "name": "Kinesiology Internship - Career Readiness",
+                    "description": "Comprehensive career preparation for health and fitness professionals"
+                },
+                {
+                    "@type": "Course",
+                    "name": "AI Tools & Resources",
+                    "description": "Master AI tools for the health and fitness industry"
+                }
+            ]
+        }
+    }
+    </script>
+</body>
+</html>

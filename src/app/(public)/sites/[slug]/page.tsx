@@ -10,25 +10,29 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const site = await prisma.site.findUnique({
     where: { slug: params.slug },
-    select: { name: true },
+    select: { name: true, templateData: true },
   });
 
   if (!site) {
     return { title: "Site Not Found" };
   }
 
+  const td = (site.templateData as Record<string, string> | null) || {};
+  const title = td.SITE_TITLE || site.name;
+  const description = td.SITE_DESCRIPTION || `Welcome to ${site.name}`;
+
   return {
-    title: site.name,
-    description: `Welcome to ${site.name}`,
+    title,
+    description,
     openGraph: {
-      title: site.name,
-      description: `Welcome to ${site.name}`,
+      title,
+      description,
       type: "website",
       url: `${process.env.NEXT_PUBLIC_APP_URL}/sites/${params.slug}`,
     },
     twitter: {
       card: "summary",
-      title: site.name,
+      title,
     },
   };
 }
@@ -54,7 +58,12 @@ export default async function PublicSitePage({ params }: PageProps) {
     notFound();
   }
 
-  // If this is an imported static site, redirect to the imported HTML
+  // Template-based sites: redirect to the dedicated render route
+  if (site.templatePath && site.templateData) {
+    redirect(`/api/render/${slug}`);
+  }
+
+  // Legacy imported static sites: redirect to the imported HTML
   if (site.importedPath) {
     redirect(site.importedPath);
   }

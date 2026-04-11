@@ -13,6 +13,13 @@ export default async function DashboardPage() {
   const sites = await prisma.site.findMany({
     where: { ownerId: session.user.id },
     orderBy: { updatedAt: "desc" },
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      status: true,
+      templatePath: true,
+    },
   });
 
   return (
@@ -58,7 +65,7 @@ export default async function DashboardPage() {
 
               <div className="mt-auto flex flex-col gap-2">
                 <Link
-                  href={`/dashboard/sites/${site.id}/edit`}
+                  href={site.templatePath ? `/dashboard/sites/${site.id}/template` : `/dashboard/sites/${site.id}/edit`}
                   className="btn-primary text-center text-sm"
                 >
                   Edit Content
